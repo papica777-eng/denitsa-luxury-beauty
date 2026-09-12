@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Нови Концепции за Луксозна Корица на Учебника - Деница Ставракиева</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0d0d0f;
+      color: #f5f5f5;
+      font-family: 'Montserrat', sans-serif;
+      padding: 40px 20px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+    .header-info {
+      text-align: center;
+      max-width: 800px;
+    }
+    .header-info h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 28px;
+      color: #e6ca85;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+    .header-info p {
+      color: #a8a29e;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .showcase-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 50px;
+      max-width: 1400px;
+    }
+    .concept-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .concept-title {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      letter-spacing: 2px;
+      color: #d4af37;
+    }
+
+    /* BOOK COVER 1: OBSIDIAN & 24K GOLD HAUTE COUTURE */
+    .book-cover-1 {
+      width: 480px;
+      height: 680px;
+      background: radial-gradient(circle at 50% 25%, #2a221a 0%, #151311 50%, #0a0908 100%);
+      border-radius: 12px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.85), 0 0 40px rgba(212,175,55,0.18), inset 0 0 0 1px rgba(212,175,55,0.3);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 45px 35px 35px;
+    }
+    /* Luxury gold foil frame */
+    .book-cover-1::before {
+      content: '';
+      position: absolute;
+      top: 18px; left: 18px; right: 18px; bottom: 18px;
+      border: 1px solid rgba(212,175,55,0.45);
+      border-radius: 6px;
+      pointer-events: none;
+    }
+    .book-cover-1::after {
+      content: '';
+      position: absolute;
+      top: 23px; left: 23px; right: 23px; bottom: 23px;
+      border: 1px solid rgba(212,175,55,0.2);
+      pointer-events: none;
+    }
+    .c1-bg-image {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url('assets/hair_after.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      opacity: 0.38;
+      filter: contrast(1.15) brightness(0.9);
+      mix-blend-mode: luminosity;
+    }
+    .c1-vignette {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(180deg, rgba(10,9,8,0.92) 0%, rgba(10,9,8,0.4) 35%, rgba(10,9,8,0.5) 60%, rgba(10,9,8,0.98) 100%);
+    }
+    .c1-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+      text-align: center;
+    }
+    .c1-emblem-wrap {
+      margin: 0 auto 10px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      box-shadow: 0 4px 20px rgba(212,175,55,0.4);
+      border: 2px solid #d4af37;
+      overflow: hidden;
+      background: #000;
+    }
+    .c1-emblem-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .c1-pre-title {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 5px;
+      color: #e5c378;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .c1-main-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 800;
+      font-size: 27px;
+      line-height: 1.15;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #fff7d6 0%, #e2b963 45%, #f9e29d 60%, #b8860b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      margin-bottom: 12px;
+    }
+    .c1-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 17px;
+      color: #d1c7bd;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+    .c1-divider {
+      width: 90px;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, #d4af37, transparent);
+      margin: 0 auto;
+    }
+    .c1-center-badge {
+      margin: auto 0;
+      padding: 12px 20px;
+      background: rgba(20, 18, 16, 0.65);
+      border-radius: 30px;
+      border: 1px solid rgba(212,175,55,0.35);
+      backdrop-filter: blur(10px);
+      display: inline-block;
+      align-self: center;
+    }
+    .c1-center-badge span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #f3e5ab;
+      font-weight: 600;
+    }
+    .c1-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .c1-author-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      letter-spacing: 4px;
+      color: #8c827a;
+      text-transform: uppercase;
+    }
+    .c1-author-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #ffffff;
+    }
+    .c1-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: #d4af37;
+      margin-top: 4px;
+    }
+
+    /* BOOK COVER 2: ROYAL PEARL & CHAMPAGNE GOLD (CHIC EDITORIAL) */
+    .book-cover-2 {
+      width: 480px;
+      height: 680px;
+      background: #fdfbf7;
+      border-radius: 12px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6), 0 0 30px rgba(212,175,55,0.25);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 45px 35px 35px;
+      color: #1a1a1a;
+    }
+    .book-cover-2::before {
+      content: '';
+      position: absolute;
+      top: 18px; left: 18px; right: 18px; bottom: 18px;
+      border: 1px solid #c9a84c;
+      border-radius: 6px;
+      pointer-events: none;
+    }
+    .book-cover-2::after {
+      content: '';
+      position: absolute;
+      top: 23px; left: 23px; right: 23px; bottom: 23px;
+      border: 1px solid rgba(201,168,76,0.3);
+      pointer-events: none;
+    }
+    .c2-bg-art {
+      position: absolute;
+      bottom: -40px;
+      right: -30px;
+      width: 380px;
+      height: 480px;
+      background-image: url('assets/hair_after.jpg');
+      background-size: cover;
+      background-position: center 25%;
+      opacity: 0.18;
+      filter: grayscale(100%) contrast(1.2);
+      mask-image: radial-gradient(circle at 60% 60%, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(circle at 60% 60%, black 20%, transparent 70%);
+    }
+    .c2-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+      text-align: center;
+    }
+    .c2-emblem-wrap {
+      margin: 0 auto 12px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      box-shadow: 0 8px 24px rgba(184,134,11,0.25);
+      border: 2px solid #b8860b;
+      overflow: hidden;
+    }
+    .c2-emblem-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .c2-pre-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 5px;
+      color: #8c733e;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .c2-main-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 800;
+      font-size: 26px;
+      line-height: 1.2;
+      letter-spacing: 2px;
+      color: #1a1610;
+      margin-bottom: 12px;
+    }
+    .c2-main-title .gold-accent {
+      color: #9e782f;
+      display: block;
+      font-size: 29px;
+      margin: 4px 0;
+    }
+    .c2-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 17px;
+      color: #635b4f;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+    .c2-divider {
+      width: 70px;
+      height: 1.5px;
+      background: #c9a84c;
+      margin: 0 auto;
+    }
+    .c2-badge-box {
+      margin: auto 0;
+      padding: 10px 18px;
+      border: 1px solid #c9a84c;
+      border-radius: 20px;
+      display: inline-block;
+      align-self: center;
+      background: rgba(255,255,255,0.8);
+    }
+    .c2-badge-box span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #8c733e;
+      font-weight: 700;
+    }
+    .c2-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .c2-author-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      letter-spacing: 4px;
+      color: #8f8576;
+      text-transform: uppercase;
+    }
+    .c2-author-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #14120e;
+    }
+    .c2-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: #9e782f;
+      margin-top: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-info">
+    <h1>ЛУКСОЗНИ КОРИЦИ ЗА УЧЕБНИКА (НОВ ДИЗАЙН)</h1>
+    <p>Сравнение на 2 ексклузивни дизайн концепции с висша естетика, кралски монограм, златни кантове и авторски брандинг на <strong>Деница Ставракиева (Hair Extensions DS)</strong>.</p>
+  </div>
+
+  <div class="showcase-grid">
+
+    <!-- CONCEPT 1 -->
+    <div class="concept-card">
+      <div class="concept-title">КОНЦЕПЦИЯ 1: OBSIDIAN & 24K GOLD (HAUTE COUTURE)</div>
+      <div class="book-cover-1" id="cover1">
+        <div class="c1-bg-image"></div>
+        <div class="c1-vignette"></div>
+        <div class="c1-content">
+          <div>
+            <div class="c1-emblem-wrap">
+              <img src="assets/emblem.jpg" alt="DS Royal Emblem">
+            </div>
+            <div class="c1-pre-title">ОФИЦИАЛНО АВТОРСКО ИЗДАНИЕ</div>
+            <h2 class="c1-main-title">ТАЙНИТЕ НА<br>УДЪЛЖАВАНЕТО<br>НА КОСА</h2>
+            <div class="c1-subtitle">Пълно ръководство за кератинови екстеншъни, техники и бизнес развитие</div>
+            <div class="c1-divider"></div>
+          </div>
+
+          <div class="c1-center-badge">
+            <span>MASTERCLASS EDITION • 2026</span>
+          </div>
+
+          <div class="c1-bottom">
+            <div class="c1-author-label">АВТОР & МЕНТОР</div>
+            <div class="c1-author-name">ДЕНИЦА СТАВРАКИЕВА</div>
+            <div class="c1-brand">HAIR EXTENSIONS DS • BULGARIA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONCEPT 2 -->
+    <div class="concept-card">
+      <div class="concept-title">КОНЦЕПЦИЯ 2: ROYAL PEARL & CHAMPAGNE GOLD</div>
+      <div class="book-cover-2" id="cover2">
+        <div class="c2-bg-art"></div>
+        <div class="c2-content">
+          <div>
+            <div class="c2-emblem-wrap">
+              <img src="assets/emblem.jpg" alt="DS Royal Emblem">
+            </div>
+            <div class="c2-pre-title">MASTER GUIDE • BEAUTY ROOM DS</div>
+            <h2 class="c2-main-title">
+              ТАЙНИТЕ НА
+              <span class="gold-accent">УДЪЛЖАВАНЕТО</span>
+              НА КОСАТА
+            </h2>
+            <div class="c2-subtitle">Професионален наръчник за кератинови екстеншъни</div>
+            <div class="c2-divider"></div>
+          </div>
+
+          <div class="c2-badge-box">
+            <span>ЗЛАТЕН СТАНДАРТ В ОБУЧЕНИЯТА</span>
+          </div>
+
+          <div class="c2-bottom">
+            <div class="c2-author-label">АВТОР</div>
+            <div class="c2-author-name">Деница Ставракиева</div>
+            <div class="c2-brand">HAIR EXTENSIONS DS</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
