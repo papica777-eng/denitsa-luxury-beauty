@@ -27,6 +27,21 @@
   padding: 0;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.brand-emblem-img {
+  width: 46px;
+  height: 46px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #d4af37;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
 html {
   background-color: var(--color-bg-base);
   color: var(--color-text-main);

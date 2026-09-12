@@ -22,6 +22,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
+  <!-- Tailwind CSS CDN for guaranteed responsive utilities -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <!-- Canvas Confetti -->
@@ -71,8 +74,8 @@
       
       <!-- Logo with Brand Emblem -->
       <a href="#" class="flex items-center gap-3 group">
-        <div class="relative w-11 h-11 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-gold-400 shadow-[0_0_15px_rgba(212,175,55,0.35)] group-hover:scale-105 transition-all">
-          <img src="assets/logo.jpg" alt="DENITSA Emblem" class="w-full h-full object-cover">
+        <div class="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden shrink-0">
+          <img src="assets/logo.jpg" alt="DENITSA Emblem" class="brand-emblem-img w-full h-full object-cover">
         </div>
         <div class="flex flex-col">
           <span class="font-cinzel text-xl sm:text-2xl tracking-[0.2em] font-bold text-transparent bg-clip-text bg-gradient-to-r from-stone-900 via-stone-800 to-gold-600 group-hover:tracking-[0.25em] transition-all duration-500">
@@ -1242,8 +1245,8 @@
       
       <div class="space-y-3">
         <div class="flex items-center gap-3">
-          <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-gold-400 shadow-sm shrink-0">
-            <img src="assets/logo.jpg" alt="DENITSA" class="w-full h-full object-cover">
+          <div class="w-11 h-11 rounded-full overflow-hidden shrink-0">
+            <img src="assets/logo.jpg" alt="DENITSA" class="brand-emblem-img w-full h-full object-cover">
           </div>
           <div>
             <span class="font-cinzel text-xl font-bold text-stone-900 tracking-[0.2em] block">DENITSA</span>
