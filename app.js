@@ -1,6 +1,6 @@
 /* ==========================================================================
-   DENITSA LUXURY STUDIO — INTERACTIVE CORE ENGINE (app.js)
-   Haute Couture Lashes, Brows, Slavic Raw Hair & Head Spa
+   HAIR EXTENSIONS DS — INTERACTIVE CORE ENGINE (app.js)
+   100% Raw Slavic Hair, Academy, Special Brushes & Japanese Head Spa
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         osc.start();
         osc.stop(this.ctx.currentTime + duration);
       } catch (e) {
-        // Audio error silent fallback
+        // Silent audio fallback
       }
     }
 
@@ -66,22 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const sound = new SoundEngine();
-
-  // Sound Toggle Button
-  const soundToggleBtn = document.getElementById('soundToggleBtn');
-  const soundIcon = document.getElementById('soundIcon');
-  if (soundToggleBtn) {
-    soundToggleBtn.addEventListener('click', () => {
-      sound.enabled = !sound.enabled;
-      if (sound.enabled) {
-        sound.playSparkle();
-        soundIcon.setAttribute('data-lucide', 'volume-2');
-      } else {
-        soundIcon.setAttribute('data-lucide', 'volume-x');
-      }
-      if (window.lucide) window.lucide.createIcons();
-    });
-  }
 
   // --- CUSTOM CURSOR (Desktop) ---
   const cursorDot = document.getElementById('cursor-dot');
@@ -132,99 +116,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- HERO PARTICLES CANVAS ---
-  const heroCanvas = document.getElementById('heroCanvas');
-  if (heroCanvas) {
-    const ctx = heroCanvas.getContext('2d');
-    let width, height;
-    let particles = [];
-
-    function resizeHeroCanvas() {
-      if (!heroCanvas.parentElement) return;
-      width = heroCanvas.width = heroCanvas.parentElement.offsetWidth;
-      height = heroCanvas.height = heroCanvas.parentElement.offsetHeight;
-    }
-    resizeHeroCanvas();
-    window.addEventListener('resize', resizeHeroCanvas);
-
-    for (let i = 0; i < 45; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        radius: Math.random() * 2 + 0.5,
-        color: i % 3 === 0 ? '#fde047' : (i % 3 === 1 ? '#d4af37' : '#ffffff'),
-        alpha: Math.random() * 0.6 + 0.2,
-        speedX: (Math.random() - 0.5) * 0.3,
-        speedY: -Math.random() * 0.4 - 0.15,
-        pulse: Math.random() * Math.PI
-      });
-    }
-
-    function renderHeroParticles() {
-      ctx.clearRect(0, 0, width, height);
-
-      particles.forEach(p => {
-        p.x += p.speedX;
-        p.y += p.speedY;
-        p.pulse += 0.03;
-
-        if (p.y < 0) {
-          p.y = height + 10;
-          p.x = Math.random() * width;
-        }
-        if (p.x < 0) p.x = width;
-        if (p.x > width) p.x = 0;
-
-        const currentAlpha = p.alpha * (0.6 + 0.4 * Math.sin(p.pulse));
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.globalAlpha = currentAlpha;
-        ctx.fill();
-      });
-
-      ctx.globalAlpha = 1.0;
-      requestAnimationFrame(renderHeroParticles);
-    }
-    renderHeroParticles();
-  }
-
   // ==========================================================================
-  // 1. SLAVIC HAIR CONFIGURATOR & PHOTO THUMBNAILS
+  // 1. HAIR EXTENSIONS DS CONFIGURATOR & PRICE CALCULATOR
+  // Official Prices by Denitsa:
+  // - 45 cm: 160€ (310 лв.) / 100g
+  // - 55 cm: 190€ (370 лв.) / 100g
+  // - 65-70 cm: 230€ (450 лв.) / 100g
+  // - 75-80 cm: 270€ (530 лв.) / 100g
   // ==========================================================================
   const hairConfigState = {
-    origin: 'slavic',
     length: 55,
-    weight: 150,
+    lengthLabel: '55 см',
+    pricePer100gEur: 190,
+    pricePer100gBgn: 370,
+    weight: 100,
     colorHex: '#2a1d17',
     colorName: '#2 Тъмен Шоколад',
     method: 'keratin',
-    basePricePerGram: {
-      slavic: 2.8,
-      russian: 2.2,
-      brazilian: 1.6
-    },
-    methodFees: {
-      keratin: 120,
-      tapes: 100,
-      wefts: 90,
-      nanorings: 130
-    }
+    methodName: 'Кератинови микро-капсули'
   };
 
-  // Hair Photo Thumbnail Switcher
   const hairDisplayImg = document.getElementById('hairDisplayImg');
   const hairThumbBtns = document.querySelectorAll('.hair-thumb-btn');
   hairThumbBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       hairThumbBtns.forEach(b => {
-        b.classList.remove('border-2', 'border-gold-400', 'active');
-        b.classList.add('border', 'border-white/10');
+        b.classList.remove('border-2', 'border-gold-500', 'active');
+        b.classList.add('border', 'border-stone-300');
       });
-      btn.classList.add('border-2', 'border-gold-400', 'active');
-      btn.classList.remove('border-white/10');
-      if (hairDisplayImg) {
+      btn.classList.add('border-2', 'border-gold-500', 'active');
+      btn.classList.remove('border-stone-300');
+      if (hairDisplayImg && btn.dataset.img) {
         hairDisplayImg.src = btn.dataset.img;
       }
       sound.playLuxuryClick();
@@ -232,22 +154,34 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function updateHairConfigurator() {
-    // 1. Calculate Price
-    const rate = hairConfigState.basePricePerGram[hairConfigState.origin];
-    const lengthMultiplier = 1 + (hairConfigState.length - 40) * 0.02;
-    const rawHairPrice = Math.round(hairConfigState.weight * rate * lengthMultiplier);
-    const methodPrice = hairConfigState.methodFees[hairConfigState.method];
-    const totalPrice = rawHairPrice + methodPrice;
+    // 1. Calculate Price based on weight ratio (weight / 100)
+    const weightFactor = hairConfigState.weight / 100;
+    const totalEur = Math.round(hairConfigState.pricePer100gEur * weightFactor);
+    const totalBgn = Math.round(hairConfigState.pricePer100gBgn * weightFactor);
 
-    // 2. Update UI Displays
-    const priceDisplay = document.getElementById('calculatedPrice');
-    if (priceDisplay) priceDisplay.textContent = `${totalPrice} лв.`;
+    // 2. Update Live Price Displays
+    const eurDisplay = document.getElementById('calculatedPriceEur');
+    if (eurDisplay) eurDisplay.textContent = `${totalEur} €`;
 
-    const lengthDisplay = document.getElementById('lengthValueDisplay');
-    if (lengthDisplay) lengthDisplay.textContent = `${hairConfigState.length} см (${hairConfigState.length > 60 ? 'Ханш / Бедра' : 'Талия / Гръб'})`;
+    const bgnDisplay = document.getElementById('calculatedPriceBgn');
+    if (bgnDisplay) bgnDisplay.textContent = `(${totalBgn} лв.)`;
+
+    // 3. Update Labels
+    const lenDisplay = document.getElementById('lengthValueDisplay');
+    if (lenDisplay) {
+      lenDisplay.textContent = `${hairConfigState.lengthLabel} — ${hairConfigState.pricePer100gEur}€ (${hairConfigState.pricePer100gBgn} лв.) / 100g`;
+    }
 
     const weightDisplay = document.getElementById('weightValueDisplay');
-    if (weightDisplay) weightDisplay.textContent = `${hairConfigState.weight} грама (${hairConfigState.weight >= 200 ? 'Mega Плътен Обем' : 'Стандартен Пълен Обем'})`;
+    if (weightDisplay) {
+      const volDesc = hairConfigState.weight <= 50 ? 'Сгъстяване' : (hairConfigState.weight <= 100 ? 'Стандартен Пълен Обем' : 'Mega Плътен Обем');
+      weightDisplay.textContent = `${hairConfigState.weight} грама (${volDesc})`;
+    }
+
+    const simHairTitle = document.getElementById('simHairTitle');
+    if (simHairTitle) {
+      simHairTitle.textContent = `Славянска Коса • ${hairConfigState.lengthLabel} (${totalEur}€)`;
+    }
 
     const simShadeName = document.getElementById('simShadeName');
     if (simShadeName) simShadeName.textContent = hairConfigState.colorName;
@@ -255,49 +189,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedShadeLabel = document.getElementById('selectedShadeLabel');
     if (selectedShadeLabel) selectedShadeLabel.textContent = hairConfigState.colorName;
 
-    const simHairTitle = document.getElementById('simHairTitle');
-    const originNames = {
-      slavic: '100% Славянска Коса',
-      russian: 'Руска Девствена Коса',
-      brazilian: 'Бразилска Remy Коприна'
-    };
-    if (simHairTitle) {
-      simHairTitle.textContent = `${originNames[hairConfigState.origin]} • ${hairConfigState.length}см`;
-    }
-
-    const originLabel = document.getElementById('originLabel');
-    if (originLabel) originLabel.textContent = originNames[hairConfigState.origin];
-
     const simMethodName = document.getElementById('simMethodName');
-    const methodDescriptions = {
-      keratin: 'Кератинови микро-капсули',
-      tapes: 'Безшевни Стикери (Tape-in)',
-      wefts: 'Треси на клипси / Зашиване',
-      nanorings: 'Нано Рингове'
-    };
-    if (simMethodName) simMethodName.textContent = methodDescriptions[hairConfigState.method];
+    if (simMethodName) simMethodName.textContent = hairConfigState.methodName;
   }
 
-  // Origin Selectors
-  document.querySelectorAll('#originSelector button').forEach(btn => {
+  // Length Buttons
+  const lengthButtons = document.querySelectorAll('.len-btn');
+  lengthButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('#originSelector button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      hairConfigState.origin = btn.dataset.origin;
+      lengthButtons.forEach(b => {
+        b.classList.remove('active', 'border-2', 'border-gold-500', 'bg-gold-500/15');
+        b.classList.add('border', 'border-stone-300', 'bg-white');
+      });
+      btn.classList.add('active', 'border-2', 'border-gold-500', 'bg-gold-500/15');
+      btn.classList.remove('border-stone-300', 'bg-white');
+
+      hairConfigState.length = parseInt(btn.dataset.len, 10);
+      hairConfigState.lengthLabel = btn.querySelector('.text-xs')?.textContent.trim() || `${btn.dataset.len} см`;
+      hairConfigState.pricePer100gEur = parseInt(btn.dataset.eur, 10);
+      hairConfigState.pricePer100gBgn = parseInt(btn.dataset.bgn, 10);
+
       sound.playLuxuryClick();
       updateHairConfigurator();
     });
   });
-
-  // Length Slider
-  const hairLengthSlider = document.getElementById('hairLengthSlider');
-  if (hairLengthSlider) {
-    hairLengthSlider.addEventListener('input', (e) => {
-      hairConfigState.length = parseInt(e.target.value, 10);
-      updateHairConfigurator();
-    });
-    hairLengthSlider.addEventListener('change', () => sound.playLuxuryClick());
-  }
 
   // Weight Slider
   const hairWeightSlider = document.getElementById('hairWeightSlider');
@@ -310,23 +225,38 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Color Palette Dots
-  document.querySelectorAll('#colorPalette button').forEach(btn => {
+  const colorDots = document.querySelectorAll('#colorPalette .color-dot');
+  colorDots.forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('#colorPalette button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      colorDots.forEach(b => {
+        b.classList.remove('active', 'border-gold-500');
+        b.classList.add('border-stone-300');
+      });
+      btn.classList.add('active', 'border-gold-500');
+      btn.classList.remove('border-stone-300');
+
       hairConfigState.colorHex = btn.dataset.color;
       hairConfigState.colorName = btn.dataset.name;
+
       sound.playSparkle();
       updateHairConfigurator();
     });
   });
 
   // Method Selector
-  document.querySelectorAll('#methodSelector button').forEach(btn => {
+  const methodButtons = document.querySelectorAll('#methodSelector .method-btn');
+  methodButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('#methodSelector button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      methodButtons.forEach(b => {
+        b.classList.remove('active', 'border-gold-500', 'bg-gold-500/15');
+        b.classList.add('border-stone-300', 'bg-white');
+      });
+      btn.classList.add('active', 'border-gold-500', 'bg-gold-500/15');
+      btn.classList.remove('border-stone-300', 'bg-white');
+
       hairConfigState.method = btn.dataset.method;
+      hairConfigState.methodName = btn.textContent.trim();
+
       sound.playLuxuryClick();
       updateHairConfigurator();
     });
@@ -335,239 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateHairConfigurator();
 
   // ==========================================================================
-  // 2. VIRTUAL LASH & BROW STUDIO VISUALIZER CANVAS
-  // ==========================================================================
-  const lashState = {
-    style: 'russian',
-    curl: 'D',
-    length: 13,
-    mode: 'glam',
-    blinkProgress: 0,
-    isBlinking: false
-  };
-
-  const eyeCanvas = document.getElementById('eyeLashCanvas');
-  const eyeCtx = eyeCanvas ? eyeCanvas.getContext('2d') : null;
-
-  if (eyeCanvas) {
-    function resizeEyeCanvas() {
-      if (!eyeCanvas.parentElement) return;
-      eyeCanvas.width = eyeCanvas.parentElement.offsetWidth;
-      eyeCanvas.height = eyeCanvas.parentElement.offsetHeight;
-    }
-    resizeEyeCanvas();
-    window.addEventListener('resize', resizeEyeCanvas);
-
-    function triggerBlink() {
-      if (lashState.isBlinking) return;
-      lashState.isBlinking = true;
-      let start = performance.now();
-      sound.playSparkle();
-
-      function blinkAnim(now) {
-        let elapsed = (now - start) / 1000;
-        if (elapsed < 0.15) {
-          lashState.blinkProgress = elapsed / 0.15;
-        } else if (elapsed < 0.3) {
-          lashState.blinkProgress = 1 - (elapsed - 0.15) / 0.15;
-        } else {
-          lashState.blinkProgress = 0;
-          lashState.isBlinking = false;
-          return;
-        }
-        requestAnimationFrame(blinkAnim);
-      }
-      requestAnimationFrame(blinkAnim);
-    }
-
-    const lashBlinkBtn = document.getElementById('lashBlinkBtn');
-    if (lashBlinkBtn) {
-      lashBlinkBtn.addEventListener('click', triggerBlink);
-    }
-
-    function renderVirtualEye() {
-      if (!eyeCtx) return;
-      const w = eyeCanvas.width;
-      const h = eyeCanvas.height;
-
-      eyeCtx.clearRect(0, 0, w, h);
-
-      const cx = w / 2;
-      const cy = h / 2 + 10;
-      const eyeWidth = Math.min(w * 0.7, 240);
-      const eyeHeight = Math.min(h * 0.4, 90) * (1 - lashState.blinkProgress * 0.95);
-
-      // 1. Draw Brow
-      eyeCtx.save();
-      const browY = cy - eyeHeight - 35;
-      eyeCtx.beginPath();
-      eyeCtx.moveTo(cx - eyeWidth * 0.55, browY + 6);
-      eyeCtx.quadraticCurveTo(cx - eyeWidth * 0.1, browY - 14, cx + eyeWidth * 0.6, browY + 10);
-      eyeCtx.lineWidth = 12;
-      eyeCtx.strokeStyle = 'rgba(77, 48, 30, 0.85)';
-      eyeCtx.stroke();
-      eyeCtx.restore();
-
-      // 2. Draw Eye Sclera & Iris
-      eyeCtx.save();
-      eyeCtx.beginPath();
-      eyeCtx.ellipse(cx, cy, eyeWidth / 2, eyeHeight / 2, 0, 0, Math.PI * 2);
-      eyeCtx.fillStyle = '#f7f6f5';
-      eyeCtx.fill();
-      eyeCtx.clip();
-
-      if (eyeHeight > 5) {
-        const irisRadius = eyeHeight * 0.85;
-        const irisGrad = eyeCtx.createRadialGradient(cx, cy, 4, cx, cy, irisRadius);
-        irisGrad.addColorStop(0, '#5a3d28');
-        irisGrad.addColorStop(0.7, '#2f1a0e');
-        irisGrad.addColorStop(1, '#110b06');
-
-        eyeCtx.beginPath();
-        eyeCtx.arc(cx, cy, irisRadius, 0, Math.PI * 2);
-        eyeCtx.fillStyle = irisGrad;
-        eyeCtx.fill();
-
-        // Pupil
-        eyeCtx.beginPath();
-        eyeCtx.arc(cx, cy, irisRadius * 0.45, 0, Math.PI * 2);
-        eyeCtx.fillStyle = '#0a0a0a';
-        eyeCtx.fill();
-
-        // Shimmer
-        eyeCtx.beginPath();
-        eyeCtx.arc(cx - irisRadius * 0.35, cy - irisRadius * 0.35, irisRadius * 0.22, 0, Math.PI * 2);
-        eyeCtx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-        eyeCtx.fill();
-      }
-      eyeCtx.restore();
-
-      // 3. Draw Eyelids Contour
-      eyeCtx.save();
-      eyeCtx.beginPath();
-      eyeCtx.ellipse(cx, cy, eyeWidth / 2, eyeHeight / 2, 0, 0, Math.PI * 2);
-      eyeCtx.lineWidth = 2.2;
-      eyeCtx.strokeStyle = '#18120c';
-      eyeCtx.stroke();
-      eyeCtx.restore();
-
-      // 4. Draw Eyelashes
-      const isNatural = (lashState.mode === 'natural');
-      const lashDensity = isNatural ? 25 : (lashState.style === 'russian' ? 90 : (lashState.style === 'wispy' ? 65 : (lashState.style === 'fox' ? 60 : 38)));
-      const baseLength = lashState.length * 2.6;
-
-      eyeCtx.save();
-      eyeCtx.lineCap = 'round';
-
-      for (let i = 0; i < lashDensity; i++) {
-        const t = i / (lashDensity - 1);
-        const lx = cx - eyeWidth / 2 + t * eyeWidth;
-        const ly = cy - Math.sin(t * Math.PI) * (eyeHeight / 2) * (1 - lashState.blinkProgress);
-
-        let curLength = baseLength * (0.6 + 0.5 * Math.sin(t * Math.PI));
-        let angle = -Math.PI / 2 + (t - 0.5) * 0.85;
-
-        if (lashState.style === 'fox' && t > 0.6) {
-          curLength *= 1.45;
-          angle += 0.35;
-        }
-        if (lashState.style === 'wispy' && (i % 6 === 0)) {
-          curLength *= 1.35;
-        }
-
-        const curlFactor = lashState.curl === 'M' ? 1.4 : (lashState.curl === 'D' ? 1.2 : 1.0);
-        const endX = lx + Math.cos(angle) * (curLength * curlFactor);
-        const endY = ly + Math.sin(angle) * (curLength * curlFactor) - (lashState.curl === 'D' ? 10 : 5);
-
-        eyeCtx.beginPath();
-        eyeCtx.moveTo(lx, ly);
-        eyeCtx.quadraticCurveTo(lx + (t - 0.5) * 12, ly - curLength * 0.4, endX, endY);
-
-        if (isNatural) {
-          eyeCtx.lineWidth = 1.0;
-          eyeCtx.strokeStyle = 'rgba(20, 16, 12, 0.7)';
-        } else {
-          eyeCtx.lineWidth = (lashState.style === 'russian' ? 1.8 : 1.4);
-          eyeCtx.strokeStyle = '#050505';
-        }
-        eyeCtx.stroke();
-      }
-      eyeCtx.restore();
-
-      requestAnimationFrame(renderVirtualEye);
-    }
-    renderVirtualEye();
-  }
-
-  function updateLashUI() {
-    const styleNames = {
-      classic: 'Косъм по косъм',
-      russian: '3D-5D Russian Velvet Volume',
-      wispy: 'Kim K / Wispy Glamour Rays',
-      fox: 'Fox Eye Outer Lift'
-    };
-
-    const canvasStyleName = document.getElementById('canvasStyleName');
-    if (canvasStyleName) canvasStyleName.textContent = styleNames[lashState.style];
-
-    const canvasSpecs = document.getElementById('canvasSpecs');
-    if (canvasSpecs) canvasSpecs.textContent = `Извивка: ${lashState.curl} • 9-${lashState.length}mm • ${lashState.mode === 'glam' ? 'Haute Glam' : 'Natural'}`;
-  }
-
-  document.querySelectorAll('#lashStyleOptions button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#lashStyleOptions button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      lashState.style = btn.dataset.style;
-      sound.playLuxuryClick();
-      updateLashUI();
-    });
-  });
-
-  document.querySelectorAll('#lashCurlSelector button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#lashCurlSelector button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      lashState.curl = btn.dataset.curl;
-      sound.playLuxuryClick();
-      updateLashUI();
-    });
-  });
-
-  const lashLengthSlider = document.getElementById('lashLengthSlider');
-  const lashLengthVal = document.getElementById('lashLengthVal');
-  if (lashLengthSlider && lashLengthVal) {
-    lashLengthSlider.addEventListener('input', (e) => {
-      lashState.length = parseInt(e.target.value, 10);
-      lashLengthVal.textContent = `${lashState.length} mm`;
-      updateLashUI();
-    });
-    lashLengthSlider.addEventListener('change', () => sound.playLuxuryClick());
-  }
-
-  const toggleLashNatural = document.getElementById('toggleLashNatural');
-  const toggleLashGlam = document.getElementById('toggleLashGlam');
-  if (toggleLashNatural && toggleLashGlam) {
-    toggleLashNatural.addEventListener('click', () => {
-      lashState.mode = 'natural';
-      toggleLashNatural.className = 'text-[9px] font-mono px-2.5 py-1 rounded-full bg-gold-500 text-black font-bold';
-      toggleLashGlam.className = 'text-[9px] font-mono px-2.5 py-1 rounded-full text-stone-400 hover:text-white';
-      sound.playLuxuryClick();
-      updateLashUI();
-    });
-    toggleLashGlam.addEventListener('click', () => {
-      lashState.mode = 'glam';
-      toggleLashGlam.className = 'text-[9px] font-mono px-2.5 py-1 rounded-full bg-gold-500 text-black font-bold';
-      toggleLashNatural.className = 'text-[9px] font-mono px-2.5 py-1 rounded-full text-stone-400 hover:text-white';
-      sound.playSparkle();
-      updateLashUI();
-    });
-  }
-
-  updateLashUI();
-
-  // ==========================================================================
-  // 3. JAPANESE WATER RIPPLE CANVAS (HEAD SPA & WASHES)
+  // 2. JAPANESE WATERFALL HEAD SPA RIPPLES CANVAS
   // ==========================================================================
   const waterCanvas = document.getElementById('waterRippleCanvas');
   if (waterCanvas) {
@@ -587,8 +285,8 @@ document.addEventListener('DOMContentLoaded', () => {
         x: x,
         y: y,
         radius: 5,
-        maxRadius: Math.random() * 100 + 60,
-        alpha: 0.7,
+        maxRadius: Math.random() * 90 + 60,
+        alpha: 0.75,
         speed: Math.random() * 1.5 + 1.2
       });
       sound.playWaterDrop();
@@ -603,7 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (ripples.length < 4) {
         addRipple(Math.random() * waterCanvas.width, Math.random() * waterCanvas.height);
       }
-    }, 2200);
+    }, 2400);
 
     function renderWaterRipples() {
       const w = waterCanvas.width;
@@ -618,8 +316,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         wctx.beginPath();
         wctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
-        wctx.strokeStyle = `rgba(45, 212, 191, ${r.alpha * 0.7})`;
-        wctx.lineWidth = 2.5;
+        wctx.strokeStyle = `rgba(212, 175, 55, ${r.alpha * 0.7})`;
+        wctx.lineWidth = 2.2;
         wctx.stroke();
 
         if (r.alpha <= 0.01) {
@@ -633,13 +331,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 4. REAL PHOTOS BEFORE & AFTER COMPARISON LENS
+  // 3. BEFORE & AFTER TRANSFORMATION SLIDER
   // ==========================================================================
   const beforeAfterContainer = document.getElementById('beforeAfterContainer');
   const transBeforeLayer = document.getElementById('transBeforeLayer');
   const dragHandle = document.getElementById('dragHandle');
-  const transBeforeImg = document.getElementById('transBeforeImg');
-  const transAfterImg = document.getElementById('transAfterImg');
   let isDragging = false;
 
   function setSliderPosition(xRatio) {
@@ -673,51 +369,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('touchmove', handleMove, { passive: true });
   }
 
-  // Before & After Preset Tabs
-  const transPresets = {
-    'slavic-hair': {
-      before: 'assets/hair_before.jpg',
-      after: 'assets/hair_after.jpg',
-      title: 'Трансформация: 65см Славянска Необработена Коса',
-      desc: '180 грама кератинови микро-капсули • Цвят #2/4 Balayage'
-    },
-    'russian-lashes': {
-      before: 'assets/lash_before.jpg',
-      after: 'assets/lashes_macro.jpg',
-      title: 'Трансформация: 4D-5D Руски Кадифен Обем',
-      desc: 'D-извивка, 9-14mm Fox Eye оформяне • 7 седмици издръжливост'
-    },
-    'brow-lamination': {
-      before: 'assets/lash_before.jpg',
-      after: 'assets/brow_lamination.jpg',
-      title: 'Трансформация: Ламиниране на Вежди + Keratin Botox',
-      desc: 'Пълна симетрия, оптическо сгъстяване и подхранване'
-    }
-  };
-
-  document.querySelectorAll('#transTabs button').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('#transTabs button').forEach(t => {
-        t.className = 'trans-tab-btn px-4 py-2 rounded-full border border-white/10 hover:border-gold-500/40 bg-stone-900/60 text-xs font-bold text-stone-300 transition-all';
-      });
-      tab.className = 'trans-tab-btn active px-4 py-2 rounded-full border border-gold-500 bg-gold-500/20 text-xs font-bold text-gold-300 transition-all';
-      
-      const type = tab.dataset.trans;
-      const data = transPresets[type];
-      if (data) {
-        if (transBeforeImg) transBeforeImg.src = data.before;
-        if (transAfterImg) transAfterImg.src = data.after;
-        const titleEl = document.getElementById('transTitle');
-        const descEl = document.getElementById('transDetails');
-        if (titleEl) titleEl.textContent = data.title;
-        if (descEl) descEl.textContent = data.desc;
-      }
-      sound.playLuxuryClick();
-    });
-  });
-
   // ==========================================================================
-  // 5. SHOPPING CART ENGINE
+  // 4. SHOPPING CART ENGINE
   // ==========================================================================
   let cart = [];
   const cartBtn = document.getElementById('cartBtn');
@@ -757,12 +410,12 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
       } else {
         cartItemsContainer.innerHTML = cart.map((item, idx) => `
-          <div class="p-3 bg-stone-900/80 rounded-2xl border border-white/5 flex items-center justify-between gap-3">
+          <div class="p-3.5 bg-stone-50 rounded-2xl border border-gold-500/20 flex items-center justify-between gap-3 shadow-sm">
             <div>
-              <div class="text-xs font-bold text-white font-cinzel">${item.title}</div>
-              <div class="text-[10px] text-gold-400 font-mono">${item.price} лв. × ${item.qty}</div>
+              <div class="text-xs font-bold text-stone-900 font-cinzel">${item.title}</div>
+              <div class="text-[11px] text-gold-700 font-mono font-bold">${item.price} лв. × ${item.qty}</div>
             </div>
-            <button class="remove-cart-item text-stone-500 hover:text-rose-400 p-1" data-idx="${idx}">
+            <button class="remove-cart-item text-stone-400 hover:text-rose-500 p-1.5 transition-colors" data-idx="${idx}">
               <i data-lucide="trash-2" class="w-4 h-4"></i>
             </button>
           </div>
@@ -790,7 +443,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     sound.playSparkle();
     if (window.confetti) {
-      window.confetti({ particleCount: 30, spread: 50, origin: { y: 0.8 } });
+      window.confetti({ particleCount: 40, spread: 60, origin: { y: 0.8 } });
     }
     updateCartUI();
     openCart();
@@ -800,17 +453,18 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       const title = btn.dataset.title;
       const price = parseInt(btn.dataset.price, 10);
-      addToCart(title, price);
+      addToCart(title, price, btn.dataset.id);
     });
   });
 
   const addCustomHairToCartBtn = document.getElementById('addCustomHairToCartBtn');
   if (addCustomHairToCartBtn) {
     addCustomHairToCartBtn.addEventListener('click', () => {
-      const title = `Славянска Коса (${hairConfigState.length}см, ${hairConfigState.weight}g, ${hairConfigState.colorName})`;
-      const priceText = document.getElementById('calculatedPrice').textContent;
-      const price = parseInt(priceText.replace(/[^0-9]/g, ''), 10) || 680;
-      addToCart(title, price);
+      const weightFactor = hairConfigState.weight / 100;
+      const totalBgn = Math.round(hairConfigState.pricePer100gBgn * weightFactor);
+      const totalEur = Math.round(hairConfigState.pricePer100gEur * weightFactor);
+      const title = `Славянска Коса DS (${hairConfigState.lengthLabel}, ${hairConfigState.weight}g, ${hairConfigState.colorName})`;
+      addToCart(title, totalBgn, `custom_hair_${Date.now()}`);
     });
   }
 
@@ -825,7 +479,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (window.confetti) {
         window.confetti({ particleCount: 100, spread: 80, origin: { y: 0.5 } });
       }
-      alert('Поръчката ви е регистрирана успешно! Наш VIP консултант ще се свърже с вас за потвърждение на адреса за доставка със Спиди / Еконт.');
+      alert('Благодарим ви! Вашата заявка към Hair Extensions DS е приета. Наш консултант ще се свърже с вас на посочения номер за потвърждение на адреса за доставка със Спиди / Еконт или позвънете директно на 0893 02 26 77.');
       cart = [];
       updateCartUI();
       closeCart();
@@ -833,7 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 6. ONLINE BOOKING SYSTEM & CALENDAR (.ICS) GENERATOR
+  // 5. ONLINE BOOKING SYSTEM & CALENDAR (.ICS)
   // ==========================================================================
   const bookingCheckboxes = document.querySelectorAll('input[name="service"]');
   const bookingTotalPreview = document.getElementById('bookingTotalPreview');
@@ -879,11 +533,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const time = document.getElementById('bookingTimeSelect')?.value;
 
       if (selectedServices.length === 0) {
-        alert('Моля, изберете поне една процедура!');
+        alert('Моля, изберете поне една услуга или коса!');
         return;
       }
       if (!name || !phone) {
-        alert('Моля, въведете вашето име и телефонен номер за връзка!');
+        alert('Моля, въведете вашето име и телефонен номер за контакт!');
         return;
       }
 
@@ -897,7 +551,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const successText = document.getElementById('bookingSuccessText');
       if (successText) {
         successText.innerHTML = `
-          Скъпа <strong>${name}</strong>, вашият VIP час за <strong>${selectedServices.join(', ')}</strong> на дата <strong>${date}</strong> от <strong>${time} ч.</strong> е регистриран успешно!
+          Скъпа <strong>${name}</strong>, вашият час за <strong>${selectedServices.join(', ')}</strong> на дата <strong>${date}</strong> от <strong>${time} ч.</strong> е регистриран успешно! Деница ще се свърже с вас за финално потвърждение.
         `;
       }
 
@@ -925,11 +579,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const icsContent = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
-        'PRODID:-//Denitsa Luxury Studio//BG',
+        'PRODID:-//Hair Extensions DS//BG',
         'BEGIN:VEVENT',
-        `SUMMARY:DENITSA STUDIO — ${selectedServices[0]}`,
-        `DESCRIPTION:VIP Процедура при Деница: ${selectedServices.join(', ')}. Клиент: ${name}`,
-        'LOCATION:Denitsa Luxury Studio, Sofia/Varna',
+        `SUMMARY:HAIR EXTENSIONS DS — ${selectedServices[0]}`,
+        `DESCRIPTION:Процедура/Консултация при Деница: ${selectedServices.join(', ')}. Клиент: ${name}. Телефон: +359893022677`,
+        'LOCATION:Hair Extensions DS Studio, Sofia / Varna',
         `DTSTART:${dtStart}`,
         `DTEND:${dtEnd}`,
         'STATUS:CONFIRMED',
@@ -940,12 +594,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
-      link.setAttribute('download', `Denitsa_Studio_${date}.ics`);
+      link.setAttribute('download', `Hair_Extensions_DS_${date}.ics`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       sound.playSparkle();
     });
   }
-
 });
