@@ -1017,6 +1017,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cb.checked = true;
           }
         });
+        calculateBookingTotal();
       }
 
       sound.playLuxuryClick();
