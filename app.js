@@ -209,8 +209,8 @@ document.addEventListener('DOMContentLoaded', () => {
       totalEur += 18;
     }
     if (hairConfigState.addBook) {
-      totalBgn += 65;
-      totalEur += 33;
+      totalBgn += 39;
+      totalEur += 20;
     }
     if (hairConfigState.addBag) {
       totalBgn += 25;
@@ -492,7 +492,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addToCart('Четка за Екстеншъни с Естествен Глигански Косъм + Гребен DS', 35, 'upsell_brush');
       }
       if (hairConfigState.addBook) {
-        addToCart('Официален Авторски Учебник (Деница Ставракиева)', 65, 'upsell_book');
+        addToCart('Официален Авторски Учебник (Деница Ставракиева) — ПРОМО', 39, 'upsell_book');
       }
       if (hairConfigState.addBag) {
         addToCart('Сатенен предпазен калъф и закачалка за съхранение', 25, 'upsell_bag');
