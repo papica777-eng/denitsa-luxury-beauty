@@ -1042,7 +1042,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (type === 'contents') {
       if (bookMainPreviewImg) bookMainPreviewImg.src = 'assets/book_contents_page.jpg';
       if (modalBookImg) modalBookImg.src = 'assets/book_contents_page.jpg';
-      if (bookPreviewBadge) bookPreviewBadge.textContent = 'Официално Съдържание (Номерирано)';
       
       if (bookTabContents) {
         bookTabContents.classList.add('active', 'bg-white', 'text-stone-900', 'shadow-sm', 'border', 'border-stone-200', 'font-bold');
@@ -1061,7 +1060,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       if (bookMainPreviewImg) bookMainPreviewImg.src = 'assets/book_cover_front.jpg';
       if (modalBookImg) modalBookImg.src = 'assets/book_cover_front.jpg';
-      if (bookPreviewBadge) bookPreviewBadge.textContent = 'Официална Корица';
 
       if (bookTabCover) {
         bookTabCover.classList.add('active', 'bg-white', 'text-stone-900', 'shadow-sm', 'border', 'border-stone-200', 'font-bold');
