@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="bg" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DENITSA | Luxury Lashes, Brows & 100% Slavic Raw Hair Extensions</title>
+  <meta name="description" content="Ексклузивно студио за миглопластика, перманентни вежди, 100% необработена славянска коса и луксозни Head Spa спа ритуали за коса от Деница.">
+  <meta name="keywords" content="мигли, миглопластика, естествени коси, славянска коса, удължаване на коса, вежди, ламиниране, head spa, Деница,Denitsa studio">
+  
+  <!-- OpenGraph -->
+  <meta property="og:title" content="DENITSA | Haute Couture Lashes, Brows & Slavic Raw Hair">
+  <meta property="og:description" content="Премиум студио за безупречни мигли, перфектни вежди, 100% девствени славянски коси и японски спа ритуали за коса.">
+  <meta property="og:type" content="website">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,400&family=Cinzel:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-obsidian text-stone-200 antialiased selection:bg-gold-500 selection:text-black">
+
+  <!-- Custom Cursor Glow -->
+  <div id="cursor-dot" class="cursor-dot pointer-events-none fixed z-50 rounded-full"></div>
+  <div id="cursor-outline" class="cursor-outline pointer-events-none fixed z-50 rounded-full"></div>
+
+  <!-- Sound Toggle & Quick Controls Floating Bar -->
+  <div class="fixed bottom-6 right-6 z-40 flex items-center gap-3">
+    <button id="soundToggleBtn" class="luxury-glass-btn p-3 rounded-full flex items-center justify-center shadow-gold transition-all duration-300 hover:scale-110 group" title="Включи / Изключи звукови ефекти">
+      <i data-lucide="volume-2" class="w-5 h-5 text-gold-400 group-hover:text-gold-200" id="soundIcon"></i>
+    </button>
+    <a href="#booking" class="luxury-cta-gold px-5 py-3 rounded-full font-medium text-xs tracking-widest uppercase flex items-center gap-2 shadow-2xl hover:scale-105 transition-all">
+      <i data-lucide="sparkles" class="w-4 h-4 text-black"></i>
+      <span>Запази Час</span>
+    </a>
+  </div>
+
+  <!-- Announcement Ticker -->
+  <div class="bg-gradient-to-r from-gold-950 via-gold-900/60 to-gold-950 border-b border-gold-500/20 py-2 overflow-hidden text-xs text-gold-300 tracking-wider font-mono">
+    <div class="ticker-track flex gap-12 whitespace-nowrap">
+      <span>✨ 100% НЕОБРАБОТЕНА ДЕВСТВЕНА СЛАВЯНСКА КОСА • ДВОЙНО ИЗТЕГЛЕНА (DOUBLE DRAWN)</span>
+      <span>💎 АВТОРСКА ТЕХНИКА ЗА МИГЛИ С 6+ СЕДМИЦИ ИЗДРЪЖЛИВОСТ</span>
+      <span>🌿 ЯПОНСКИ WATERFALL HEAD SPA РИТУАЛ ЗА СКАЛП И КОСА</span>
+      <span>✨ ЕКСКЛУЗИВНИ ЧАСОВЕ ЗА МЕСЕЦА — РЕЗЕРВИРАЙТЕ ОНЛАЙН</span>
+      <span>✨ 100% НЕОБРАБОТЕНА ДЕВСТВЕНА СЛАВЯНСКА КОСА • ДВОЙНО ИЗТЕГЛЕНА (DOUBLE DRAWN)</span>
+      <span>💎 АВТОРСКА ТЕХНИКА ЗА МИГЛИ С 6+ СЕДМИЦИ ИЗДРЪЖЛИВОСТ</span>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-obsidian/80 border-b border-gold-500/10 transition-all duration-300" id="mainHeader">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="flex flex-col group">
+        <span class="font-cinzel text-2xl sm:text-3xl tracking-[0.25em] font-bold text-transparent bg-clip-text bg-gradient-to-r from-gold-200 via-gold-400 to-amber-200 group-hover:tracking-[0.3em] transition-all duration-500">
+          DENITSA
+        </span>
+        <span class="text-[9px] uppercase tracking-[0.4em] text-gold-500 font-sans font-semibold -mt-1">
+          Lashes • Brows • Raw Hair & Washes
+        </span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-widest text-stone-300">
+        <a href="#services" class="hover:text-gold-400 transition-colors link-underline">Услуги</a>
+        <a href="#hair-configurator" class="hover:text-gold-400 transition-colors link-underline text-gold-300">Славянска Коса 3D</a>
+        <a href="#lash-visualizer" class="hover:text-gold-400 transition-colors link-underline">Lash Студио</a>
+        <a href="#head-spa" class="hover:text-gold-400 transition-colors link-underline">Head Spa & Измиване</a>
+        <a href="#transformations" class="hover:text-gold-400 transition-colors link-underline">Преди & След</a>
+        <a href="#shop" class="hover:text-gold-400 transition-colors link-underline flex items-center gap-1">
+          Бутик
+          <span class="bg-gold-500/20 text-gold-400 text-[10px] px-1.5 py-0.5 rounded-full border border-gold-500/30">VIP</span>
+        </a>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="flex items-center gap-4">
+        <!-- Cart Trigger -->
+        <button id="cartBtn" class="relative p-2.5 rounded-full luxury-glass-btn hover:border-gold-500/50 transition-all">
+          <i data-lucide="shopping-bag" class="w-5 h-5 text-gold-300"></i>
+          <span id="cartCount" class="absolute -top-1 -right-1 bg-gold-500 text-black text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+        </button>
+
+        <!-- VIP Book Button -->
+        <a href="#booking" class="hidden sm:inline-flex luxury-cta-gold px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-gold hover:shadow-gold-bright transition-all">
+          Запази Час
+        </a>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="mobileMenuBtn" class="md:hidden p-2 text-stone-300 hover:text-gold-400">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="hidden md:hidden bg-obsidian-card border-b border-gold-500/20 px-6 py-6 space-y-4">
+      <a href="#services" class="block text-sm uppercase tracking-wider text-stone-200 hover:text-gold-400 py-1">Услуги</a>
+      <a href="#hair-configurator" class="block text-sm uppercase tracking-wider text-gold-400 font-semibold py-1">Конфигуратор Славянска Коса</a>
+      <a href="#lash-visualizer" class="block text-sm uppercase tracking-wider text-stone-200 hover:text-gold-400 py-1">Виртуално Lash Студио</a>
+      <a href="#head-spa" class="block text-sm uppercase tracking-wider text-stone-200 hover:text-gold-400 py-1">Head Spa & Измиване</a>
+      <a href="#transformations" class="block text-sm uppercase tracking-wider text-stone-200 hover:text-gold-400 py-1">Преди & След Галерия</a>
+      <a href="#shop" class="block text-sm uppercase tracking-wider text-stone-200 hover:text-gold-400 py-1">Бутик за Коса & Продукти</a>
+      <a href="#booking" class="block text-center luxury-cta-gold py-3 rounded-full text-xs font-bold uppercase tracking-widest mt-4">Онлайн Резервация</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-16 sm:py-24">
+      <!-- Ambient Glow & Luxury Particles Canvas -->
+      <canvas id="heroCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+      <div class="absolute inset-0 bg-radial-gradient pointer-events-none"></div>
+      
+      <!-- Decorative Floating Glowing Rings -->
+      <div class="absolute top-1/4 left-1/10 w-96 h-96 bg-gold-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+      <div class="absolute bottom-1/4 right-1/10 w-80 h-80 bg-rose-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow delay-1000"></div>
+
+      <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center">
+        <!-- Luxury Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold-500/30 bg-gold-950/40 backdrop-blur-md mb-8 animate-fade-in">
+          <span class="w-2 h-2 rounded-full bg-gold-400 animate-ping"></span>
+          <span class="text-xs uppercase tracking-[0.25em] text-gold-300 font-mono font-medium">
+            Master Artistry by Denitsa • Sofia & Varna VIP Access
+          </span>
+        </div>
+
+        <!-- Main Title -->
+        <h1 class="font-cinzel text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-stone-100 to-gold-300/80 leading-[1.08] mb-6">
+          СЪВЪРШЕНСТВО В <br>
+          <span class="font-cormorant italic font-normal text-gold-300 text-5xl sm:text-7xl md:text-8xl lg:text-9xl">Всяка Мигла,</span><br>
+          <span class="font-cinzel">Истинска Славянска Коса</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="max-w-2xl mx-auto text-base sm:text-lg text-stone-400 font-light leading-relaxed mb-10">
+          Студио от ново поколение: прецизна миглопластика без тежест, 100% сурова и девствена славянска коса за удължаване и релаксиращ японски Waterfall Head Spa ритуал.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-16">
+          <a href="#hair-configurator" class="w-full sm:w-auto luxury-cta-gold px-8 py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] shadow-gold-bright hover:scale-105 transition-all flex items-center justify-center gap-3">
+            <i data-lucide="sliders" class="w-4 h-4"></i>
+            <span>3D Конфигуратор на Коса</span>
+          </a>
+          <a href="#lash-visualizer" class="w-full sm:w-auto luxury-glass-btn px-8 py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] border border-gold-500/30 hover:border-gold-400 hover:text-gold-300 transition-all flex items-center justify-center gap-3">
+            <i data-lucide="eye" class="w-4 h-4 text-gold-400"></i>
+            <span>Интерактивни Мигли</span>
+          </a>
+          <a href="#booking" class="w-full sm:w-auto luxury-glass-btn px-8 py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] bg-stone-900/80 hover:bg-stone-800 transition-all flex items-center justify-center gap-3">
+            <i data-lucide="calendar" class="w-4 h-4 text-rose-400"></i>
+            <span>Запази Час</span>
+          </a>
+        </div>
+
+        <!-- Trust Badges Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-8 border-t border-gold-500/10 text-left">
+          <div class="p-4 rounded-2xl bg-stone-900/40 border border-white/5 backdrop-blur-sm">
+            <div class="text-gold-400 font-cinzel text-2xl font-bold">100% Raw</div>
+            <div class="text-xs text-stone-400 mt-1">Необработена, естествена славянска коса от един донор</div>
+          </div>
+          <div class="p-4 rounded-2xl bg-stone-900/40 border border-white/5 backdrop-blur-sm">
+            <div class="text-gold-400 font-cinzel text-2xl font-bold">6-8 Седмици</div>
+            <div class="text-xs text-stone-400 mt-1">Безупречна издръжливост на мигли без увреждане</div>
+          </div>
+          <div class="p-4 rounded-2xl bg-stone-900/40 border border-white/5 backdrop-blur-sm">
+            <div class="text-gold-400 font-cinzel text-2xl font-bold">Japanese Spa</div>
+            <div class="text-xs text-stone-400 mt-1">Воден спа ритуал за дълбок релакс и растеж</div>
+          </div>
+          <div class="p-4 rounded-2xl bg-stone-900/40 border border-white/5 backdrop-blur-sm">
+            <div class="text-gold-400 font-cinzel text-2xl font-bold">5.0 ★★★★★</div>
+            <div class="text-xs text-stone-400 mt-1">Над 1,400+ щастливи дами и ВИП клиенти</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INTERACTIVE SECTION 1: 3D SLAVIC RAW HAIR CONFIGURATOR & QUOTE GENERATOR -->
+    <section id="hair-configurator" class="py-24 relative overflow-hidden bg-obsidian-card/60 border-y border-gold-500/20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Title -->
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="inline-block text-xs uppercase tracking-[0.3em] text-gold-400 font-mono mb-3">
+            [ Haute Coiffure • 100% Virgin Hair Studio ]
+          </div>
+          <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white mb-4">
+            Интерактивен Конфигуратор на <span class="text-gold-300 font-cormorant italic">Славянска Коса</span>
+          </h2>
+          <p class="text-stone-400 text-sm sm:text-base">
+            Персонализирайте дължината, плътността, метода на поставяне и нюанса. Вижте симулация на косата в реално време и моментална оферта.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- LEFT / CENTER: Interactive Hair Simulation Visualizer & Strand Canvas -->
+          <div class="lg:col-span-6 bg-stone-950/80 rounded-3xl p-6 sm:p-8 border border-gold-500/30 relative shadow-2xl backdrop-blur-xl">
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+              <div>
+                <span class="text-xs text-gold-400 font-mono uppercase tracking-widest block">Симулация на Жива Коса</span>
+                <h3 id="simHairTitle" class="text-lg font-cinzel font-bold text-white">Славянска Коса • 55см • Silk Straight</h3>
+              </div>
+              <span id="simCuticleBadge" class="px-3 py-1 bg-gold-500/20 text-gold-300 border border-gold-500/40 rounded-full text-xs font-mono">
+                100% Кутикула Посока
+              </span>
+            </div>
+
+            <!-- Visualizer Box with Model Silhouette & Dynamic Hair Canvas -->
+            <div class="relative h-96 w-full rounded-2xl bg-gradient-to-b from-stone-900 via-stone-950 to-black overflow-hidden flex items-center justify-center border border-white/5">
+              
+              <!-- Dynamic Hair Strands Physics Canvas -->
+              <canvas id="hairStrandCanvas" class="absolute inset-0 w-full h-full z-10"></canvas>
+              
+              <!-- Length Indicator Overlay -->
+              <div class="absolute right-4 top-8 bottom-8 flex flex-col justify-between text-[11px] font-mono text-stone-500 z-20 pointer-events-none border-r border-dashed border-stone-700 pr-2">
+                <span class="text-stone-600">Рамене 35см</span>
+                <span id="lenMark45" class="transition-colors">Гърди 45см</span>
+                <span id="lenMark55" class="transition-colors font-bold text-gold-400">Талия 55см</span>
+                <span id="lenMark65" class="transition-colors">Ханш 65см</span>
+                <span id="lenMark75" class="transition-colors">Бедра 75см+</span>
+              </div>
+
+              <!-- Animated Hair Glow -->
+              <div id="hairGlowEffect" class="absolute w-48 h-72 rounded-full blur-3xl opacity-40 z-0 transition-all duration-700" style="background: radial-gradient(circle, rgba(212,175,55,0.4) 0%, transparent 70%);"></div>
+
+              <!-- Center Model Card Info -->
+              <div class="relative z-20 text-center pointer-events-none mt-32 p-4 bg-black/60 rounded-2xl border border-white/10 backdrop-blur-md">
+                <div class="text-gold-300 font-cormorant italic text-xl" id="simShadeName">Шоколадов Сатен (#2)</div>
+                <div class="text-stone-400 text-xs mt-1" id="simMethodName">Метод: Кератинови микро-капсули (Италиански кератин)</div>
+                <div class="text-gold-400 text-xs font-mono font-bold mt-2" id="simWeightDisplay">Плътност: 150 грама (Пълен обем & дължина)</div>
+              </div>
+
+              <!-- Interaction Hint -->
+              <div class="absolute bottom-3 left-4 text-[10px] font-mono text-stone-500 z-20 flex items-center gap-1.5">
+                <i data-lucide="move" class="w-3 h-3 text-gold-400"></i>
+                Движете мишката за реакция на копринения блясък
+              </div>
+            </div>
+
+            <!-- Quality Highlights Grid -->
+            <div class="grid grid-cols-3 gap-3 mt-6 pt-4 border-t border-white/10 text-center">
+              <div class="p-3 bg-stone-900/50 rounded-xl border border-white/5">
+                <div class="text-gold-400 text-xs font-bold font-mono">0% Заплитане</div>
+                <div class="text-[10px] text-stone-400 mt-0.5">Гладка кутикула</div>
+              </div>
+              <div class="p-3 bg-stone-900/50 rounded-xl border border-white/5">
+                <div class="text-gold-400 text-xs font-bold font-mono">2-3 Години</div>
+                <div class="text-[10px] text-stone-400 mt-0.5">Живот при правилна грижа</div>
+              </div>
+              <div class="p-3 bg-stone-900/50 rounded-xl border border-white/5">
+                <div class="text-gold-400 text-xs font-bold font-mono">Третиране</div>
+                <div class="text-[10px] text-stone-400 mt-0.5">Боядисване & стилизиране</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT: Interactive Controls & Live Price Quote -->
+          <div class="lg:col-span-6 space-y-6">
+
+            <!-- Control 1: Hair Origin -->
+            <div class="bg-stone-950/60 p-6 rounded-2xl border border-white/10 space-y-3">
+              <label class="text-xs uppercase tracking-widest font-mono text-gold-400 flex items-center justify-between">
+                <span>1. Произход и Качество на Косата</span>
+                <span id="originLabel" class="text-white font-sans font-bold">100% Сурова Славянска Коса</span>
+              </label>
+              <div class="grid grid-cols-3 gap-2" id="originSelector">
+                <button data-origin="slavic" class="hair-opt-btn active p-3 rounded-xl border border-gold-500 bg-gold-500/10 text-left transition-all">
+                  <div class="text-xs font-bold text-white">Славянска VIP</div>
+                  <div class="text-[10px] text-gold-400 mt-1">Тънка, супер мека, най-висок клас</div>
+                </button>
+                <button data-origin="russian" class="hair-opt-btn p-3 rounded-xl border border-white/10 hover:border-gold-500/50 bg-stone-900/40 text-left transition-all">
+                  <div class="text-xs font-bold text-white">Руска Девствена</div>
+                  <div class="text-[10px] text-stone-400 mt-1">Плътна, здрава и копринена</div>
+                </button>
+                <button data-origin="brazilian" class="hair-opt-btn p-3 rounded-xl border border-white/10 hover:border-gold-500/50 bg-stone-900/40 text-left transition-all">
+                  <div class="text-xs font-bold text-white">Бразилска Remy</div>
+                  <div class="text-[10px] text-stone-400 mt-1">Естествен обем и здравина</div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Control 2: Length Slider -->
+            <div class="bg-stone-950/60 p-6 rounded-2xl border border-white/10 space-y-3">
+              <div class="flex items-center justify-between text-xs font-mono">
+                <span class="uppercase tracking-widest text-gold-400">2. Дължина на Косата</span>
+                <span id="lengthValueDisplay" class="text-white font-bold text-sm bg-stone-900 px-3 py-1 rounded-lg border border-gold-500/30">55 см (До талията)</span>
+              </div>
+              <input type="range" id="hairLengthSlider" min="40" max="80" step="5" value="55" class="w-full luxury-slider">
+              <div class="flex justify-between text-[10px] font-mono text-stone-500">
+                <span>40 см</span>
+                <span>50 см</span>
+                <span class="text-gold-400 font-bold">55 см</span>
+                <span>65 см</span>
+                <span>75 см</span>
+                <span>80 см+</span>
+              </div>
+            </div>
+
+            <!-- Control 3: Weight / Grams -->
+            <div class="bg-stone-950/60 p-6 rounded-2xl border border-white/10 space-y-3">
+              <div class="flex items-center justify-between text-xs font-mono">
+                <span class="uppercase tracking-widest text-gold-400">3. Грамаж и Плътност (Грама)</span>
+                <span id="weightValueDisplay" class="text-white font-bold text-sm bg-stone-900 px-3 py-1 rounded-lg border border-gold-500/30">150 грама (Стандартен пълен обем)</span>
+              </div>
+              <input type="range" id="hairWeightSlider" min="80" max="300" step="20" value="150" class="w-full luxury-slider">
+              <div class="flex justify-between text-[10px] font-mono text-stone-500">
+                <span>80g (Сгъстяване)</span>
+                <span>150g (Стандарт)</span>
+                <span>220g (Mega Обем)</span>
+                <span>300g (Haute Glam)</span>
+              </div>
+            </div>
+
+            <!-- Control 4: Shades / Color Palette -->
+            <div class="bg-stone-950/60 p-6 rounded-2xl border border-white/10 space-y-3">
+              <label class="text-xs uppercase tracking-widest font-mono text-gold-400 flex items-center justify-between">
+                <span>4. Нюанс & Цвят</span>
+                <span id="selectedShadeLabel" class="text-white font-bold text-xs">#2 Тъмен Шоколад</span>
+              </label>
+              <div class="flex items-center gap-3 flex-wrap" id="colorPalette">
+                <!-- Color dots -->
+                <button data-color="#111111" data-name="#1 Jet Black" data-glow="rgba(20,20,20,0.6)" class="color-dot w-8 h-8 rounded-full border-2 border-stone-700 bg-[#111111] hover:scale-110 transition-all"></button>
+                <button data-color="#2a1d17" data-name="#2 Тъмен Шоколад" data-glow="rgba(42,29,23,0.6)" class="color-dot active w-8 h-8 rounded-full border-2 border-gold-400 bg-[#2a1d17] hover:scale-110 transition-all ring-2 ring-gold-400/50"></button>
+                <button data-color="#4d301e" data-name="#4 Кестеняво Какао" data-glow="rgba(77,48,30,0.6)" class="color-dot w-8 h-8 rounded-full border-2 border-stone-700 bg-[#4d301e] hover:scale-110 transition-all"></button>
+                <button data-color="#8a613c" data-name="#6 Меден Карамел" data-glow="rgba(138,97,60,0.6)" class="color-dot w-8 h-8 rounded-full border-2 border-stone-700 bg-[#8a613c] hover:scale-110 transition-all"></button>
+                <button data-color="#bfa272" data-name="#4/27 Балаяж Златен Пясък" data-glow="rgba(191,162,114,0.6)" class="color-dot w-8 h-8 rounded-full border-2 border-stone-700 bg-gradient-to-tr from-[#4d301e] to-[#e4cc9a] hover:scale-110 transition-all"></button>
+                <button data-color="#f0e2be" data-name="#60 Ледено Платинено Русо" data-glow="rgba(240,226,190,0.6)" class="color-dot w-8 h-8 rounded-full border-2 border-stone-700 bg-[#f0e2be] hover:scale-110 transition-all"></button>
+                <button data-color="#e0d5c1" data-name="#100 Скандинавско Сребро" data-glow="rgba(224,213,193,0.6)" class="color-dot w-8 h-8 rounded-full border-2 border-stone-700 bg-[#e0d5c1] hover:scale-110 transition-all"></button>
+              </div>
+            </div>
+
+            <!-- Control 5: Method Selector -->
+            <div class="bg-stone-950/60 p-6 rounded-2xl border border-white/10 space-y-3">
+              <label class="text-xs uppercase tracking-widest font-mono text-gold-400 block">5. Метод на Удължаване</label>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="methodSelector">
+                <button data-method="keratin" class="method-btn active p-2.5 rounded-xl border border-gold-500 bg-gold-500/10 text-center text-xs font-bold text-white transition-all">
+                  Кератин Капсули
+                </button>
+                <button data-method="tapes" class="method-btn p-2.5 rounded-xl border border-white/10 hover:border-gold-500/50 bg-stone-900/40 text-center text-xs font-bold text-white transition-all">
+                  Стикери (Tape-in)
+                </button>
+                <button data-method="wefts" class="method-btn p-2.5 rounded-xl border border-white/10 hover:border-gold-500/50 bg-stone-900/40 text-center text-xs font-bold text-white transition-all">
+                  Треси на Клипси
+                </button>
+                <button data-method="nanorings" class="method-btn p-2.5 rounded-xl border border-white/10 hover:border-gold-500/50 bg-stone-900/40 text-center text-xs font-bold text-white transition-all">
+                  Нано Рингове
+                </button>
+              </div>
+            </div>
+
+            <!-- LIVE CALCULATED QUOTE & ACTION -->
+            <div class="bg-gradient-to-r from-stone-900 via-gold-950/40 to-stone-900 p-6 rounded-2xl border border-gold-500/40 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+              <div>
+                <div class="text-[11px] font-mono text-gold-400 uppercase tracking-widest">Калкулирана Стойност:</div>
+                <div class="flex items-baseline gap-2">
+                  <span id="calculatedPrice" class="font-cinzel text-3xl font-black text-white">680 лв.</span>
+                  <span class="text-xs text-stone-400 font-mono">(с включен монтаж и оформяне)</span>
+                </div>
+                <div class="text-[11px] text-stone-400 mt-0.5">Включва VIP подарък: Специална четка за удължения & серум</div>
+              </div>
+              <div class="flex items-center gap-3 w-full sm:w-auto">
+                <button id="addCustomHairToCartBtn" class="flex-1 sm:flex-initial luxury-glass-btn px-5 py-3 rounded-full text-xs font-bold uppercase tracking-wider text-gold-300 border border-gold-500/30 hover:border-gold-400 transition-all flex items-center justify-center gap-2">
+                  <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                  <span>Купи Коса</span>
+                </button>
+                <a href="#booking" id="bookHairSlotBtn" class="flex-1 sm:flex-initial luxury-cta-gold px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2">
+                  <i data-lucide="calendar-check" class="w-4 h-4"></i>
+                  <span>Запази Час</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INTERACTIVE SECTION 2: VIRTUAL LASH & BROW STUDIO VISUALIZER -->
+    <section id="lash-visualizer" class="py-24 relative overflow-hidden bg-obsidian">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="inline-block text-xs uppercase tracking-[0.3em] text-rose-400 font-mono mb-3">
+            [ Artistry In Every Wink • Lash & Brow Configurator ]
+          </div>
+          <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white mb-4">
+            Виртуално <span class="text-gold-300 font-cormorant italic">Lash & Brow</span> Студио
+          </h2>
+          <p class="text-stone-400 text-sm sm:text-base">
+            Изпробвайте различни ефекти на миглопластика (Косъм по косъм, 3D Руски Обем, Kim K Wispy, Fox Eye) и ламиниране на вежди върху интерактивен модел на живо!
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- LEFT: Interactive Eye Canvas Visualizer -->
+          <div class="lg:col-span-7 bg-stone-950 rounded-3xl p-6 sm:p-8 border border-white/10 relative shadow-2xl overflow-hidden">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-mono text-gold-400 uppercase tracking-widest flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                Интерактивна Визуализация на Окото
+              </span>
+              <button id="lashBlinkBtn" class="luxury-glass-btn px-3 py-1 rounded-full text-xs font-mono text-stone-300 hover:text-white flex items-center gap-1.5">
+                <i data-lucide="eye" class="w-3.5 h-3.5 text-gold-400"></i>
+                Мигни
+              </button>
+            </div>
+
+            <!-- Eye Rendering Canvas Container -->
+            <div class="relative h-[340px] sm:h-[400px] w-full rounded-2xl bg-stone-900/60 overflow-hidden flex items-center justify-center border border-white/5">
+              <canvas id="eyeLashCanvas" class="w-full h-full"></canvas>
+              
+              <!-- Floating Active Style Badge -->
+              <div class="absolute top-4 left-4 bg-black/70 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-left pointer-events-none">
+                <div class="text-[10px] font-mono text-gold-400 uppercase">Избран Стил:</div>
+                <div id="canvasStyleName" class="text-sm font-cinzel font-bold text-white">3D-5D Russian Velvet Volume</div>
+                <div id="canvasSpecs" class="text-[10px] text-stone-400 font-mono mt-0.5">Извивка: D • Дължина: 9-14mm • Fox Lift</div>
+              </div>
+
+              <!-- Brow Style Badge -->
+              <div class="absolute bottom-4 left-4 bg-black/70 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-left pointer-events-none">
+                <div class="text-[10px] font-mono text-rose-400 uppercase">Стил на Вежди:</div>
+                <div id="canvasBrowName" class="text-xs font-semibold text-white">Ламиниране & Кератинов Botox</div>
+              </div>
+
+              <!-- Split Mode Before/After Toggle in canvas -->
+              <div class="absolute top-4 right-4 flex items-center gap-2 bg-black/70 backdrop-blur-md p-1.5 rounded-full border border-white/10">
+                <button id="toggleLashNatural" class="text-[10px] font-mono px-3 py-1 rounded-full transition-all text-stone-400 hover:text-white">Натурално</button>
+                <button id="toggleLashGlam" class="text-[10px] font-mono px-3 py-1 rounded-full bg-gold-500 text-black font-bold transition-all">Haute Glam</button>
+              </div>
+            </div>
+
+            <!-- Lash Properties Summary -->
+            <div class="grid grid-cols-3 gap-3 mt-4 text-center">
+              <div class="p-2.5 bg-stone-900/40 rounded-xl border border-white/5">
+                <div class="text-[10px] font-mono text-stone-400">Време за процедура</div>
+                <div class="text-xs font-bold text-white font-mono mt-0.5" id="lashDuration">90 - 110 мин.</div>
+              </div>
+              <div class="p-2.5 bg-stone-900/40 rounded-xl border border-white/5">
+                <div class="text-[10px] font-mono text-stone-400">Издръжливост</div>
+                <div class="text-xs font-bold text-gold-400 font-mono mt-0.5">5 до 7 седмици</div>
+              </div>
+              <div class="p-2.5 bg-stone-900/40 rounded-xl border border-white/5">
+                <div class="text-[10px] font-mono text-stone-400">Цена на процедурата</div>
+                <div class="text-xs font-bold text-emerald-400 font-mono mt-0.5" id="lashPrice">75 лв.</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT: Controls for Lashes & Brows -->
+          <div class="lg:col-span-5 space-y-5">
+            
+            <!-- Lash Style Cards -->
+            <div class="bg-stone-950/60 p-5 rounded-2xl border border-white/10 space-y-3">
+              <label class="text-xs uppercase tracking-widest font-mono text-gold-400 block">
+                1. Стил на Миглите
+              </label>
+              <div class="grid grid-cols-2 gap-2" id="lashStyleOptions">
+                <button data-style="classic" data-price="60" data-time="80 мин" class="lash-style-btn p-3 rounded-xl border border-white/10 hover:border-gold-500/40 bg-stone-900/40 text-left transition-all">
+                  <div class="text-xs font-bold text-white">Косъм по косъм</div>
+                  <div class="text-[10px] text-stone-400 mt-0.5">Деликатен, естествен ефект</div>
+                </button>
+                <button data-style="russian" data-price="75" data-time="90 мин" class="lash-style-btn active p-3 rounded-xl border border-gold-500 bg-gold-500/10 text-left transition-all">
+                  <div class="text-xs font-bold text-white">3D-5D Руски Обем</div>
+                  <div class="text-[10px] text-gold-400 mt-0.5">Плътен кадифен поглед</div>
+                </button>
+                <button data-style="wispy" data-price="85" data-time="110 мин" class="lash-style-btn p-3 rounded-xl border border-white/10 hover:border-gold-500/40 bg-stone-900/40 text-left transition-all">
+                  <div class="text-xs font-bold text-white">Kim K / Wispy Ефект</div>
+                  <div class="text-[10px] text-stone-400 mt-0.5">Игриви неравномерни лъчи</div>
+                </button>
+                <button data-style="fox" data-price="80" data-time="95 мин" class="lash-style-btn p-3 rounded-xl border border-white/10 hover:border-gold-500/40 bg-stone-900/40 text-left transition-all">
+                  <div class="text-xs font-bold text-white">Fox Eye / Лисичи Поглед</div>
+                  <div class="text-[10px] text-stone-400 mt-0.5">Издължаване във външния ъгъл</div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Lash Curl & Length Controls -->
+            <div class="bg-stone-950/60 p-5 rounded-2xl border border-white/10 space-y-4">
+              <div>
+                <label class="text-xs uppercase tracking-widest font-mono text-gold-400 block mb-2">2. Извивка на Миглите (Curl)</label>
+                <div class="grid grid-cols-4 gap-2" id="lashCurlSelector">
+                  <button data-curl="C" class="curl-btn p-2 rounded-lg border border-white/10 hover:border-gold-500 text-xs font-mono font-bold text-center">C-Curl</button>
+                  <button data-curl="D" class="curl-btn active p-2 rounded-lg border border-gold-500 bg-gold-500/20 text-xs font-mono font-bold text-center text-gold-300">D-Curl</button>
+                  <button data-curl="L" class="curl-btn p-2 rounded-lg border border-white/10 hover:border-gold-500 text-xs font-mono font-bold text-center">L-Lift</button>
+                  <button data-curl="M" class="curl-btn p-2 rounded-lg border border-white/10 hover:border-gold-500 text-xs font-mono font-bold text-center">M-Extreme</button>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-mono text-stone-300 mb-1">
+                  <span>Максимална Дължина</span>
+                  <span id="lashLengthVal" class="text-gold-400 font-bold">13 mm</span>
+                </div>
+                <input type="range" id="lashLengthSlider" min="9" max="16" value="13" class="w-full luxury-slider">
+              </div>
+            </div>
+
+            <!-- Brow Styling Addon -->
+            <div class="bg-stone-950/60 p-5 rounded-2xl border border-white/10 space-y-3">
+              <label class="text-xs uppercase tracking-widest font-mono text-rose-400 block">3. Оформяне & Терапия за Вежди</label>
+              <div class="grid grid-cols-3 gap-2" id="browOptions">
+                <button data-brow="lamination" class="brow-btn active p-2.5 rounded-xl border border-rose-500 bg-rose-500/10 text-left text-xs font-bold text-white transition-all">
+                  Ламиниране + Botox
+                </button>
+                <button data-brow="tint" class="brow-btn p-2.5 rounded-xl border border-white/10 hover:border-rose-500/40 bg-stone-900/40 text-left text-xs font-bold text-white transition-all">
+                  Хибридна Боя & Форма
+                </button>
+                <button data-brow="none" class="brow-btn p-2.5 rounded-xl border border-white/10 hover:border-rose-500/40 bg-stone-900/40 text-left text-xs font-bold text-white transition-all">
+                  Без Промяна
+                </button>
+              </div>
+            </div>
+
+            <!-- Booking Fast Action -->
+            <div class="pt-2">
+              <a href="#booking" id="bookSelectedLashBtn" class="w-full luxury-cta-gold py-4 rounded-full text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 shadow-gold">
+                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                <span>Запази Час за Тази Визия</span>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INTERACTIVE SECTION 3: SIGNATURE JAPANESE HEAD SPA & WASHES -->
+    <section id="head-spa" class="py-24 relative overflow-hidden bg-gradient-to-b from-stone-950 via-obsidian to-stone-950 border-t border-gold-500/20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Left: Information & Ritual Steps -->
+          <div class="lg:col-span-6 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-teal-500/30 bg-teal-950/30 text-teal-300 text-xs font-mono uppercase tracking-widest">
+              <i data-lucide="droplet" class="w-3.5 h-3.5"></i>
+              Японски Воден Спа Ореол (Waterfall Head Spa)
+            </div>
+
+            <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white leading-tight">
+              Дълбоко Измиване & <br>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-200 via-gold-300 to-amber-200 font-cormorant italic font-normal text-4xl sm:text-6xl">Японски Head Spa</span>
+            </h2>
+
+            <p class="text-stone-300 text-sm sm:text-base leading-relaxed">
+              Уникално преживяване за цялостен релакс на ума и дълбоко възстановяване на скалпа и косата. Премахва натрупания стрес, стимулира микроциркулацията и пробужда спящите космени фоликули.
+            </p>
+
+            <!-- Ritual Steps Accordion -->
+            <div class="space-y-3 pt-2">
+              <div class="p-4 rounded-2xl bg-stone-900/60 border border-white/5 hover:border-gold-500/30 transition-all cursor-pointer">
+                <div class="flex items-center gap-3 text-gold-300 font-cinzel font-bold text-sm">
+                  <span class="w-6 h-6 rounded-full bg-gold-500/20 flex items-center justify-center text-xs font-mono">1</span>
+                  Диагностика на Скалпа с Микрокамера
+                </div>
+                <div class="text-stone-400 text-xs mt-1 ml-9">Анализ на омазняване, чувствителност и плътност на косъма с 200x увеличение.</div>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-stone-900/60 border border-white/5 hover:border-gold-500/30 transition-all cursor-pointer">
+                <div class="flex items-center gap-3 text-gold-300 font-cinzel font-bold text-sm">
+                  <span class="w-6 h-6 rounded-full bg-gold-500/20 flex items-center justify-center text-xs font-mono">2</span>
+                  Ароматерапия & Дълбок Шиацу Масаж
+                </div>
+                <div class="text-stone-400 text-xs mt-1 ml-9">Освобождаване на напрежението във врата, раменете и слепоочията с етерични масла.</div>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-stone-900/60 border border-white/5 hover:border-gold-500/30 transition-all cursor-pointer">
+                <div class="flex items-center gap-3 text-gold-300 font-cinzel font-bold text-sm">
+                  <span class="w-6 h-6 rounded-full bg-gold-500/20 flex items-center justify-center text-xs font-mono">3</span>
+                  Кръгов Воден Водопад (Water Halo) & Парна Инфузия
+                </div>
+                <div class="text-stone-400 text-xs mt-1 ml-9">Непрекъсната топла водна струя с хидротерапевтични минерали за копринена мекота.</div>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-stone-900/60 border border-white/5 hover:border-gold-500/30 transition-all cursor-pointer">
+                <div class="flex items-center gap-3 text-gold-300 font-cinzel font-bold text-sm">
+                  <span class="w-6 h-6 rounded-full bg-gold-500/20 flex items-center justify-center text-xs font-mono">4</span>
+                  Кератинов Silk Botox & Оформящ Сешоар
+                </div>
+                <div class="text-stone-400 text-xs mt-1 ml-9">Запечатване на влагата и перфектен обем за блясък като от огледало.</div>
+              </div>
+            </div>
+
+            <div class="pt-4 flex items-center gap-4">
+              <a href="#booking" class="luxury-cta-gold px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-gold">
+                Запази Head Spa Ритуал
+              </a>
+              <span class="text-stone-400 text-xs font-mono">Времетраене: 60 - 90 мин • 85 лв.</span>
+            </div>
+          </div>
+
+          <!-- Right: Interactive Water Ripple & Visual Experience -->
+          <div class="lg:col-span-6 relative">
+            <div class="relative rounded-3xl overflow-hidden border border-gold-500/30 p-2 bg-gradient-to-b from-stone-900 via-stone-950 to-black shadow-2xl">
+              <div class="relative h-[420px] rounded-2xl overflow-hidden bg-stone-900 flex items-center justify-center">
+                <!-- Water animation canvas -->
+                <canvas id="waterRippleCanvas" class="absolute inset-0 w-full h-full"></canvas>
+                
+                <div class="relative z-10 text-center p-8 bg-black/60 rounded-3xl border border-white/10 backdrop-blur-md max-w-md">
+                  <div class="w-16 h-16 rounded-full bg-gold-500/20 border border-gold-400/40 mx-auto flex items-center justify-center mb-4 text-gold-300 animate-pulse">
+                    <i data-lucide="sparkles" class="w-8 h-8"></i>
+                  </div>
+                  <h3 class="font-cinzel text-xl font-bold text-white mb-2">Пълно Презареждане на Сетивата</h3>
+                  <p class="text-xs text-stone-300 leading-relaxed mb-4">
+                    Докоснете екрана, за да създадете интерактивни водни вълни на спокойствието. Използваме само органична японска и френска козметика от най-висок ранг.
+                  </p>
+                  <div class="inline-flex items-center gap-2 text-gold-400 text-xs font-mono">
+                    <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+                    Включва комплимент: Чаша Просеко или Японски чай Matcha
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INTERACTIVE SECTION 4: BEFORE & AFTER TRANSFORMATION LENS -->
+    <section id="transformations" class="py-24 relative bg-stone-950 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="inline-block text-xs uppercase tracking-[0.3em] text-gold-400 font-mono mb-3">
+            [ Real Transformations • Master Hands ]
+          </div>
+          <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white mb-4">
+            Трансформации: <span class="text-gold-300 font-cormorant italic">Преди и След</span>
+          </h2>
+          <p class="text-stone-400 text-sm sm:text-base">
+            Плъзнете интерактивния разделител, за да видите разликата в обема на миглите, плътността на славянската коса и перфектната форма на веждите.
+          </p>
+        </div>
+
+        <!-- Before/After Slider Container -->
+        <div class="max-w-4xl mx-auto">
+          
+          <!-- Tab selector for transformations -->
+          <div class="flex items-center justify-center gap-2 sm:gap-4 mb-8 flex-wrap" id="transTabs">
+            <button data-trans="slavic-hair" class="trans-tab-btn active px-5 py-2.5 rounded-full border border-gold-500 bg-gold-500/20 text-xs font-bold text-gold-300 transition-all">
+              Славянска Коса 60см
+            </button>
+            <button data-trans="russian-lashes" class="trans-tab-btn px-5 py-2.5 rounded-full border border-white/10 hover:border-gold-500/40 bg-stone-900/60 text-xs font-bold text-stone-300 transition-all">
+              3D Руски Обем Мигли
+            </button>
+            <button data-trans="brow-lamination" class="trans-tab-btn px-5 py-2.5 rounded-full border border-white/10 hover:border-gold-500/40 bg-stone-900/60 text-xs font-bold text-stone-300 transition-all">
+              Ламиниране на Вежди
+            </button>
+            <button data-trans="head-spa-repair" class="trans-tab-btn px-5 py-2.5 rounded-full border border-white/10 hover:border-gold-500/40 bg-stone-900/60 text-xs font-bold text-stone-300 transition-all">
+              Head Spa Терапия
+            </button>
+          </div>
+
+          <!-- The Interactive Comparison Frame -->
+          <div class="relative w-full h-[450px] sm:h-[520px] rounded-3xl overflow-hidden border border-gold-500/30 shadow-2xl select-none" id="beforeAfterContainer">
+            
+            <!-- AFTER (Right / Full background layer) -->
+            <div class="absolute inset-0 w-full h-full bg-stone-900 flex items-center justify-center overflow-hidden" id="transAfterLayer">
+              <div class="absolute inset-0 bg-gradient-to-tr from-amber-950/40 via-stone-900 to-black"></div>
+              <!-- Procedural High Aesthetic Canvas Visual -->
+              <canvas id="afterCanvas" class="w-full h-full object-cover"></canvas>
+              <div class="absolute top-6 right-6 bg-gold-500 text-black px-4 py-1.5 rounded-full font-bold text-xs uppercase tracking-widest shadow-lg">
+                След (Denitsa Studio) ✨
+              </div>
+            </div>
+
+            <!-- BEFORE (Left / Clipped layer) -->
+            <div class="absolute inset-0 h-full overflow-hidden" id="transBeforeLayer" style="width: 50%;">
+              <div class="absolute inset-0 w-full h-full bg-stone-950 flex items-center justify-center">
+                <canvas id="beforeCanvas" class="w-full h-full object-cover"></canvas>
+                <div class="absolute top-6 left-6 bg-black/80 text-stone-300 border border-white/20 px-4 py-1.5 rounded-full font-bold text-xs uppercase tracking-widest shadow-lg">
+                  Преди 🌿
+                </div>
+              </div>
+            </div>
+
+            <!-- DRAG HANDLE BAR -->
+            <div class="absolute top-0 bottom-0 w-1 bg-gold-400 shadow-[0_0_15px_rgba(212,175,55,0.8)] cursor-ew-resize flex items-center justify-center z-30" id="dragHandle" style="left: 50%;">
+              <div class="w-10 h-10 rounded-full bg-gold-400 text-black flex items-center justify-center shadow-xl border-2 border-white">
+                <i data-lucide="chevrons-left-right" class="w-5 h-5"></i>
+              </div>
+            </div>
+
+            <!-- Bottom Information Bar on Transformation -->
+            <div class="absolute bottom-6 left-6 right-6 z-20 bg-black/80 backdrop-blur-md p-4 rounded-2xl border border-white/10 flex items-center justify-between pointer-events-none">
+              <div>
+                <h4 id="transTitle" class="text-sm font-cinzel font-bold text-white">Трансформация: 60см Славянска Необработена Коса</h4>
+                <p id="transDetails" class="text-xs text-stone-400">180 грама кератинови микро-капсули • Цвят #2/4 Balayage</p>
+              </div>
+              <span class="text-gold-400 text-xs font-mono hidden sm:inline-block">← Плъзнете наляво/надясно →</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FULL SERVICES & PRICING MENU -->
+    <section id="services" class="py-24 relative bg-obsidian-card/40 border-t border-gold-500/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="inline-block text-xs uppercase tracking-[0.3em] text-gold-400 font-mono mb-3">
+            [ Haute Aesthetic Menu ]
+          </div>
+          <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white mb-4">
+            Ценоразпис & <span class="text-gold-300 font-cormorant italic">Премиум Услуги</span>
+          </h2>
+          <p class="text-stone-400 text-sm sm:text-base">
+            Безкомпромисно качество на материалите, стриктна медицинска дезинфекция и индивидуален подход към всяка дама.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Category 1: Lashes -->
+          <div class="bg-stone-950/80 rounded-3xl p-8 border border-white/10 hover:border-gold-500/40 transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 mb-6 group-hover:scale-110 transition-transform">
+                <i data-lucide="sparkles" class="w-6 h-6"></i>
+              </div>
+              <h3 class="font-cinzel text-xl font-bold text-white mb-2">Миглопластика</h3>
+              <p class="text-xs text-stone-400 mb-6">Австрийско хипоалергенно лепило, олекотени копринени фибри, перфектна изолация.</p>
+
+              <div class="space-y-4 border-t border-white/5 pt-6 text-sm">
+                <div class="flex justify-between items-baseline">
+                  <div>
+                    <div class="text-white font-medium">Косъм по косъм (Класик)</div>
+                    <div class="text-[11px] text-stone-500">80 мин • Естествен вид</div>
+                  </div>
+                  <span class="font-mono text-gold-400 font-bold">60 лв.</span>
+                </div>
+                <div class="flex justify-between items-baseline">
+                  <div>
+                    <div class="text-white font-medium">2D - 3D Light Volume</div>
+                    <div class="text-[11px] text-stone-500">90 мин • Лек обем</div>
+                  </div>
+                  <span class="font-mono text-gold-400 font-bold">70 лв.</span>
+                </div>
+                <div class="flex justify-between items-baseline">
+                  <div>
+                    <div class="text-white font-medium">4D - 6D Russian Velvet</div>
+                    <div class="text-[11px] text-stone-500">100 мин • Наситен кадифен ефект</div>
+                  </div>
+                  <span class="font-mono text-gold-400 font-bold">85 лв.</span>
+                </div>
+                <div class="flex justify-between items-baseline">
+                  <div>
+                    <div class="text-white font-medium">Mega Volume / Kim K Wispy</div>
+                    <div class="text-[11px] text-stone-500">120 мин • VIP стилизиране</div>
+                  </div>
+                  <span class="font-mono text-gold-400 font-bold">100 лв.</span>
+                </div>
+                <div class="flex justify-between items-baseline">
+                  <div>
+                    <div class="text-white font-medium">Поддръжка (до 4 седмици)</div>
+                    <div class="text-[11px] text-stone-500">Попълване и опресняване</div>
+                  </div>
+                  <span class="font-mono text-gold-400 font-bold">50 - 70 лв.</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="#booking" class="luxury-cta-gold w-full py-3 rounded-full text-xs font-bold uppercase tracking-widest text-center mt-8 block">
+              Резервирай Мигли
+            </a>
+          </div>
+
+          <!-- Category 2: Hair Extensions -->
+          <div class="bg-gradient-to-b from-stone-900 to-stone-950 rounded-3xl p-8 border border-gold-500/40 shadow-gold hover:border-gold-400 transition-all duration-300 flex flex-col justify-between relative">
+            <div class="absolute -top-3 right-6 bg-gold-500 text-black font-bold text-[10px] uppercase tracking-widest px-3 py-1 rounded-full">
+              Най-Търсено
+            </div>
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-gold-500/20 border border-gold-400/50 flex items-center justify-center text-gold-300 mb-6">
+                <i data-lucide="crown" class="w-6 h-6"></i>
+              </div>
+              <h3 class="font-cinzel text-xl font-bold text-white mb-2">Славянска Коса & Удължаване</h3>
+              <p class="text-xs text-stone-400 mb-6">100% сурова девствена славянска коса. Изключителна издръжливост до 3 години.</p>
+
+              <div class="space-y-4 border-t border-white/5 pt-6 text-sm">
+                <div class="flex justify-between items-baseline">
+                  <div>
+                    <div class="text-white font-medium">Поставяне на Кератинови Капсули</div>
+                    <div class="text-[11px] text-stone-500">Микро капсула (за 100 бр.)</div>
+                  </div>
+                  <span class="font-mono text-gold-400 font-bold">120 лв.</span>
+                </div>
+                <div class="flex justify-between items-baseline">
+                  <div>
+                    <div class="text-white font-medium">Поставяне на Стикери (Tape-in)</div>
+                    <div class="text-[11px] text-stone-500">Монтаж & наместване (40 стикера)</div>
+                  </div>
+                  <span class="font-mono text-gold-400 font-bold">100 лв.</span>
+                </div>
+                <div class="flex justify-between items-baseline">
+                  <div>
+                    <div class="text-white font-medium">Пришиване на треса (Weft)</div>
+                    <div class="text-[11px] text-stone-500">Скрит безшевен шев на ред</div>
+                  </div>
+                  <span class="font-mono text-gold-400 font-bold">45 лв. / ред</span>
+                </div>
+                <div class="flex justify-between items-baseline">
+                  <div>
+                    <div class="text-white font-medium">Сваляне & Поддръжка</div>
+                    <div class="text-[11px] text-stone-500">Безопасно сваляне без увреждане</div>
+                  </div>
+                  <span class="font-mono text-gold-400 font-bold">80 - 140 лв.</span>
+                </div>
+                <div class="flex justify-between items-baseline">
+                  <div>
+                    <div class="text-white font-medium">100% Славянска Коса Bundle (100g)</div>
+                    <div class="text-[11px] text-stone-500">55см • Двойно изтеглена (Double Drawn)</div>
+                  </div>
+                  <span class="font-mono text-gold-400 font-bold">от 420 лв.</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="#hair-configurator" class="luxury-cta-gold w-full py-3 rounded-full text-xs font-bold uppercase tracking-widest text-center mt-8 block">
+              Отвори Конфигуратора
+            </a>
+          </div>
+
+          <!-- Category 3: Head Spa, Washes & Brows -->
+          <div class="bg-stone-950/80 rounded-3xl p-8 border border-white/10 hover:border-gold-500/40 transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-400 mb-6 group-hover:scale-110 transition-transform">
+                <i data-lucide="droplets" class="w-6 h-6"></i>
+              </div>
+              <h3 class="font-cinzel text-xl font-bold text-white mb-2">Head Spa & Вежди</h3>
+              <p class="text-xs text-stone-400 mb-6">Дълбоко възстановяване на косъма, ламиниране и перфектна симетрия.</p>
+
+              <div class="space-y-4 border-t border-white/5 pt-6 text-sm">
+                <div class="flex justify-between items-baseline">
+                  <div>
+                    <div class="text-white font-medium">Японски Waterfall Head Spa</div>
+                    <div class="text-[11px] text-stone-500">75 мин • Масаж, воден ритуал, маска</div>
+                  </div>
+                  <span class="font-mono text-gold-400 font-bold">85 лв.</span>
+                </div>
+                <div class="flex justify-between items-baseline">
+                  <div>
+                    <div class="text-white font-medium">Луксозно Измиване & Blowout</div>
+                    <div class="text-[11px] text-stone-500">45 мин • Кератинов блясък и стайлинг</div>
+                  </div>
+                  <span class="font-mono text-gold-400 font-bold">45 лв.</span>
+                </div>
+                <div class="flex justify-between items-baseline">
+                  <div>
+                    <div class="text-white font-medium">Ламиниране на Вежди + Botox</div>
+                    <div class="text-[11px] text-stone-500">60 мин • Подхранване & фиксиране</div>
+                  </div>
+                  <span class="font-mono text-gold-400 font-bold">55 лв.</span>
+                </div>
+                <div class="flex justify-between items-baseline">
+                  <div>
+                    <div class="text-white font-medium">Хибридно Оцветяване & Архитектура</div>
+                    <div class="text-[11px] text-stone-500">40 мин • Трайна форма и нюанс</div>
+                  </div>
+                  <span class="font-mono text-gold-400 font-bold">35 лв.</span>
+                </div>
+                <div class="flex justify-between items-baseline">
+                  <div>
+                    <div class="text-white font-medium">VIP Комбо (Мигли + Вежди + Spa)</div>
+                    <div class="text-[11px] text-stone-500">Пълна 3-часова звездна трансформация</div>
+                  </div>
+                  <span class="font-mono text-gold-400 font-bold">180 лв.</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="#booking" class="luxury-cta-gold w-full py-3 rounded-full text-xs font-bold uppercase tracking-widest text-center mt-8 block">
+              Запази Час за Спа / Вежди
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INTERACTIVE BOUTIQUE / SHOP -->
+    <section id="shop" class="py-24 relative bg-stone-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+          <div>
+            <div class="inline-block text-xs uppercase tracking-[0.3em] text-gold-400 font-mono mb-2">
+              [ Denitsa Signature Boutique ]
+            </div>
+            <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white">
+              Ексклузивни <span class="text-gold-300 font-cormorant italic">Продукти & Коси</span>
+            </h2>
+          </div>
+          <p class="text-stone-400 text-xs sm:text-sm max-w-md mt-4 md:mt-0">
+            Поръчайте онлайн с бърза доставка с преглед и тест до офис на Спиди или Еконт.
+          </p>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Product 1 -->
+          <div class="product-card bg-stone-900/60 rounded-3xl p-5 border border-white/5 hover:border-gold-500/40 transition-all group flex flex-col justify-between">
+            <div class="relative h-60 rounded-2xl overflow-hidden bg-stone-950 mb-4 flex items-center justify-center p-4">
+              <div class="w-24 h-48 rounded-full bg-gradient-to-b from-[#2a1d17] to-[#111111] shadow-2xl relative group-hover:scale-105 transition-transform">
+                <div class="absolute inset-0 bg-gold-400/20 blur-md rounded-full"></div>
+              </div>
+              <span class="absolute top-3 left-3 bg-black/70 text-gold-300 text-[10px] font-mono px-2.5 py-1 rounded-full border border-gold-500/30">
+                100% Славянска
+              </span>
+            </div>
+            <div>
+              <div class="text-[10px] text-stone-500 font-mono uppercase">Коса за удължаване</div>
+              <h4 class="font-cinzel text-sm font-bold text-white mt-1">Славянска Коса 55см #2 Dark Chocolate (100g)</h4>
+              <p class="text-stone-400 text-xs mt-1">Необработена, Double Drawn за максимална плътност до върха.</p>
+              <div class="flex items-center justify-between mt-4">
+                <span class="font-cinzel text-lg font-bold text-gold-400">440 лв.</span>
+                <button class="add-to-cart-btn luxury-glass-btn p-2.5 rounded-full hover:bg-gold-500 hover:text-black transition-all" data-id="p1" data-title="Славянска Коса 55см (100g)" data-price="440">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="product-card bg-stone-900/60 rounded-3xl p-5 border border-white/5 hover:border-gold-500/40 transition-all group flex flex-col justify-between">
+            <div class="relative h-60 rounded-2xl overflow-hidden bg-stone-950 mb-4 flex items-center justify-center p-4">
+              <div class="w-24 h-48 rounded-full bg-gradient-to-b from-[#f0e2be] to-[#bfa272] shadow-2xl relative group-hover:scale-105 transition-transform">
+                <div class="absolute inset-0 bg-gold-200/20 blur-md rounded-full"></div>
+              </div>
+              <span class="absolute top-3 left-3 bg-black/70 text-gold-300 text-[10px] font-mono px-2.5 py-1 rounded-full border border-gold-500/30">
+                Платинено Руса
+              </span>
+            </div>
+            <div>
+              <div class="text-[10px] text-stone-500 font-mono uppercase">Коса за удължаване</div>
+              <h4 class="font-cinzel text-sm font-bold text-white mt-1">Руска Девствена Коса 60см #60 Ice Blonde (100g)</h4>
+              <p class="text-stone-400 text-xs mt-1">Копринено гладка, запазена кутикула, не се заплита.</p>
+              <div class="flex items-center justify-between mt-4">
+                <span class="font-cinzel text-lg font-bold text-gold-400">490 лв.</span>
+                <button class="add-to-cart-btn luxury-glass-btn p-2.5 rounded-full hover:bg-gold-500 hover:text-black transition-all" data-id="p2" data-title="Руска Девствена Коса 60см Ice Blonde (100g)" data-price="490">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="product-card bg-stone-900/60 rounded-3xl p-5 border border-white/5 hover:border-gold-500/40 transition-all group flex flex-col justify-between">
+            <div class="relative h-60 rounded-2xl overflow-hidden bg-stone-950 mb-4 flex items-center justify-center p-4">
+              <div class="w-16 h-36 rounded-2xl bg-gradient-to-t from-stone-800 to-stone-700 border border-gold-400/40 flex items-center justify-center text-gold-300 group-hover:scale-105 transition-transform">
+                <i data-lucide="sparkles" class="w-8 h-8"></i>
+              </div>
+              <span class="absolute top-3 left-3 bg-black/70 text-rose-300 text-[10px] font-mono px-2.5 py-1 rounded-full border border-rose-500/30">
+                Lash Care
+              </span>
+            </div>
+            <div>
+              <div class="text-[10px] text-stone-500 font-mono uppercase">Грижа за мигли</div>
+              <h4 class="font-cinzel text-sm font-bold text-white mt-1">Denitsa Lash Cleanser Foam (150ml)</h4>
+              <p class="text-stone-400 text-xs mt-1">Безмаслена почистваща пяна с чаено дърво и лайка + четчица.</p>
+              <div class="flex items-center justify-between mt-4">
+                <span class="font-cinzel text-lg font-bold text-gold-400">28 лв.</span>
+                <button class="add-to-cart-btn luxury-glass-btn p-2.5 rounded-full hover:bg-gold-500 hover:text-black transition-all" data-id="p3" data-title="Denitsa Lash Cleanser Foam (150ml)" data-price="28">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="product-card bg-stone-900/60 rounded-3xl p-5 border border-white/5 hover:border-gold-500/40 transition-all group flex flex-col justify-between">
+            <div class="relative h-60 rounded-2xl overflow-hidden bg-stone-950 mb-4 flex items-center justify-center p-4">
+              <div class="w-20 h-28 rounded-2xl bg-gradient-to-br from-gold-900/40 via-stone-800 to-amber-950 border border-gold-400/40 flex items-center justify-center text-gold-300 group-hover:scale-105 transition-transform">
+                <i data-lucide="droplet" class="w-8 h-8"></i>
+              </div>
+              <span class="absolute top-3 left-3 bg-black/70 text-gold-300 text-[10px] font-mono px-2.5 py-1 rounded-full border border-gold-500/30">
+                Organic Silk
+              </span>
+            </div>
+            <div>
+              <div class="text-[10px] text-stone-500 font-mono uppercase">Грижа за коса & удължения</div>
+              <h4 class="font-cinzel text-sm font-bold text-white mt-1">Silk & Keratin Elixir Serum (100ml)</h4>
+              <p class="text-stone-400 text-xs mt-1">Златен еликсир за копринен блясък и термозащита до 230°C.</p>
+              <div class="flex items-center justify-between mt-4">
+                <span class="font-cinzel text-lg font-bold text-gold-400">42 лв.</span>
+                <button class="add-to-cart-btn luxury-glass-btn p-2.5 rounded-full hover:bg-gold-500 hover:text-black transition-all" data-id="p4" data-title="Silk & Keratin Elixir Serum (100ml)" data-price="42">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ONLINE BOOKING SYSTEM -->
+    <section id="booking" class="py-24 relative bg-obsidian-card border-t border-gold-500/20">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        
+        <div class="text-center mb-12">
+          <div class="inline-block text-xs uppercase tracking-[0.3em] text-gold-400 font-mono mb-2">
+            [ Direct Reservation System ]
+          </div>
+          <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white mb-3">
+            Запазете Вашия <span class="text-gold-300 font-cormorant italic">VIP Час</span>
+          </h2>
+          <p class="text-stone-400 text-sm">
+            Изберете желаната процедура, дата и час. Ще получите мигновено потвърждение по телефон и WhatsApp.
+          </p>
+        </div>
+
+        <!-- Booking Form Container -->
+        <div class="bg-stone-950 p-6 sm:p-10 rounded-3xl border border-gold-500/30 shadow-2xl space-y-8">
+          
+          <!-- Step 1: Select Service -->
+          <div>
+            <label class="block text-xs uppercase tracking-widest font-mono text-gold-400 mb-3">
+              1. Изберете Услуга(и)
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="bookingServicesGrid">
+              <label class="booking-service-card p-4 rounded-2xl border border-white/10 hover:border-gold-500/50 bg-stone-900/40 cursor-pointer flex items-center gap-3 transition-all">
+                <input type="checkbox" name="service" value="Миглопластика (3D/Руски обем)" data-price="85" class="accent-gold-500 w-4 h-4">
+                <div>
+                  <div class="text-sm font-bold text-white">Миглопластика 3D-5D</div>
+                  <div class="text-xs text-gold-400 font-mono">85 лв. • 90 мин</div>
+                </div>
+              </label>
+
+              <label class="booking-service-card p-4 rounded-2xl border border-white/10 hover:border-gold-500/50 bg-stone-900/40 cursor-pointer flex items-center gap-3 transition-all">
+                <input type="checkbox" name="service" value="Славянска Коса (Консултация + Поставяне)" data-price="120" class="accent-gold-500 w-4 h-4">
+                <div>
+                  <div class="text-sm font-bold text-white">Удължаване на Коса</div>
+                  <div class="text-xs text-gold-400 font-mono">от 120 лв. • Капсули/Стикери</div>
+                </div>
+              </label>
+
+              <label class="booking-service-card p-4 rounded-2xl border border-white/10 hover:border-gold-500/50 bg-stone-900/40 cursor-pointer flex items-center gap-3 transition-all">
+                <input type="checkbox" name="service" value="Японски Waterfall Head Spa" data-price="85" class="accent-gold-500 w-4 h-4">
+                <div>
+                  <div class="text-sm font-bold text-white">Japanese Head Spa</div>
+                  <div class="text-xs text-gold-400 font-mono">85 лв. • 75 мин</div>
+                </div>
+              </label>
+
+              <label class="booking-service-card p-4 rounded-2xl border border-white/10 hover:border-gold-500/50 bg-stone-900/40 cursor-pointer flex items-center gap-3 transition-all">
+                <input type="checkbox" name="service" value="Ламиниране на Вежди + Botox" data-price="55" class="accent-gold-500 w-4 h-4">
+                <div>
+                  <div class="text-sm font-bold text-white">Ламиниране Вежди</div>
+                  <div class="text-xs text-gold-400 font-mono">55 лв. • 60 мин</div>
+                </div>
+              </label>
+
+              <label class="booking-service-card p-4 rounded-2xl border border-white/10 hover:border-gold-500/50 bg-stone-900/40 cursor-pointer flex items-center gap-3 transition-all">
+                <input type="checkbox" name="service" value="Луксозно Измиване & Blowout" data-price="45" class="accent-gold-500 w-4 h-4">
+                <div>
+                  <div class="text-sm font-bold text-white">Измиване & Сешоар</div>
+                  <div class="text-xs text-gold-400 font-mono">45 лв. • 45 мин</div>
+                </div>
+              </label>
+
+              <label class="booking-service-card p-4 rounded-2xl border border-gold-500/40 bg-gold-950/20 cursor-pointer flex items-center gap-3 transition-all">
+                <input type="checkbox" name="service" value="VIP Пълен Пакет Трансформация" data-price="180" class="accent-gold-500 w-4 h-4">
+                <div>
+                  <div class="text-sm font-bold text-gold-300">VIP Master Трансформация</div>
+                  <div class="text-xs text-gold-400 font-mono">180 лв. • Всичко в 1</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Step 2: Date & Time Picker -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs uppercase tracking-widest font-mono text-gold-400 mb-2">2. Изберете Дата</label>
+              <input type="date" id="bookingDateInput" class="w-full bg-stone-900 border border-white/10 rounded-2xl px-4 py-3.5 text-white font-mono text-sm focus:border-gold-500 focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-widest font-mono text-gold-400 mb-2">3. Свободен Час</label>
+              <select id="bookingTimeSelect" class="w-full bg-stone-900 border border-white/10 rounded-2xl px-4 py-3.5 text-white font-mono text-sm focus:border-gold-500 focus:outline-none">
+                <option value="10:00">10:00 ч. (Сутрешен VIP слот)</option>
+                <option value="11:30">11:30 ч.</option>
+                <option value="13:30">13:30 ч.</option>
+                <option value="15:30" selected>15:30 ч.</option>
+                <option value="17:30">17:30 ч. (Следработен слот)</option>
+                <option value="19:00">19:00 ч.</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Step 3: Client Details -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs uppercase tracking-widest font-mono text-stone-300 mb-2">Вашето Име *</label>
+              <input type="text" id="clientNameInput" placeholder="Име и Фамилия" class="w-full bg-stone-900 border border-white/10 rounded-2xl px-4 py-3.5 text-white text-sm focus:border-gold-500 focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-widest font-mono text-stone-300 mb-2">Телефонен Номер (за потвърждение) *</label>
+              <input type="tel" id="clientPhoneInput" placeholder="+359 888 ..." class="w-full bg-stone-900 border border-white/10 rounded-2xl px-4 py-3.5 text-white font-mono text-sm focus:border-gold-500 focus:outline-none">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs uppercase tracking-widest font-mono text-stone-300 mb-2">Специални изисквания или бележки (по избор)</label>
+            <textarea id="clientNotesInput" rows="2" placeholder="Напр. Имам чувствителни очи / искам консултация за нюанс на косата..." class="w-full bg-stone-900 border border-white/10 rounded-2xl px-4 py-3 text-white text-sm focus:border-gold-500 focus:outline-none"></textarea>
+          </div>
+
+          <!-- Submit Button & Live Total -->
+          <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <div class="text-xs text-stone-400 font-mono">Обща приблизителна сума:</div>
+              <div id="bookingTotalPreview" class="text-2xl font-cinzel font-bold text-gold-300">0 лв.</div>
+            </div>
+            <button id="submitBookingBtn" class="w-full sm:w-auto luxury-cta-gold px-10 py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] shadow-gold-bright hover:scale-105 transition-all flex items-center justify-center gap-3">
+              <i data-lucide="check-circle" class="w-4 h-4"></i>
+              <span>Потвърди Резервацията</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS & INSTAGRAM VIP FEED -->
+    <section class="py-24 relative bg-stone-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <div class="inline-block text-xs uppercase tracking-[0.3em] text-gold-400 font-mono mb-2">
+            [ Words From Our Queens ]
+          </div>
+          <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white mb-4">
+            Отзиви & <span class="text-gold-300 font-cormorant italic">Любими Клиенти</span>
+          </h2>
+          <div class="flex items-center justify-center gap-1 text-gold-400 text-lg">
+            ★★★★★ <span class="text-stone-300 text-xs font-mono ml-2">(1,400+ доволни дами)</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <div class="p-6 rounded-3xl bg-stone-900/40 border border-white/5 space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-gold-500/20 border border-gold-400 flex items-center justify-center font-cinzel font-bold text-gold-300">
+                Е
+              </div>
+              <div>
+                <div class="text-sm font-bold text-white">Елена Василева</div>
+                <div class="text-[11px] text-stone-500">Клиент за славянска коса 60см</div>
+              </div>
+            </div>
+            <p class="text-stone-300 text-xs leading-relaxed italic">
+              "Косата е просто феноменална! Вече 10 месеца я нося, пребоядисах я в платинено русо и е мека като коприна без никакво заплитане. Деница е истински ювелир в капсулите!"
+            </p>
+            <div class="text-gold-400 text-xs">★★★★★</div>
+          </div>
+
+          <div class="p-6 rounded-3xl bg-stone-900/40 border border-white/5 space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-gold-500/20 border border-gold-400 flex items-center justify-center font-cinzel font-bold text-gold-300">
+                М
+              </div>
+              <div>
+                <div class="text-sm font-bold text-white">Моника Димитрова</div>
+                <div class="text-[11px] text-stone-500">Клиент за 4D Руски Обем</div>
+              </div>
+            </div>
+            <p class="text-stone-300 text-xs leading-relaxed italic">
+              "Миглите ми издържат пълни 7 седмици без да падат и без изобщо да ги усещам тежки. Преди ми се зачервяваха очите в други салони, при Деница няма абсолютно никакъв дискомфорт!"
+            </p>
+            <div class="text-gold-400 text-xs">★★★★★</div>
+          </div>
+
+          <div class="p-6 rounded-3xl bg-stone-900/40 border border-white/5 space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-gold-500/20 border border-gold-400 flex items-center justify-center font-cinzel font-bold text-gold-300">
+                С
+              </div>
+              <div>
+                <div class="text-sm font-bold text-white">Силвия Георгиева</div>
+                <div class="text-[11px] text-stone-500">Waterfall Head Spa ритуал</div>
+              </div>
+            </div>
+            <p class="text-stone-300 text-xs leading-relaxed italic">
+              "Японският Head Spa беше най-релаксиращото преживяване в живота ми. Водният ореол и масажът на скалпа буквално изтриха умората от седмицата. Препоръчвам на всяка жена!"
+            </p>
+            <div class="text-gold-400 text-xs">★★★★★</div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- SHOPPING CART SLIDEOVER MODAL -->
+  <div id="cartModal" class="fixed inset-0 z-50 overflow-hidden hidden">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" id="cartOverlay"></div>
+    <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+      <div class="w-screen max-w-md bg-stone-950 border-l border-gold-500/30 p-6 flex flex-col justify-between shadow-2xl">
+        
+        <div>
+          <div class="flex items-center justify-between pb-4 border-b border-white/10">
+            <div class="flex items-center gap-2">
+              <i data-lucide="shopping-bag" class="w-5 h-5 text-gold-400"></i>
+              <h3 class="font-cinzel text-lg font-bold text-white">Вашата Кошница</h3>
+            </div>
+            <button id="closeCartBtn" class="p-2 text-stone-400 hover:text-white">
+              <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+          </div>
+
+          <!-- Cart Items List -->
+          <div id="cartItemsContainer" class="py-6 space-y-4 max-h-[60vh] overflow-y-auto">
+            <div class="text-center py-12 text-stone-500 text-sm font-mono">
+              Кошницата ви е празна. Изберете славянска коса или продукт от бутика!
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-white/10 pt-4 space-y-4">
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-stone-400 font-mono">Междинна сума:</span>
+            <span id="cartSubtotal" class="font-cinzel text-xl font-bold text-gold-300">0 лв.</span>
+          </div>
+
+          <div class="space-y-2">
+            <input type="text" id="promoCodeInput" placeholder="Промо код (напр. DENITSA10)" class="w-full bg-stone-900 border border-white/10 rounded-xl px-3 py-2 text-xs text-white uppercase font-mono">
+          </div>
+
+          <button id="checkoutBtn" class="w-full luxury-cta-gold py-3.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-gold">
+            Поръчай с Безплатна Доставка
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOKING SUCCESS MODAL -->
+  <div id="bookingSuccessModal" class="fixed inset-0 z-50 overflow-hidden hidden flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/85 backdrop-blur-md"></div>
+    <div class="relative bg-stone-950 border border-gold-500/50 p-8 rounded-3xl max-w-md w-full text-center shadow-2xl z-10 animate-fade-in">
+      <div class="w-16 h-16 rounded-full bg-gold-500/20 border border-gold-400 mx-auto flex items-center justify-center text-gold-300 mb-4 animate-bounce">
+        <i data-lucide="sparkles" class="w-8 h-8"></i>
+      </div>
+      <h3 class="font-cinzel text-2xl font-bold text-white mb-2">Часът е Резервиран Успешно!</h3>
+      <p id="bookingSuccessText" class="text-stone-300 text-xs leading-relaxed mb-6">
+        Благодарим ви! Деница получи вашата заявка и ще се свърже с вас за финално потвърждение.
+      </p>
+      <div class="space-y-3">
+        <button id="downloadIcsBtn" class="w-full luxury-glass-btn py-3 rounded-full text-xs font-bold uppercase tracking-wider text-gold-300 border border-gold-500/40 flex items-center justify-center gap-2">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          <span>Добави в Календара (Google/Apple)</span>
+        </button>
+        <button id="closeSuccessModalBtn" class="w-full luxury-cta-gold py-3 rounded-full text-xs font-bold uppercase tracking-wider text-black">
+          Разбрах, благодаря!
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-black border-t border-gold-500/20 py-16 text-stone-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
+      
+      <div class="space-y-4">
+        <span class="font-cinzel text-2xl font-bold text-white tracking-[0.2em] block">DENITSA</span>
+        <p class="text-stone-400 text-xs leading-relaxed">
+          Премиум ателие за миглопластика, 100% славянска коса, вежди и японски Head Spa ритуали.
+        </p>
+        <div class="text-gold-400 font-mono text-[11px]">
+          VIP Lounge • София & Варна
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-cinzel font-bold text-white uppercase tracking-widest text-xs mb-4">Бързи Връзки</h4>
+        <ul class="space-y-2 font-mono">
+          <li><a href="#services" class="hover:text-gold-400 transition-colors">Ценоразпис & Услуги</a></li>
+          <li><a href="#hair-configurator" class="hover:text-gold-400 transition-colors">3D Конфигуратор на Коса</a></li>
+          <li><a href="#lash-visualizer" class="hover:text-gold-400 transition-colors">Lash & Brow Студио</a></li>
+          <li><a href="#head-spa" class="hover:text-gold-400 transition-colors">Head Spa Ритуали</a></li>
+          <li><a href="#shop" class="hover:text-gold-400 transition-colors">Бутик за Славянска Коса</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-cinzel font-bold text-white uppercase tracking-widest text-xs mb-4">Контакти & Часове</h4>
+        <ul class="space-y-2 font-mono">
+          <li class="flex items-center gap-2 text-stone-300">
+            <i data-lucide="phone" class="w-3.5 h-3.5 text-gold-400"></i>
+            +359 88 888 8888
+          </li>
+          <li class="flex items-center gap-2 text-stone-300">
+            <i data-lucide="instagram" class="w-3.5 h-3.5 text-rose-400"></i>
+            @denitsa.lashes.hair
+          </li>
+          <li class="flex items-center gap-2 text-stone-300">
+            <i data-lucide="clock" class="w-3.5 h-3.5 text-gold-400"></i>
+            Пон - Съб: 10:00 - 19:30 ч.
+          </li>
+          <li class="text-[11px] text-stone-500">Неделя: Само с предварителна VIP заявка</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-cinzel font-bold text-white uppercase tracking-widest text-xs mb-4">VIP Гаранция</h4>
+        <p class="text-[11px] text-stone-400 leading-relaxed mb-4">
+          Гарантираме 100% произход на всяка славянска опашка и 14-дневна безплатна корекция на мигли при необходимост.
+        </p>
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-stone-900 rounded-full border border-gold-500/30 text-gold-300 text-[10px] font-mono">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-gold-400"></i>
+          100% Certified Master Artist
+        </div>
+      </div>
+
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 mt-10 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-[11px] text-stone-600 font-mono">
+      <div>© 2026 DENITSA STUDIO. Всички права запазени.</div>
+      <div>Designed with Haute Couture Code for the Queen of Lashes & Hair.</div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
