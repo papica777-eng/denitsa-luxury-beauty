@@ -780,6 +780,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (cartCount) cartCount.textContent = totalCount;
     if (cartSubtotal) cartSubtotal.textContent = `${totalPrice} лв.`;
+    const cartRemainder = document.getElementById('cartRemainder');
+    const remainder = Math.max(0, totalPrice - 39);
+    if (cartRemainder) cartRemainder.textContent = `${remainder} лв.`;
 
     if (cartItemsContainer) {
       if (cart.length === 0) {
@@ -848,6 +851,157 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ==========================================================================
+  // 4.1 HAIR ORDER & 20 EUR DEPOSIT UNIQUE CLIENT CODE SYSTEM
+  // ==========================================================================
+  const hairOrderCheckoutModal = document.getElementById('hairOrderCheckoutModal');
+  const closeHairOrderCheckoutBtn = document.getElementById('closeHairOrderCheckoutBtn');
+  const closeHairOrderModalBackdrop = document.getElementById('closeHairOrderModalBackdrop');
+  const hairOrderForm = document.getElementById('hairOrderForm');
+  const checkoutOrderTotalDisplay = document.getElementById('checkoutOrderTotalDisplay');
+  const checkoutOrderRemainderDisplay = document.getElementById('checkoutOrderRemainderDisplay');
+  const checkoutOrderItemsList = document.getElementById('checkoutOrderItemsList');
+
+  const orderCodeReceiptModal = document.getElementById('orderCodeReceiptModal');
+  const closeOrderReceiptBtn = document.getElementById('closeOrderReceiptBtn');
+  const closeOrderReceiptBackdrop = document.getElementById('closeOrderReceiptBackdrop');
+  const receiptUniqueCode = document.getElementById('receiptUniqueCode');
+  const receiptPaymentReason = document.getElementById('receiptPaymentReason');
+  const receiptRemainderBgn = document.getElementById('receiptRemainderBgn');
+  const receiptWhatsAppLink = document.getElementById('receiptWhatsAppLink');
+  const copyReceiptCodeBtn = document.getElementById('copyReceiptCodeBtn');
+  const copyBtnText = document.getElementById('copyBtnText');
+  const copyIbanBtn = document.getElementById('copyIbanBtn');
+  const ibanCodeText = document.getElementById('ibanCodeText');
+
+  const masterDirectOrderBtn = document.getElementById('masterDirectOrderBtn');
+
+  const trackOrderModal = document.getElementById('trackOrderModal');
+  const trackOrderTopBtn = document.getElementById('trackOrderTopBtn');
+  const trackOrderHeaderBtn = document.getElementById('trackOrderHeaderBtn');
+  const closeTrackOrderBtn = document.getElementById('closeTrackOrderBtn');
+  const closeTrackOrderBackdrop = document.getElementById('closeTrackOrderBackdrop');
+  const trackCodeInput = document.getElementById('trackCodeInput');
+  const submitTrackCodeBtn = document.getElementById('submitTrackCodeBtn');
+  const trackResultContainer = document.getElementById('trackResultContainer');
+
+  let activeCheckoutContext = null;
+
+  function openHairOrderCheckout(items, totalBgn, totalEur, source = 'direct') {
+    activeCheckoutContext = { items, totalBgn, totalEur, source };
+    if (checkoutOrderTotalDisplay) checkoutOrderTotalDisplay.textContent = `${totalBgn} лв. (${totalEur} €)`;
+    const remainder = Math.max(0, totalBgn - 39);
+    if (checkoutOrderRemainderDisplay) checkoutOrderRemainderDisplay.textContent = `${remainder} лв.`;
+
+    if (checkoutOrderItemsList) {
+      checkoutOrderItemsList.innerHTML = items.map(it => `
+        <div class="flex items-center justify-between py-1 border-b border-amber-100 last:border-0">
+          <span class="font-medium">${it.title}</span>
+          <span class="font-mono font-bold text-amber-900">${it.price} лв. ${it.qty > 1 ? `× ${it.qty}` : ''}</span>
+        </div>
+      `).join('');
+    }
+
+    if (hairOrderCheckoutModal) hairOrderCheckoutModal.classList.remove('hidden');
+    sound.playLuxuryClick();
+  }
+
+  function closeHairOrderCheckout() {
+    if (hairOrderCheckoutModal) hairOrderCheckoutModal.classList.add('hidden');
+  }
+
+  if (closeHairOrderCheckoutBtn) closeHairOrderCheckoutBtn.addEventListener('click', closeHairOrderCheckout);
+  if (closeHairOrderModalBackdrop) closeHairOrderModalBackdrop.addEventListener('click', closeHairOrderCheckout);
+
+  function openOrderCodeReceipt(order) {
+    if (receiptUniqueCode) receiptUniqueCode.textContent = order.code;
+    if (receiptPaymentReason) receiptPaymentReason.textContent = `${order.code} - ${order.name}`;
+    if (receiptRemainderBgn) receiptRemainderBgn.textContent = `${order.remainderBgn} лв.`;
+
+    const itemsSummary = order.items.map(i => i.title).join(', ');
+    const waMsg = `Здравейте Деница! Направих 20 евро (39 лв.) капаро за поръчка с уникален код: ${order.code}.\nИме: ${order.name}\nТелефон: ${order.phone}\nДоставка: ${order.address}\nПоръчана коса: ${itemsSummary}\nОстатък при куриера: ${order.remainderBgn} лв.\nПрикачвам платежното за потвърждение и изпращане!`;
+    if (receiptWhatsAppLink) {
+      receiptWhatsAppLink.href = `https://wa.me/359893022677?text=${encodeURIComponent(waMsg)}`;
+    }
+
+    if (orderCodeReceiptModal) orderCodeReceiptModal.classList.remove('hidden');
+    sound.playSparkle();
+    if (window.confetti) {
+      window.confetti({ particleCount: 150, spread: 90, origin: { y: 0.5 } });
+    }
+  }
+
+  function closeOrderCodeReceipt() {
+    if (orderCodeReceiptModal) orderCodeReceiptModal.classList.add('hidden');
+  }
+
+  if (closeOrderReceiptBtn) closeOrderReceiptBtn.addEventListener('click', closeOrderCodeReceipt);
+  if (closeOrderReceiptBackdrop) closeOrderReceiptBackdrop.addEventListener('click', closeOrderCodeReceipt);
+
+  if (copyReceiptCodeBtn) {
+    copyReceiptCodeBtn.addEventListener('click', () => {
+      const code = receiptUniqueCode?.textContent?.trim() || '';
+      if (code) {
+        navigator.clipboard.writeText(code);
+        if (copyBtnText) copyBtnText.textContent = '✅ Копиран!';
+        sound.playLuxuryClick();
+        setTimeout(() => {
+          if (copyBtnText) copyBtnText.textContent = 'Копирай Кода';
+        }, 2500);
+      }
+    });
+  }
+
+  if (copyIbanBtn && ibanCodeText) {
+    copyIbanBtn.addEventListener('click', () => {
+      const iban = ibanCodeText.textContent.trim();
+      navigator.clipboard.writeText(iban);
+      copyIbanBtn.innerHTML = '<i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>';
+      sound.playLuxuryClick();
+      if (window.lucide) window.lucide.createIcons();
+      setTimeout(() => {
+        copyIbanBtn.innerHTML = '<i data-lucide="copy" class="w-3.5 h-3.5"></i>';
+        if (window.lucide) window.lucide.createIcons();
+      }, 2500);
+    });
+  }
+
+  // Master Direct Order button from hair configurator
+  if (masterDirectOrderBtn) {
+    masterDirectOrderBtn.addEventListener('click', () => {
+      const weightRatio = hairConfigState.weight / 100;
+      let baseEur = Math.round(hairConfigState.pricePer100gEur * weightRatio);
+      let baseBgn = Math.round(hairConfigState.pricePer100gBgn * weightRatio);
+      let totalEur = baseEur + hairConfigState.methodFeeEur;
+      let totalBgn = baseBgn + hairConfigState.methodFeeBgn;
+
+      const items = [{
+        title: `${hairConfigState.originLabel} (${hairConfigState.densityLabel}, ${hairConfigState.lengthLabel}, ${hairConfigState.weight}g, ${hairConfigState.colorName}, ${hairConfigState.methodName})`,
+        price: baseBgn + hairConfigState.methodFeeBgn,
+        qty: 1
+      }];
+
+      if (hairConfigState.addBrush) {
+        items.push({ title: 'Специална Четка за Екстеншъни DS с Глигански Косъм', price: 35, qty: 1 });
+        totalBgn += 35;
+        totalEur += 18;
+      }
+      if (hairConfigState.addBook) {
+        items.push({ title: 'Официален Авторски Учебник (Деница Ставракиева) — ПРОМО', price: 39, qty: 1 });
+        totalBgn += 39;
+        totalEur += 20;
+      }
+      if (hairConfigState.addBag) {
+        items.push({ title: 'Луксозен предпазен сатенен калъф и закачалка', price: 25, qty: 1 });
+        totalBgn += 25;
+        totalEur += 13;
+      }
+
+      openHairOrderCheckout(items, totalBgn, totalEur, 'direct');
+    });
+  }
+
+  // Checkout button in cart drawer
   const checkoutBtn = document.getElementById('checkoutBtn');
   if (checkoutBtn) {
     checkoutBtn.addEventListener('click', () => {
@@ -855,14 +1009,134 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Моля, добавете продукт в кошницата!');
         return;
       }
-      sound.playSparkle();
-      if (window.confetti) {
-        window.confetti({ particleCount: 100, spread: 80, origin: { y: 0.5 } });
-      }
-      alert('Благодарим ви! Вашата заявка към Hair Extensions DS е приета. Наш консултант ще се свърже с вас на посочения номер за потвърждение на адреса за доставка със Спиди / Еконт или позвънете директно на 0893 02 26 77.');
-      cart = [];
-      updateCartUI();
+      const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+      const totalEur = Math.round(totalPrice / 1.95583);
       closeCart();
+      openHairOrderCheckout(cart, totalPrice, totalEur, 'cart');
+    });
+  }
+
+  // Form submission: Generate Unique Code & Record Order
+  if (hairOrderForm) {
+    hairOrderForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('orderInputName')?.value.trim();
+      const phone = document.getElementById('orderInputPhone')?.value.trim();
+      const address = document.getElementById('orderInputAddress')?.value.trim();
+      const notes = document.getElementById('orderInputNotes')?.value.trim() || '';
+
+      if (!name || !phone || !address) {
+        alert('Моля, попълнете всички задължителни полета за доставка!');
+        return;
+      }
+
+      const uniqueNum = Math.floor(100000 + Math.random() * 900000);
+      const orderCode = `DS-${uniqueNum}`;
+
+      const totalBgn = activeCheckoutContext?.totalBgn || 0;
+      const totalEur = activeCheckoutContext?.totalEur || 0;
+      const remainderBgn = Math.max(0, totalBgn - 39);
+
+      const orderData = {
+        code: orderCode,
+        name,
+        phone,
+        address,
+        notes,
+        items: activeCheckoutContext?.items || [],
+        totalBgn,
+        totalEur,
+        depositEur: 20,
+        depositBgn: 39,
+        remainderBgn,
+        status: 'pending_deposit',
+        createdAt: new Date().toISOString()
+      };
+
+      try {
+        const savedOrders = JSON.parse(localStorage.getItem('ds_hair_orders') || '[]');
+        savedOrders.unshift(orderData);
+        localStorage.setItem('ds_hair_orders', JSON.stringify(savedOrders));
+      } catch (err) {
+        console.error('Storage error:', err);
+      }
+
+      if (activeCheckoutContext?.source === 'cart') {
+        cart = [];
+        updateCartUI();
+      }
+
+      closeHairOrderCheckout();
+      hairOrderForm.reset();
+      openOrderCodeReceipt(orderData);
+    });
+  }
+
+  // Track Order By Code Logic
+  function openTrackOrderModal() {
+    if (trackOrderModal) trackOrderModal.classList.remove('hidden');
+    sound.playLuxuryClick();
+  }
+
+  function closeTrackOrderModal() {
+    if (trackOrderModal) trackOrderModal.classList.add('hidden');
+  }
+
+  if (trackOrderTopBtn) trackOrderTopBtn.addEventListener('click', openTrackOrderModal);
+  if (trackOrderHeaderBtn) trackOrderHeaderBtn.addEventListener('click', openTrackOrderModal);
+  if (closeTrackOrderBtn) closeTrackOrderBtn.addEventListener('click', closeTrackOrderModal);
+  if (closeTrackOrderBackdrop) closeTrackOrderBackdrop.addEventListener('click', closeTrackOrderModal);
+
+  if (submitTrackCodeBtn) {
+    submitTrackCodeBtn.addEventListener('click', () => {
+      const enteredCode = trackCodeInput?.value?.trim().toUpperCase();
+      if (!enteredCode) {
+        alert('Моля, въведете клиентски код (напр. DS-123456)!');
+        return;
+      }
+
+      let found = null;
+      try {
+        const savedOrders = JSON.parse(localStorage.getItem('ds_hair_orders') || '[]');
+        found = savedOrders.find(o => o.code === enteredCode);
+      } catch (err) {}
+
+      if (trackResultContainer) {
+        trackResultContainer.classList.remove('hidden');
+        if (found) {
+          trackResultContainer.innerHTML = `
+            <div class="flex items-center justify-between border-b border-stone-200 pb-2">
+              <span class="font-bold text-stone-900 font-cinzel">Код: ${found.code}</span>
+              <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-mono text-[10px] font-bold">Очаква верификация на капарото</span>
+            </div>
+            <div class="space-y-1 text-[11px] text-stone-600">
+              <div><strong>Клиент:</strong> ${found.name} (${found.phone})</div>
+              <div><strong>Адрес за доставка:</strong> ${found.address}</div>
+              <div><strong>Обща стойност:</strong> ${found.totalBgn} лв.</div>
+              <div><strong>Капаро:</strong> 20 € (39 лв.) | <strong>Остатък при куриера:</strong> ${found.remainderBgn} лв.</div>
+            </div>
+            <div class="pt-2 border-t border-stone-200">
+              <a href="https://wa.me/359893022677?text=${encodeURIComponent(`Здравейте Деница! Проверявам статус на поръчка с код ${found.code}. Изпращам доказателство за преведено капаро.`)}" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+                <span>Докажи плащането в WhatsApp</span>
+              </a>
+            </div>
+          `;
+        } else {
+          trackResultContainer.innerHTML = `
+            <div class="text-stone-700 leading-relaxed">
+              Код <strong>${enteredCode}</strong> е въведен. За директно финализиране и проверка на плащането, свържете се с Деница:
+            </div>
+            <div class="pt-2">
+              <a href="https://wa.me/359893022677?text=${encodeURIComponent(`Здравейте Деница! Направих капаро по поръчка с код ${enteredCode}. Изпращам платежно за потвърждение и изпращане на косата.`)}" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+                <span>Изпрати доказателство в WhatsApp</span>
+              </a>
+            </div>
+          `;
+        }
+        if (window.lucide) window.lucide.createIcons();
+      }
     });
   }
 
