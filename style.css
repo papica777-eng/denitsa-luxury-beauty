@@ -255,3 +255,59 @@ details[open] summary svg {
   background-color: #faf8f5;
 }
 
+/* Mila Savage Style Procedure Cards & Buttons (Exact Reference Match) */
+.mila-procedure-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mila-procedure-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.4);
+}
+
+.mila-bronze-btn {
+  background-color: #9e825a;
+  color: #ffffff !important;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(158, 130, 90, 0.3);
+}
+.mila-bronze-btn:hover {
+  background-color: #b59567;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(158, 130, 90, 0.45);
+}
+
+.mila-dark-btn {
+  background-color: #0b0b0e;
+  color: #ffffff !important;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.mila-dark-btn:hover {
+  background-color: #000000;
+  border-color: #d4af37;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
+}
+
+/* Floating Stylist Chat Widget (Mila Savage Style) */
+.mila-chat-widget {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mila-chat-widget:hover {
+  transform: scale(1.05);
+}
+
+

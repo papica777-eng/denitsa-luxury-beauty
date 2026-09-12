@@ -745,4 +745,46 @@ document.addEventListener('DOMContentLoaded', () => {
       sound.playSparkle();
     });
   }
+
+  // --- STYLIST GREETING WIDGET (MILA SAVAGE STYLE) ---
+  const stylistGreetingBtn = document.getElementById('stylistGreetingBtn');
+  const stylistGreetingPopup = document.getElementById('stylistGreetingPopup');
+  if (stylistGreetingBtn && stylistGreetingPopup) {
+    stylistGreetingBtn.addEventListener('click', () => {
+      stylistGreetingPopup.classList.toggle('hidden');
+      sound.playLuxuryClick();
+    });
+  }
+
+  // --- PROCEDURE CARDS MULTI-CITY & VIP BOOKING HANDLER ---
+  document.querySelectorAll('a[href="#booking"]').forEach(link => {
+    link.addEventListener('click', () => {
+      const targetCity = link.dataset.city;
+      const isVip = link.dataset.vip;
+      const targetService = link.dataset.service;
+
+      if (targetCity === 'София') {
+        const r = document.getElementById('cityRadioSofia');
+        if (r) r.checked = true;
+      } else if (targetCity === 'Варна') {
+        const r = document.getElementById('cityRadioVarna');
+        if (r) r.checked = true;
+      } else if (isVip) {
+        const r = document.getElementById('cityRadioVIP');
+        if (r) r.checked = true;
+      }
+
+      if (targetService) {
+        const checkboxes = document.querySelectorAll('input[name="service"]');
+        checkboxes.forEach(cb => {
+          if (cb.value.includes(targetService) || targetService.includes(cb.value)) {
+            cb.checked = true;
+          }
+        });
+      }
+
+      sound.playLuxuryClick();
+    });
+  });
 });
+
