@@ -223,3 +223,35 @@ details[open] summary svg {
 .nav-link:hover::after {
   width: 100%;
 }
+
+/* Diverso-Crushing Luxury Product Customizer Styles */
+.product-thumb-item {
+  transition: all 0.25s ease;
+}
+.product-thumb-item.active {
+  border-color: #d4af37;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.45);
+  transform: scale(1.04);
+}
+
+.opt-pill {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.opt-pill.active {
+  border-color: #d4af37 !important;
+  background: linear-gradient(135deg, #fffdf5 0%, #fef9e8 100%) !important;
+  color: #1c1917 !important;
+  font-weight: 700;
+  box-shadow: 0 3px 12px rgba(212, 175, 55, 0.25);
+}
+
+.product-tab-btn.active {
+  color: #997b1e;
+  border-bottom: 2.5px solid #d4af37;
+  font-weight: 700;
+}
+
+.compare-row:nth-child(even) {
+  background-color: #faf8f5;
+}
+

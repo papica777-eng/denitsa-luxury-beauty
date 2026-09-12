@@ -117,12 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 1. HAIR EXTENSIONS DS CONFIGURATOR & PRICE CALCULATOR
-  // Official Prices by Denitsa:
-  // - 45 cm: 160€ (310 лв.) / 100g
-  // - 55 cm: 190€ (370 лв.) / 100g
-  // - 65-70 cm: 230€ (450 лв.) / 100g
-  // - 75-80 cm: 270€ (530 лв.) / 100g
+  // 1. MASTER SLAVIC HAIR CUSTOMIZER & PRODUCT SHOWCASE (DIVERSO-CRUSHING)
   // ==========================================================================
   const hairConfigState = {
     length: 55,
@@ -130,79 +125,136 @@ document.addEventListener('DOMContentLoaded', () => {
     pricePer100gEur: 190,
     pricePer100gBgn: 370,
     weight: 100,
-    colorHex: '#2a1d17',
+    method: 'raw',
+    methodName: 'Сурова цяла треса',
+    methodFeeBgn: 0,
+    methodFeeEur: 0,
     colorName: '#2 Тъмен Шоколад',
-    method: 'keratin',
-    methodName: 'Кератинови микро-капсули'
+    colorHex: '#2a1d17',
+    addBrush: false,
+    addBook: false,
+    addBag: false
   };
 
-  const hairDisplayImg = document.getElementById('hairDisplayImg');
-  const hairThumbBtns = document.querySelectorAll('.hair-thumb-btn');
-  hairThumbBtns.forEach(btn => {
+  const masterProductImg = document.getElementById('masterProductImg');
+  const photoCaptionTitle = document.getElementById('photoCaptionTitle');
+  const productThumbs = document.querySelectorAll('.product-thumb-item');
+
+  productThumbs.forEach(btn => {
     btn.addEventListener('click', () => {
-      hairThumbBtns.forEach(b => {
-        b.classList.remove('border-2', 'border-gold-500', 'active');
-        b.classList.add('border', 'border-stone-300');
+      productThumbs.forEach(b => {
+        b.classList.remove('active', 'border-2', 'border-amber-400');
+        b.classList.add('border', 'border-stone-200');
       });
-      btn.classList.add('border-2', 'border-gold-500', 'active');
-      btn.classList.remove('border-stone-300');
-      if (hairDisplayImg && btn.dataset.img) {
-        hairDisplayImg.src = btn.dataset.img;
+      btn.classList.add('active', 'border-2', 'border-amber-400');
+      btn.classList.remove('border-stone-200');
+
+      if (masterProductImg && btn.dataset.img) {
+        masterProductImg.src = btn.dataset.img;
+      }
+      if (photoCaptionTitle && btn.dataset.title) {
+        photoCaptionTitle.textContent = btn.dataset.title;
       }
       sound.playLuxuryClick();
     });
   });
 
-  function updateHairConfigurator() {
-    // 1. Calculate Price based on weight ratio (weight / 100)
-    const weightFactor = hairConfigState.weight / 100;
-    const totalEur = Math.round(hairConfigState.pricePer100gEur * weightFactor);
-    const totalBgn = Math.round(hairConfigState.pricePer100gBgn * weightFactor);
+  function updateMasterCustomizer() {
+    // 1. Calculate Prices with Weight Ratio and Add-ons
+    const weightRatio = hairConfigState.weight / 100;
+    let baseEur = Math.round(hairConfigState.pricePer100gEur * weightRatio);
+    let baseBgn = Math.round(hairConfigState.pricePer100gBgn * weightRatio);
+
+    let totalEur = baseEur + hairConfigState.methodFeeEur;
+    let totalBgn = baseBgn + hairConfigState.methodFeeBgn;
+
+    if (hairConfigState.addBrush) {
+      totalBgn += 35;
+      totalEur += 18;
+    }
+    if (hairConfigState.addBook) {
+      totalBgn += 65;
+      totalEur += 33;
+    }
+    if (hairConfigState.addBag) {
+      totalBgn += 25;
+      totalEur += 13;
+    }
 
     // 2. Update Live Price Displays
-    const eurDisplay = document.getElementById('calculatedPriceEur');
-    if (eurDisplay) eurDisplay.textContent = `${totalEur} €`;
+    const eurDisplay = document.getElementById('masterPriceEur');
+    if (eurDisplay) eurDisplay.textContent = `${totalEur},00 €`;
 
-    const bgnDisplay = document.getElementById('calculatedPriceBgn');
-    if (bgnDisplay) bgnDisplay.textContent = `(${totalBgn} лв.)`;
+    const bgnDisplay = document.getElementById('masterPriceBgn');
+    if (bgnDisplay) bgnDisplay.textContent = `(${totalBgn},00 лв.)`;
 
-    // 3. Update Labels
-    const lenDisplay = document.getElementById('lengthValueDisplay');
-    if (lenDisplay) {
-      lenDisplay.textContent = `${hairConfigState.lengthLabel} — ${hairConfigState.pricePer100gEur}€ (${hairConfigState.pricePer100gBgn} лв.) / 100g`;
+    const activeLenBadge = document.getElementById('activeLenBadge');
+    if (activeLenBadge) activeLenBadge.textContent = `${hairConfigState.lengthLabel} (${totalEur} €)`;
+
+    // 3. Update Title & Specs
+    const masterTitle = document.getElementById('masterProductTitle');
+    if (masterTitle) {
+      masterTitle.textContent = `100% Сурова Славянска Коса на Треса – Дължина ${hairConfigState.lengthLabel}, цвят ${hairConfigState.colorName}`;
     }
 
-    const weightDisplay = document.getElementById('weightValueDisplay');
-    if (weightDisplay) {
-      const volDesc = hairConfigState.weight <= 50 ? 'Сгъстяване' : (hairConfigState.weight <= 100 ? 'Стандартен Пълен Обем' : 'Mega Плътен Обем');
-      weightDisplay.textContent = `${hairConfigState.weight} грама (${volDesc})`;
+    const specLength = document.getElementById('specLength');
+    if (specLength) specLength.textContent = `${hairConfigState.lengthLabel} (Double Drawn)`;
+
+    const specWeight = document.getElementById('specWeight');
+    if (specWeight) specWeight.textContent = `${hairConfigState.weight} грама (${hairConfigState.weight >= 200 ? 'Mega Плътен Обем' : 'Стандартен Пълен Обем'})`;
+
+    const specColor = document.getElementById('specColor');
+    if (specColor) specColor.textContent = hairConfigState.colorName;
+
+    // 4. Update Section Labels
+    const selectedWeightLabel = document.getElementById('selectedWeightLabel');
+    if (selectedWeightLabel) {
+      selectedWeightLabel.textContent = `${hairConfigState.weight} грама (${hairConfigState.weight >= 200 ? 'Mega Плътен Обем' : 'Стандартен пълен обем'})`;
     }
 
-    const simHairTitle = document.getElementById('simHairTitle');
-    if (simHairTitle) {
-      simHairTitle.textContent = `Славянска Коса • ${hairConfigState.lengthLabel} (${totalEur}€)`;
+    const selectedLengthLabel = document.getElementById('selectedLengthLabel');
+    if (selectedLengthLabel) {
+      selectedLengthLabel.textContent = `${hairConfigState.lengthLabel} — ${hairConfigState.pricePer100gEur}€ (${hairConfigState.pricePer100gBgn} лв.) / 100g`;
     }
 
-    const simShadeName = document.getElementById('simShadeName');
-    if (simShadeName) simShadeName.textContent = hairConfigState.colorName;
+    const selectedMethodLabel = document.getElementById('selectedMethodLabel');
+    if (selectedMethodLabel) {
+      selectedMethodLabel.textContent = hairConfigState.methodName;
+    }
 
-    const selectedShadeLabel = document.getElementById('selectedShadeLabel');
-    if (selectedShadeLabel) selectedShadeLabel.textContent = hairConfigState.colorName;
-
-    const simMethodName = document.getElementById('simMethodName');
-    if (simMethodName) simMethodName.textContent = hairConfigState.methodName;
+    const masterColorLabel = document.getElementById('masterColorLabel');
+    if (masterColorLabel) {
+      masterColorLabel.textContent = hairConfigState.colorName;
+    }
   }
 
-  // Length Buttons
-  const lengthButtons = document.querySelectorAll('.len-btn');
-  lengthButtons.forEach(btn => {
+  // Weight Pill Buttons
+  const weightPills = document.querySelectorAll('#weightPillGroup .opt-pill');
+  weightPills.forEach(btn => {
     btn.addEventListener('click', () => {
-      lengthButtons.forEach(b => {
-        b.classList.remove('active', 'border-2', 'border-gold-500', 'bg-gold-500/15');
-        b.classList.add('border', 'border-stone-300', 'bg-white');
+      weightPills.forEach(b => {
+        b.classList.remove('active', 'border-2', 'border-amber-400', 'bg-amber-50', 'font-bold', 'shadow-sm');
+        b.classList.add('border', 'border-stone-200', 'bg-white');
       });
-      btn.classList.add('active', 'border-2', 'border-gold-500', 'bg-gold-500/15');
-      btn.classList.remove('border-stone-300', 'bg-white');
+      btn.classList.add('active', 'border-2', 'border-amber-400', 'bg-amber-50', 'font-bold', 'shadow-sm');
+      btn.classList.remove('border-stone-200', 'bg-white');
+
+      hairConfigState.weight = parseInt(btn.dataset.weight, 10);
+      sound.playLuxuryClick();
+      updateMasterCustomizer();
+    });
+  });
+
+  // Length Pill Buttons
+  const lengthPills = document.querySelectorAll('#lengthPillGroup .opt-pill');
+  lengthPills.forEach(btn => {
+    btn.addEventListener('click', () => {
+      lengthPills.forEach(b => {
+        b.classList.remove('active', 'border-2', 'border-amber-400', 'bg-amber-50', 'font-bold', 'shadow-sm');
+        b.classList.add('border', 'border-stone-200', 'bg-white');
+      });
+      btn.classList.add('active', 'border-2', 'border-amber-400', 'bg-amber-50', 'font-bold', 'shadow-sm');
+      btn.classList.remove('border-stone-200', 'bg-white');
 
       hairConfigState.length = parseInt(btn.dataset.len, 10);
       hairConfigState.lengthLabel = btn.querySelector('.text-xs')?.textContent.trim() || `${btn.dataset.len} см`;
@@ -210,59 +262,151 @@ document.addEventListener('DOMContentLoaded', () => {
       hairConfigState.pricePer100gBgn = parseInt(btn.dataset.bgn, 10);
 
       sound.playLuxuryClick();
-      updateHairConfigurator();
+      updateMasterCustomizer();
     });
   });
 
-  // Weight Slider
-  const hairWeightSlider = document.getElementById('hairWeightSlider');
-  if (hairWeightSlider) {
-    hairWeightSlider.addEventListener('input', (e) => {
-      hairConfigState.weight = parseInt(e.target.value, 10);
-      updateHairConfigurator();
-    });
-    hairWeightSlider.addEventListener('change', () => sound.playLuxuryClick());
-  }
-
-  // Color Palette Dots
-  const colorDots = document.querySelectorAll('#colorPalette .color-dot');
-  colorDots.forEach(btn => {
+  // Method Pill Buttons
+  const methodPills = document.querySelectorAll('#methodPillGroup .opt-pill');
+  methodPills.forEach(btn => {
     btn.addEventListener('click', () => {
-      colorDots.forEach(b => {
-        b.classList.remove('active', 'border-gold-500');
-        b.classList.add('border-stone-300');
+      methodPills.forEach(b => {
+        b.classList.remove('active', 'border-2', 'border-amber-400', 'bg-amber-50', 'font-bold', 'shadow-sm');
+        b.classList.add('border', 'border-stone-200', 'bg-white');
       });
-      btn.classList.add('active', 'border-gold-500');
-      btn.classList.remove('border-stone-300');
-
-      hairConfigState.colorHex = btn.dataset.color;
-      hairConfigState.colorName = btn.dataset.name;
-
-      sound.playSparkle();
-      updateHairConfigurator();
-    });
-  });
-
-  // Method Selector
-  const methodButtons = document.querySelectorAll('#methodSelector .method-btn');
-  methodButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      methodButtons.forEach(b => {
-        b.classList.remove('active', 'border-gold-500', 'bg-gold-500/15');
-        b.classList.add('border-stone-300', 'bg-white');
-      });
-      btn.classList.add('active', 'border-gold-500', 'bg-gold-500/15');
-      btn.classList.remove('border-stone-300', 'bg-white');
+      btn.classList.add('active', 'border-2', 'border-amber-400', 'bg-amber-50', 'font-bold', 'shadow-sm');
+      btn.classList.remove('border-stone-200', 'bg-white');
 
       hairConfigState.method = btn.dataset.method;
-      hairConfigState.methodName = btn.textContent.trim();
+      hairConfigState.methodFeeBgn = parseInt(btn.dataset.price || '0', 10);
+      hairConfigState.methodFeeEur = Math.round(hairConfigState.methodFeeBgn / 1.95);
+      hairConfigState.methodName = btn.querySelector('span')?.textContent.trim() || btn.textContent.trim();
 
       sound.playLuxuryClick();
-      updateHairConfigurator();
+      updateMasterCustomizer();
     });
   });
 
-  updateHairConfigurator();
+  // Color Swatches
+  const colorSwatches = document.querySelectorAll('#colorSwatchGroup .opt-pill');
+  colorSwatches.forEach(btn => {
+    btn.addEventListener('click', () => {
+      colorSwatches.forEach(b => {
+        b.classList.remove('active', 'border-2', 'border-amber-400', 'bg-amber-50', 'font-bold', 'shadow-sm');
+        b.classList.add('border', 'border-stone-200', 'bg-white');
+      });
+      btn.classList.add('active', 'border-2', 'border-amber-400', 'bg-amber-50', 'font-bold', 'shadow-sm');
+      btn.classList.remove('border-stone-200', 'bg-white');
+
+      hairConfigState.colorName = btn.dataset.name;
+      hairConfigState.colorHex = btn.dataset.color;
+
+      if (masterProductImg && btn.dataset.img) {
+        masterProductImg.src = btn.dataset.img;
+      }
+      if (photoCaptionTitle) {
+        photoCaptionTitle.textContent = `Славянска Коса • ${hairConfigState.colorName}`;
+      }
+
+      sound.playSparkle();
+      updateMasterCustomizer();
+    });
+  });
+
+  // Upsell Checkboxes
+  const addBrushCb = document.getElementById('addBrushCheckbox');
+  if (addBrushCb) {
+    addBrushCb.addEventListener('change', (e) => {
+      hairConfigState.addBrush = e.target.checked;
+      sound.playLuxuryClick();
+      updateMasterCustomizer();
+    });
+  }
+
+  const addBookCb = document.getElementById('addBookCheckbox');
+  if (addBookCb) {
+    addBookCb.addEventListener('change', (e) => {
+      hairConfigState.addBook = e.target.checked;
+      sound.playLuxuryClick();
+      updateMasterCustomizer();
+    });
+  }
+
+  const addBagCb = document.getElementById('addBagCheckbox');
+  if (addBagCb) {
+    addBagCb.addEventListener('change', (e) => {
+      hairConfigState.addBag = e.target.checked;
+      sound.playLuxuryClick();
+      updateMasterCustomizer();
+    });
+  }
+
+  // Toggle Description View More
+  const toggleDescBtn = document.getElementById('toggleDescBtn');
+  const moreDesc = document.getElementById('moreDesc');
+  if (toggleDescBtn && moreDesc) {
+    toggleDescBtn.addEventListener('click', () => {
+      const isHidden = moreDesc.classList.contains('hidden');
+      if (isHidden) {
+        moreDesc.classList.remove('hidden');
+        toggleDescBtn.textContent = '▲ Скрий';
+      } else {
+        moreDesc.classList.add('hidden');
+        toggleDescBtn.textContent = '▼ Покажи повече';
+      }
+      sound.playLuxuryClick();
+    });
+  }
+
+  // Product Tabs (Specs, Comparison, Care, Reviews)
+  const productTabButtons = document.querySelectorAll('.product-tab-btn');
+  const tabPanes = document.querySelectorAll('.tab-pane');
+
+  productTabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.dataset.tab;
+      productTabButtons.forEach(b => {
+        b.classList.remove('active', 'text-amber-800', 'font-bold', 'border-b-2', 'border-amber-500');
+        b.classList.add('text-stone-500');
+      });
+      btn.classList.add('active', 'text-amber-800', 'font-bold', 'border-b-2', 'border-amber-500');
+      btn.classList.remove('text-stone-500');
+
+      tabPanes.forEach(pane => {
+        if (pane.id === targetId) {
+          pane.classList.remove('hidden');
+        } else {
+          pane.classList.add('hidden');
+        }
+      });
+      sound.playLuxuryClick();
+    });
+  });
+
+  // Master Add To Cart Button
+  const masterAddToCartBtn = document.getElementById('masterAddToCartBtn');
+  if (masterAddToCartBtn) {
+    masterAddToCartBtn.addEventListener('click', () => {
+      const weightRatio = hairConfigState.weight / 100;
+      let baseBgn = Math.round(hairConfigState.pricePer100gBgn * weightRatio);
+      let totalBgn = baseBgn + hairConfigState.methodFeeBgn;
+
+      const mainTitle = `Славянска Коса DS (${hairConfigState.lengthLabel}, ${hairConfigState.weight}g, ${hairConfigState.colorName}, ${hairConfigState.methodName})`;
+      addToCart(mainTitle, totalBgn, `custom_hair_${Date.now()}`);
+
+      if (hairConfigState.addBrush) {
+        addToCart('Специална Четка за Екстеншъни DS Loop Brush', 35, 'upsell_brush');
+      }
+      if (hairConfigState.addBook) {
+        addToCart('Официален Авторски Учебник (DS Manual)', 65, 'upsell_book');
+      }
+      if (hairConfigState.addBag) {
+        addToCart('Сатенен предпазен калъф и закачалка', 25, 'upsell_bag');
+      }
+    });
+  }
+
+  updateMasterCustomizer();
 
   // ==========================================================================
   // 2. JAPANESE WATERFALL HEAD SPA RIPPLES CANVAS
