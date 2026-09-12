@@ -489,7 +489,7 @@ document.addEventListener('DOMContentLoaded', () => {
       addToCart(mainTitle, totalBgn, `custom_hair_${Date.now()}`);
 
       if (hairConfigState.addBrush) {
-        addToCart('Четка за Екстеншъни с Естествен Глигански Косъм + Гребен DS', 35, 'upsell_brush');
+        addToCart('Четка за Екстеншъни с Естествен Глигански Косъм DS', 29, 'upsell_brush');
       }
       if (hairConfigState.addBook) {
         addToCart('Официален Авторски Учебник (Деница Ставракиева) — ПРОМО', 39, 'upsell_book');
@@ -982,9 +982,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }];
 
       if (hairConfigState.addBrush) {
-        items.push({ title: 'Специална Четка за Екстеншъни DS с Глигански Косъм', price: 35, qty: 1 });
-        totalBgn += 35;
-        totalEur += 18;
+        items.push({ title: 'Специална Четка за Екстеншъни DS с Глигански Косъм (14.99 €)', price: 29, qty: 1 });
+        totalBgn += 29;
+        totalEur += 15;
       }
       if (hairConfigState.addBook) {
         items.push({ title: 'Официален Авторски Учебник (Деница Ставракиева) — ПРОМО', price: 39, qty: 1 });
@@ -1273,11 +1273,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const isVip = link.dataset.vip;
       const targetService = link.dataset.service;
 
-      if (targetCity === 'София') {
-        const r = document.getElementById('cityRadioSofia');
-        if (r) r.checked = true;
-      } else if (targetCity === 'Варна') {
-        const r = document.getElementById('cityRadioVarna');
+      if (targetCity === 'Слънчев бряг' || targetCity === 'София' || targetCity === 'Варна') {
+        const r = document.getElementById('cityRadioSunnyBeach');
         if (r) r.checked = true;
       } else if (isVip) {
         const r = document.getElementById('cityRadioVIP');
