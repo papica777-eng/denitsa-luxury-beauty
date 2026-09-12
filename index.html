@@ -624,14 +624,54 @@
               </div>
             </div>
 
-            <!-- OPTION 1: ТЕГЛО * (Diverso Style Pills) -->
+            <!-- OPTION 1: ТЕГЛО * (Diverso Style Pills + Bellami Smart Quiz) -->
             <div class="space-y-2">
               <div class="flex items-center justify-between text-xs font-mono">
                 <label class="font-bold text-stone-900 uppercase">
                   ⚖️ ТЕГЛО / ГРАМАЖ <span class="text-rose-600">*</span>:
                 </label>
-                <span id="selectedWeightLabel" class="text-amber-800 font-bold">100 грама (Стандартен пълен обем)</span>
+                <button type="button" id="densityQuizToggleBtn" class="text-[11px] font-bold text-amber-800 hover:text-amber-900 flex items-center gap-1 underline underline-offset-2 decoration-amber-400">
+                  <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-600"></i>
+                  <span>Колко грама са ми нужни?</span>
+                </button>
               </div>
+
+              <!-- Collapsible Smart Hair Density & Weight Advisor (Bellami / Luxy Standard) -->
+              <div id="densityQuizBox" class="hidden p-4 rounded-2xl bg-amber-50/70 border border-amber-300/80 space-y-3 text-xs animate-fade-in">
+                <div class="flex items-center justify-between font-bold text-stone-900">
+                  <span class="font-cinzel text-amber-900">💡 Персонален съветник за грамаж:</span>
+                  <button type="button" id="closeDensityQuizBtn" class="text-stone-400 hover:text-stone-800 text-sm">✕</button>
+                </div>
+                
+                <div class="space-y-1.5">
+                  <span class="text-[11px] text-stone-600 font-medium">1. Каква е вашата естествена коса в момента?</span>
+                  <div class="grid grid-cols-3 gap-1.5">
+                    <button type="button" class="density-q1-btn p-2 rounded-lg bg-white border border-stone-200 text-[11px] font-semibold text-stone-800 hover:border-amber-400" data-cur="short">Късо каре / Боб</button>
+                    <button type="button" class="density-q1-btn active p-2 rounded-lg bg-stone-900 border border-stone-900 text-[11px] font-bold text-white shadow-sm" data-cur="medium">До раменете</button>
+                    <button type="button" class="density-q1-btn p-2 rounded-lg bg-white border border-stone-200 text-[11px] font-semibold text-stone-800 hover:border-amber-400" data-cur="long">Средна / Дълга</button>
+                  </div>
+                </div>
+
+                <div class="space-y-1.5">
+                  <span class="text-[11px] text-stone-600 font-medium">2. Какъв резултат желаете да постигнете?</span>
+                  <div class="grid grid-cols-3 gap-1.5">
+                    <button type="button" class="density-q2-btn p-2 rounded-lg bg-white border border-stone-200 text-[11px] font-semibold text-stone-800 hover:border-amber-400" data-goal="volume">Само плътност / обем</button>
+                    <button type="button" class="density-q2-btn active p-2 rounded-lg bg-stone-900 border border-stone-900 text-[11px] font-bold text-white shadow-sm" data-goal="both">Обем + дължина</button>
+                    <button type="button" class="density-q2-btn p-2 rounded-lg bg-white border border-stone-200 text-[11px] font-semibold text-stone-800 hover:border-amber-400" data-goal="max">Максимална гъстота</button>
+                  </div>
+                </div>
+
+                <div class="p-3 bg-white rounded-xl border border-amber-300 flex items-center justify-between gap-3">
+                  <div>
+                    <div class="text-[10px] text-stone-500 uppercase font-mono">Препоръчителен грамаж за вас:</div>
+                    <div class="text-sm font-bold text-stone-900 font-cinzel" id="quizRecommendedResult">150 грама (Перфектен обем и преливане)</div>
+                  </div>
+                  <button type="button" id="applyQuizGramsBtn" class="bg-amber-400 hover:bg-amber-500 text-black text-[11px] font-bold uppercase px-3 py-1.5 rounded-lg shrink-0 shadow-sm transition-transform active:scale-95">
+                    Приложи 150g
+                  </button>
+                </div>
+              </div>
+
               <div class="grid grid-cols-3 sm:grid-cols-6 gap-2" id="weightPillGroup">
                 <button data-weight="50" class="opt-pill p-2.5 rounded-xl border border-stone-200 bg-white text-center text-xs text-stone-800 hover:border-amber-400">
                   50 грама
@@ -654,14 +694,56 @@
               </div>
             </div>
 
-            <!-- OPTION 2: ДЪЛЖИНА * (Official Prices: 55cm = 190€, 65-70cm = 230€) -->
+            <!-- OPTION 2: ДЪЛЖИНА * (Official Prices + Bellami Silhouette Guide) -->
             <div class="space-y-2">
               <div class="flex items-center justify-between text-xs font-mono">
                 <label class="font-bold text-stone-900 uppercase">
                   📏 ДЪЛЖИНА НА КОСАТА <span class="text-rose-600">*</span>:
                 </label>
-                <span id="selectedLengthLabel" class="text-amber-800 font-bold">55 см — 190€ (370 лв.) / 100g</span>
+                <button type="button" id="lengthGuideToggleBtn" class="text-[11px] font-bold text-amber-800 hover:text-amber-900 flex items-center gap-1 underline underline-offset-2 decoration-amber-400">
+                  <i data-lucide="eye" class="w-3.5 h-3.5 text-amber-600"></i>
+                  <span>Виж по силует (Ръководство)</span>
+                </button>
               </div>
+
+              <!-- Collapsible Visual Length Guide (Bellami Silhouette Standard) -->
+              <div id="lengthGuideBox" class="hidden p-4 rounded-2xl bg-stone-900 text-white space-y-3 text-xs animate-fade-in">
+                <div class="flex items-center justify-between font-bold">
+                  <span class="font-cinzel text-amber-400">📐 Как стоят дължините върху силуета:</span>
+                  <button type="button" id="closeLengthGuideBtn" class="text-stone-400 hover:text-white text-sm">✕</button>
+                </div>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                  <div class="guide-len-card p-3 rounded-xl bg-stone-800/90 border border-stone-700 hover:border-amber-400 cursor-pointer space-y-1 transition-all" data-len="45">
+                    <div class="font-bold text-amber-300">45 см (18")</div>
+                    <div class="text-[10px] text-stone-300 font-medium">Под бюста (Bra-strap)</div>
+                    <div class="text-[10px] text-stone-400">Дискретен обем и средна дължина</div>
+                    <div class="text-[11px] font-mono text-amber-400 font-bold pt-1">160 € / 310 лв.</div>
+                  </div>
+
+                  <div class="guide-len-card active p-3 rounded-xl bg-amber-500/20 border-2 border-amber-400 cursor-pointer space-y-1 transition-all" data-len="55">
+                    <div class="font-bold text-amber-300">55 см (22") ★</div>
+                    <div class="text-[10px] text-stone-200 font-medium">До талията (Waist)</div>
+                    <div class="text-[10px] text-stone-300">Най-популярната дължина в света</div>
+                    <div class="text-[11px] font-mono text-amber-400 font-bold pt-1">190 € / 370 лв.</div>
+                  </div>
+
+                  <div class="guide-len-card p-3 rounded-xl bg-stone-800/90 border border-stone-700 hover:border-amber-400 cursor-pointer space-y-1 transition-all" data-len="65">
+                    <div class="font-bold text-amber-300">65-70 см (26") ★</div>
+                    <div class="text-[10px] text-stone-300 font-medium">До ханша (Tailbone)</div>
+                    <div class="text-[10px] text-stone-400">Драматичен лукс за събития</div>
+                    <div class="text-[11px] font-mono text-amber-400 font-bold pt-1">230 € / 450 лв.</div>
+                  </div>
+
+                  <div class="guide-len-card p-3 rounded-xl bg-stone-800/90 border border-stone-700 hover:border-amber-400 cursor-pointer space-y-1 transition-all" data-len="75">
+                    <div class="font-bold text-amber-300">75-80 см (30")</div>
+                    <div class="text-[10px] text-stone-300 font-medium">Под ханша (Classic)</div>
+                    <div class="text-[10px] text-stone-400">Ултра-рядка сурова славянска коса</div>
+                    <div class="text-[11px] font-mono text-amber-400 font-bold pt-1">270 € / 530 лв.</div>
+                  </div>
+                </div>
+              </div>
+
               <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="lengthPillGroup">
                 <button data-len="45" data-eur="160" data-bgn="310" class="opt-pill p-3 rounded-xl border border-stone-200 bg-white text-center hover:border-amber-400">
                   <div class="text-xs font-bold text-stone-900">45 см</div>
@@ -710,7 +792,7 @@
               </div>
             </div>
 
-            <!-- OPTION 4: ЦВЯТ НА КОСАТА -->
+            <!-- OPTION 4: ЦВЯТ НА КОСАТА + БЕЗПЛАТНА КОНСУЛТАЦИЯ ЗА ЦВЯТ В WHATSAPP -->
             <div class="space-y-2">
               <div class="flex items-center justify-between text-xs font-mono">
                 <label class="font-bold text-stone-900 uppercase">
@@ -743,6 +825,23 @@
                   <span class="w-5 h-5 rounded-full bg-[#f0e2be] border border-stone-300 shrink-0"></span>
                   <span class="truncate font-semibold">#60 Платинено Русо</span>
                 </button>
+              </div>
+
+              <!-- Free Shade Match Guarantee Banner (Bellami / Great Lengths Standard) -->
+              <div class="mt-3 p-3.5 rounded-2xl bg-gradient-to-r from-emerald-50 via-teal-50 to-amber-50 border border-emerald-200/80 flex items-center justify-between gap-3 shadow-sm">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+                    <i data-lucide="camera" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs font-bold text-stone-900 font-cinzel">Безплатно съчетаване на цвят (100% гаранция)</div>
+                    <div class="text-[10px] text-stone-600">Изпратете снимка на косата си на дневна светлина на Деница за точен избор.</div>
+                  </div>
+                </div>
+                <a href="https://wa.me/359893022677?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D0%B5%D0%B9%D1%82%D0%B5!%20%D0%98%D1%81%D0%BA%D0%B0%D0%BC%20%D0%B1%D0%B5%D0%B7%D0%BF%D0%BB%D0%B0%D1%82%D0%BD%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%82%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B7%D0%B0%20%D1%86%D0%B2%D1%8F%D1%82%20%D1%81%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%D0%B0%20%D0%BA%D0%BE%D1%81%D0%B0." target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold px-3.5 py-2 rounded-xl shrink-0 flex items-center gap-1.5 shadow-sm transition-colors">
+                  <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                  <span>WhatsApp</span>
+                </a>
               </div>
             </div>
 
@@ -1152,9 +1251,119 @@
                   <div class="text-xs text-stone-200 mt-1">Обучения с Деница в София и Варна или самостоятелна подготовка с учебника.</div>
                 </div>
               </div>
+          </div>
+
+        </div>
+
+        <!-- ACADEMY CURRICULUM (VIDAL SASSOON & BELLAMI PRO STANDARD) -->
+        <div class="mt-16 pt-12 border-t border-stone-200">
+          <div class="text-center max-w-2xl mx-auto mb-10">
+            <span class="text-xs uppercase tracking-widest text-amber-700 font-mono font-bold">[ 6-Модулна Програма ]</span>
+            <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-stone-900 mt-1">
+              Какво ще усвоите по време на курса
+            </h3>
+            <p class="text-xs sm:text-sm text-stone-500 mt-1.5">
+              От фундаменталната трихология до майсторското незабележимо поставяне и салонния мениджмънт.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- Module 1 -->
+            <div class="p-5 bg-stone-50 rounded-2xl border border-stone-200 space-y-2 hover:border-amber-400 transition-colors shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[10px] font-mono font-bold uppercase">Модул 01</span>
+                <i data-lucide="microscope" class="w-4 h-4 text-amber-700"></i>
+              </div>
+              <h4 class="font-cinzel font-bold text-sm text-stone-900">Трихология & Скалп Диагностика</h4>
+              <p class="text-xs text-stone-600 leading-relaxed">
+                Анатомия на естествения косъм, допустимо натоварване на фоликулите, разпознаване на противопоказания и избор на правилен грамаж.
+              </p>
+            </div>
+
+            <!-- Module 2 -->
+            <div class="p-5 bg-stone-50 rounded-2xl border border-stone-200 space-y-2 hover:border-amber-400 transition-colors shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[10px] font-mono font-bold uppercase">Модул 02</span>
+                <i data-lucide="layout-grid" class="w-4 h-4 text-amber-700"></i>
+              </div>
+              <h4 class="font-cinzel font-bold text-sm text-stone-900">Зониране & Геометрия на Редовете</h4>
+              <p class="text-xs text-stone-600 leading-relaxed">
+                Прецизно разделяне на зоните на главата, изграждане на естествена линия на падане без видими стъпала и правилен ъгъл на издърпване.
+              </p>
+            </div>
+
+            <!-- Module 3 -->
+            <div class="p-5 bg-stone-50 rounded-2xl border border-stone-200 space-y-2 hover:border-amber-400 transition-colors shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[10px] font-mono font-bold uppercase">Модул 03</span>
+                <i data-lucide="flame" class="w-4 h-4 text-amber-700"></i>
+              </div>
+              <h4 class="font-cinzel font-bold text-sm text-stone-900">Италиански Микро-Кератин</h4>
+              <p class="text-xs text-stone-600 leading-relaxed">
+                Топъл и студен метод за микро и нано капсулиране с оригинален италиански кератин. Запечатване без разтичане и без бели следи.
+              </p>
+            </div>
+
+            <!-- Module 4 -->
+            <div class="p-5 bg-stone-50 rounded-2xl border border-stone-200 space-y-2 hover:border-amber-400 transition-colors shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[10px] font-mono font-bold uppercase">Модул 04</span>
+                <i data-lucide="layers" class="w-4 h-4 text-amber-700"></i>
+              </div>
+              <h4 class="font-cinzel font-bold text-sm text-stone-900">Стикери (Tape-In) & Треси</h4>
+              <p class="text-xs text-stone-600 leading-relaxed">
+                Ултра-тънки сандвич стикери и холивудско невидимо шиене на треси без лепило. Пълно сливане и комфорт при спане и прически.
+              </p>
+            </div>
+
+            <!-- Module 5 -->
+            <div class="p-5 bg-stone-50 rounded-2xl border border-stone-200 space-y-2 hover:border-amber-400 transition-colors shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[10px] font-mono font-bold uppercase">Модул 05</span>
+                <i data-lucide="refresh-cw" class="w-4 h-4 text-amber-700"></i>
+              </div>
+              <h4 class="font-cinzel font-bold text-sm text-stone-900">Безопасно Сваляне & Рекапсулиране</h4>
+              <p class="text-xs text-stone-600 leading-relaxed">
+                Специални разтворители за кератин без увреждане на косъма, безболезнено разплитане и подготовка на кичурите за повторен монтаж.
+              </p>
+            </div>
+
+            <!-- Module 6 -->
+            <div class="p-5 bg-stone-50 rounded-2xl border border-stone-200 space-y-2 hover:border-amber-400 transition-colors shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[10px] font-mono font-bold uppercase">Модул 06</span>
+                <i data-lucide="trending-up" class="w-4 h-4 text-amber-700"></i>
+              </div>
+              <h4 class="font-cinzel font-bold text-sm text-stone-900">Салонен Бизнес & VIP Клиенти</h4>
+              <p class="text-xs text-stone-600 leading-relaxed">
+                Ценообразуване на труда и материалите, създаване на портфолио, фотозаснемане преди/след и методи за задържане на лоялни клиенти.
+              </p>
             </div>
           </div>
 
+          <!-- PRO STARTER KIT UNBOXING HIGHLIGHT -->
+          <div class="mt-10 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-amber-50 via-white to-stone-50 border-2 border-amber-400 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">
+            <div class="space-y-2 text-center md:text-left">
+              <div class="inline-flex items-center gap-2 text-amber-900 font-mono font-bold text-xs uppercase">
+                <i data-lucide="package-check" class="w-4 h-4 text-amber-700"></i>
+                Включен пълен професионален стартов пакет:
+              </div>
+              <h4 class="font-cinzel text-xl sm:text-2xl font-bold text-stone-900">
+                Всичко необходимо, за да започнете работа веднага
+              </h4>
+              <p class="text-xs text-stone-600 max-w-2xl leading-relaxed">
+                Авторски печатен учебник DS • Дигитален термо-апарат за италиански кератин • Пакет кристален кератин A+ • Четка за екстеншъни DS Loop Brush • Разделителни дискове и клещи за сваляне • Официален Сертификат за квалификация с холограма.
+              </p>
+            </div>
+            <div class="shrink-0 flex flex-col sm:flex-row items-center gap-3">
+              <a href="tel:+359893022677" class="luxury-gold-btn px-6 py-3 rounded-full text-xs uppercase tracking-wider text-black font-bold shadow-md whitespace-nowrap">
+                Запиши се за Курс
+              </a>
+              <a href="https://wa.me/359893022677?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D0%B5%D0%B9%D1%82%D0%B5!%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B2%D0%B0%D0%BC%20%D1%81%D0%B5%20%D0%BE%D1%82%20%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D1%8F%D1%82%D0%B0%20%D0%B7%D0%B0%20%D1%81%D1%82%D0%B8%D0%BB%D0%B8%D1%81%D1%82%D0%B8%20%D0%B8%20%D1%83%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA%D0%B0%20DS." target="_blank" class="luxury-outline-btn px-6 py-3 rounded-full text-xs uppercase tracking-wider text-stone-800 font-bold whitespace-nowrap">
+                Въпрос в WhatsApp
+              </a>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -1215,9 +1424,119 @@
                   <div class="text-[11px] text-amber-800 font-mono mt-0.5">Възстановяващ ритуал за скалпа и косата</div>
                 </div>
               </div>
-            </div>
           </div>
 
+        </div>
+
+        <!-- 7-STEP JAPANESE HEAD SPA RITUAL JOURNEY (HEAD SPA TOKYO & GISOU BENCHMARK) -->
+        <div class="mt-16 pt-12 border-t border-stone-200">
+          <div class="text-center max-w-2xl mx-auto mb-10">
+            <span class="text-xs uppercase tracking-widest text-teal-700 font-mono font-bold">[ Автентичен Японски Протокол ]</span>
+            <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-stone-900 mt-1">
+              7-Степенната Церемония Waterfall Head Spa
+            </h3>
+            <p class="text-xs sm:text-sm text-stone-500 mt-1.5">
+              Всяка минута от 75-минутния ритуал е съобразена с японската холистична грижа за духа, скалпа и косъма.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Step 1 -->
+            <div class="p-5 bg-white rounded-2xl border border-stone-200 space-y-2 hover:border-teal-400 transition-colors shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-900 text-[10px] font-mono font-bold uppercase">Стъпка 01</span>
+                <i data-lucide="scan-eye" class="w-4 h-4 text-teal-700"></i>
+              </div>
+              <h4 class="font-cinzel font-bold text-sm text-stone-900">200x Микрокамерна Трихоскопия</h4>
+              <p class="text-xs text-stone-600 leading-relaxed">
+                Дигитален видео-анализ на порите на скалпа, омазняването и активността на фоликулите преди процедурата.
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="p-5 bg-white rounded-2xl border border-stone-200 space-y-2 hover:border-teal-400 transition-colors shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-900 text-[10px] font-mono font-bold uppercase">Стъпка 02</span>
+                <i data-lucide="sparkle" class="w-4 h-4 text-teal-700"></i>
+              </div>
+              <h4 class="font-cinzel font-bold text-sm text-stone-900">Билков Пилинг & Скалп Детокс</h4>
+              <p class="text-xs text-stone-600 leading-relaxed">
+                Нежна ексфолиация с екстракт от зелен чай и бамбук за отпушване на фоликулите и премахване на стилизиращи плаки.
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="p-5 bg-white rounded-2xl border border-stone-200 space-y-2 hover:border-teal-400 transition-colors shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-900 text-[10px] font-mono font-bold uppercase">Стъпка 03</span>
+                <i data-lucide="heart-pulse" class="w-4 h-4 text-teal-700"></i>
+              </div>
+              <h4 class="font-cinzel font-bold text-sm text-stone-900">Шиацу Акупресурен Масаж</h4>
+              <p class="text-xs text-stone-600 leading-relaxed">
+                Прецизен точков масаж по меридианите на главата, слепоочията и тила за снемане на мигренозен и мускулен стрес.
+              </p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="p-5 bg-white rounded-2xl border border-stone-200 space-y-2 hover:border-teal-400 transition-colors shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-900 text-[10px] font-mono font-bold uppercase">Стъпка 04</span>
+                <i data-lucide="waves" class="w-4 h-4 text-teal-700"></i>
+              </div>
+              <h4 class="font-cinzel font-bold text-sm text-stone-900">Воден Ореол (Waterfall Halo)</h4>
+              <p class="text-xs text-stone-600 leading-relaxed">
+                Непрекъснат хидротерапевтичен кръгов водопад с топла минерализирана вода за медитативен пълен релакс.
+              </p>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="p-5 bg-white rounded-2xl border border-stone-200 space-y-2 hover:border-teal-400 transition-colors shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-900 text-[10px] font-mono font-bold uppercase">Стъпка 05</span>
+                <i data-lucide="cloud-fog" class="w-4 h-4 text-teal-700"></i>
+              </div>
+              <h4 class="font-cinzel font-bold text-sm text-stone-900">Нано-Парна Кератинова Мъгла</h4>
+              <p class="text-xs text-stone-600 leading-relaxed">
+                Топли нано-частици отварят кутикулата за дълбоко проникване на кератин, колаген и аминокиселини.
+              </p>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="p-5 bg-white rounded-2xl border border-stone-200 space-y-2 hover:border-teal-400 transition-colors shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-900 text-[10px] font-mono font-bold uppercase">Стъпка 06</span>
+                <i data-lucide="shield" class="w-4 h-4 text-teal-700"></i>
+              </div>
+              <h4 class="font-cinzel font-bold text-sm text-stone-900">Озонова & Колагенова Вана</h4>
+              <p class="text-xs text-stone-600 leading-relaxed">
+                Антибактериално озониране за успокояване на раздразнения скалп и подсилване на естествената бариера на кожата.
+              </p>
+            </div>
+
+            <!-- Step 7 -->
+            <div class="p-5 bg-white rounded-2xl border border-stone-200 space-y-2 hover:border-teal-400 transition-colors shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-900 text-[10px] font-mono font-bold uppercase">Стъпка 07</span>
+                <i data-lucide="wind" class="w-4 h-4 text-teal-700"></i>
+              </div>
+              <h4 class="font-cinzel font-bold text-sm text-stone-900">Сешоар, Арган & Релакс Напитка</h4>
+              <p class="text-xs text-stone-600 leading-relaxed">
+                Професионално изсушаване с копринен блясък, съчетано с чаша автентичен японски зелен чай или италианско Prosecco.
+              </p>
+            </div>
+
+            <!-- Price & Booking CTA Card -->
+            <div class="p-5 bg-gradient-to-br from-teal-900 to-stone-900 text-white rounded-2xl flex flex-col justify-between shadow-md">
+              <div>
+                <span class="text-[10px] font-mono text-teal-300 uppercase font-bold">Всичко Включено</span>
+                <div class="font-cinzel text-2xl font-bold text-white mt-1">85 лв.</div>
+                <div class="text-[11px] text-teal-200 mt-0.5">Времетраене: 75 минути</div>
+              </div>
+              <a href="#booking" class="mt-4 bg-teal-400 hover:bg-teal-300 text-black text-xs uppercase font-bold py-2.5 px-4 rounded-xl text-center shadow-md transition-colors block">
+                Запази Час Онлайн
+              </a>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -1271,6 +1590,175 @@
             </div>
             <div class="text-xs text-stone-500 mt-1" id="transDetails">
               180 грама кератинови микро-капсули • Цвят #4/27 • Издръжливост над 2 години
+            </div>
+          </div>
+        </div>
+
+        <!-- 5-POINT SLAVIC QUALITY SEAL & AUTHENTICITY CERTIFICATE (GREAT LENGTHS & HAIRDREAMS STANDARD) -->
+        <div class="mt-16 pt-12 border-t border-stone-200">
+          <div class="max-w-4xl mx-auto bg-stone-900 text-white rounded-3xl p-6 sm:p-10 border border-amber-500/40 shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-48 h-48 rounded-full bg-amber-500/10 blur-3xl pointer-events-none"></div>
+            
+            <div class="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-6 pb-6 border-b border-stone-800">
+              <div class="flex items-center gap-4 text-center sm:text-left">
+                <div class="w-14 h-14 rounded-2xl bg-amber-400 text-black flex items-center justify-center font-cinzel font-black text-xl shrink-0 shadow-lg">
+                  DS
+                </div>
+                <div>
+                  <span class="text-xs uppercase font-mono font-bold text-amber-400 tracking-widest">
+                    [ Етикет за Безкомпромисност ]
+                  </span>
+                  <h3 class="font-cinzel text-xl sm:text-2xl font-bold text-white mt-0.5">
+                    5-Степенният Златен Печат за Славянска Коса DS
+                  </h3>
+                </div>
+              </div>
+              <div class="bg-stone-800/80 px-4 py-2 rounded-xl border border-amber-400/30 text-right shrink-0">
+                <div class="text-[10px] text-stone-400 font-mono">СЕРТИФИКАТ ЗА ПРОИЗХОД</div>
+                <div class="text-xs font-mono font-bold text-amber-300">№ DS-SLAVIC-2026-RAW</div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-6 text-xs text-stone-300">
+              <div class="p-3.5 rounded-xl bg-stone-800/60 border border-stone-700/60 space-y-1">
+                <div class="font-bold text-amber-300 flex items-center gap-1.5 font-cinzel">
+                  <span>1. Един Донор (Single Donor)</span>
+                </div>
+                <p class="text-[11px] text-stone-400 leading-relaxed">
+                  Всеки сноп произхожда от 1 здрав славянски донор без смесване с косми от трети страни.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-stone-800/60 border border-stone-700/60 space-y-1">
+                <div class="font-bold text-amber-300 flex items-center gap-1.5 font-cinzel">
+                  <span>2. 100% Запазена Кутикула (Remy)</span>
+                </div>
+                <p class="text-[11px] text-stone-400 leading-relaxed">
+                  Всички люспи на косъма сочат в естествената си посока от корена към върха – без заплитане.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-stone-800/60 border border-stone-700/60 space-y-1">
+                <div class="font-bold text-amber-300 flex items-center gap-1.5 font-cinzel">
+                  <span>3. 0% Киселинно Изгаряне</span>
+                </div>
+                <p class="text-[11px] text-stone-400 leading-relaxed">
+                  Без разяждане с киселинни вани и без изкуствен силиконов лак, който се отмива при 2-рото пране.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-stone-800/60 border border-stone-700/60 space-y-1">
+                <div class="font-bold text-amber-300 flex items-center gap-1.5 font-cinzel">
+                  <span>4. Double Drawn Плътност</span>
+                </div>
+                <p class="text-[11px] text-stone-400 leading-relaxed">
+                  Ръчно изчистени къси косми. Пълна дебелина и обем до самия край без изтъняване.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-stone-800/60 border border-stone-700/60 space-y-1">
+                <div class="font-bold text-amber-300 flex items-center gap-1.5 font-cinzel">
+                  <span>5. Живот 2-3 Години</span>
+                </div>
+                <p class="text-[11px] text-stone-400 leading-relaxed">
+                  Позволява многократно прекапсулиране, изсветляване, тониране и топлинна обработка.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-gradient-to-br from-amber-600/30 to-amber-900/30 border border-amber-400/40 flex flex-col justify-between">
+                <div>
+                  <div class="font-bold text-white font-cinzel">Опция "Преглед и Тест"</div>
+                  <div class="text-[11px] text-amber-200/90 mt-0.5">Докоснете копринената мекота преди заплащане на куриера.</div>
+                </div>
+                <span class="text-[10px] text-amber-300 font-mono font-bold mt-2">100% Гарантирана Сигурност</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VERIFIED CLIENT REVIEWS & TRUST MATRIX (BELLAMI & TRUSTPILOT STANDARD) -->
+        <div class="mt-16 pt-12 border-t border-stone-200">
+          <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+            <div>
+              <span class="text-xs uppercase tracking-widest text-amber-700 font-mono font-bold">[ Проверени Отзиви ]</span>
+              <h3 class="font-cinzel text-2xl sm:text-4xl font-bold text-stone-900 mt-1">
+                Какво споделят нашите клиенти
+              </h3>
+            </div>
+            <div class="flex items-center gap-2 mt-3 md:mt-0 text-sm">
+              <span class="text-amber-500 font-bold text-lg">★★★★★</span>
+              <span class="font-mono font-bold text-stone-900">4.9 от 5</span>
+              <span class="text-stone-400 text-xs">(Базирано на 140+ отзива в София & Варна)</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <!-- Review 1 -->
+            <div class="p-5 bg-white rounded-3xl border border-stone-200 shadow-sm space-y-3 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between">
+                  <div class="flex text-amber-500 text-xs">★★★★★</div>
+                  <span class="text-[10px] bg-emerald-100 text-emerald-800 font-mono px-2 py-0.5 rounded-full font-bold">Проверена Покупка</span>
+                </div>
+                <p class="text-xs text-stone-700 leading-relaxed mt-3">
+                  "Взех 150g славянска коса 55см цвят #2 Тъмен Шоколад. Разликата с Diverso е от земята до небето! Косъмът не цъфти, няма силикон и стои мек като собствен."
+                </p>
+              </div>
+              <div class="pt-3 border-t border-stone-100">
+                <div class="font-bold text-xs text-stone-900 font-cinzel">Виктория С.</div>
+                <div class="text-[10px] text-stone-400 font-mono">Клиент от София • 55 см Треса</div>
+              </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="p-5 bg-white rounded-3xl border border-stone-200 shadow-sm space-y-3 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between">
+                  <div class="flex text-amber-500 text-xs">★★★★★</div>
+                  <span class="text-[10px] bg-teal-100 text-teal-800 font-mono px-2 py-0.5 rounded-full font-bold">Head Spa Ритуал</span>
+                </div>
+                <p class="text-xs text-stone-700 leading-relaxed mt-3">
+                  "Японският Waterfall Head Spa е пълно прераждане! Водният ореол и шиацу масажът премахнаха цялата тежест от главата. Косата ми не е била толкова лека от години."
+                </p>
+              </div>
+              <div class="pt-3 border-t border-stone-100">
+                <div class="font-bold text-xs text-stone-900 font-cinzel">Елена Д.</div>
+                <div class="text-[10px] text-stone-400 font-mono">Клиент от Варна • 75 мин. Head Spa</div>
+              </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="p-5 bg-white rounded-3xl border border-stone-200 shadow-sm space-y-3 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between">
+                  <div class="flex text-amber-500 text-xs">★★★★★</div>
+                  <span class="text-[10px] bg-amber-100 text-amber-800 font-mono px-2 py-0.5 rounded-full font-bold">Курсист Академия</span>
+                </div>
+                <p class="text-xs text-stone-700 leading-relaxed mt-3">
+                  "Изкарах индивидуалния курс при Деница. Учебникът и практиката върху реален модел ми дадоха увереност веднага да започна да работя в моя салон."
+                </p>
+              </div>
+              <div class="pt-3 border-t border-stone-100">
+                <div class="font-bold text-xs text-stone-900 font-cinzel">Мартина П.</div>
+                <div class="text-[10px] text-stone-400 font-mono">Курсист от Пловдив • DS Academy</div>
+              </div>
+            </div>
+
+            <!-- Review 4 -->
+            <div class="p-5 bg-white rounded-3xl border border-stone-200 shadow-sm space-y-3 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between">
+                  <div class="flex text-amber-500 text-xs">★★★★★</div>
+                  <span class="text-[10px] bg-emerald-100 text-emerald-800 font-mono px-2 py-0.5 rounded-full font-bold">Проверена Покупка</span>
+                </div>
+                <p class="text-xs text-stone-700 leading-relaxed mt-3">
+                  "65-70см Balayage пада точно до ханша. Специалната четка с бримки разресва кератиновите капсули без никакво скубане. Поръчах и учебника – пълен с полезна информация."
+                </p>
+              </div>
+              <div class="pt-3 border-t border-stone-100">
+                <div class="font-bold text-xs text-stone-900 font-cinzel">Силвия К.</div>
+                <div class="text-[10px] text-stone-400 font-mono">Клиент от Бургас • 65см + Четка DS</div>
+              </div>
             </div>
           </div>
         </div>

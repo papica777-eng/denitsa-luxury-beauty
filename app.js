@@ -406,6 +406,148 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- BELLAMI & LUXY HAIR BEST PRACTICES: DENSITY QUIZ & LENGTH GUIDE ---
+  const densityQuizToggleBtn = document.getElementById('densityQuizToggleBtn');
+  const densityQuizBox = document.getElementById('densityQuizBox');
+  const closeDensityQuizBtn = document.getElementById('closeDensityQuizBtn');
+  const quizRecommendedResult = document.getElementById('quizRecommendedResult');
+  const applyQuizGramsBtn = document.getElementById('applyQuizGramsBtn');
+
+  let quizState = { currentHair: 'medium', goal: 'both' };
+
+  function updateQuizRecommendation() {
+    let recGrams = 150;
+    let recDesc = '150 грама (Перфектен обем и хармонично преливане)';
+
+    if (quizState.currentHair === 'short') {
+      if (quizState.goal === 'volume') {
+        recGrams = 100;
+        recDesc = '100 грама (За дискретно сгъстяване на карето)';
+      } else if (quizState.goal === 'both') {
+        recGrams = 150;
+        recDesc = '150 грама (Обем + удължаване без видими стъпала)';
+      } else {
+        recGrams = 200;
+        recDesc = '200 грама (Задължителен за късо каре към дълга коса)';
+      }
+    } else if (quizState.currentHair === 'medium') {
+      if (quizState.goal === 'volume') {
+        recGrams = 100;
+        recDesc = '100 грама (Пълен естествен обем)';
+      } else if (quizState.goal === 'both') {
+        recGrams = 150;
+        recDesc = '150 грама (Най-препоръчваният златен стандарт)';
+      } else {
+        recGrams = 200;
+        recDesc = '200 грама (Драматична холивудска гъстота)';
+      }
+    } else { // long
+      if (quizState.goal === 'volume') {
+        recGrams = 100;
+        recDesc = '100 грама (Сгъстяване на изтънените краища)';
+      } else if (quizState.goal === 'both') {
+        recGrams = 150;
+        recDesc = '150 грама (Допълнителна дължина и дебелина)';
+      } else {
+        recGrams = 200;
+        recDesc = '200-250 грама (Ултра-богат обем на червен килим)';
+      }
+    }
+
+    if (quizRecommendedResult) quizRecommendedResult.textContent = recDesc;
+    if (applyQuizGramsBtn) {
+      applyQuizGramsBtn.textContent = `Приложи ${recGrams}g`;
+      applyQuizGramsBtn.dataset.grams = recGrams;
+    }
+  }
+
+  if (densityQuizToggleBtn && densityQuizBox) {
+    densityQuizToggleBtn.addEventListener('click', () => {
+      densityQuizBox.classList.toggle('hidden');
+      sound.playLuxuryClick();
+    });
+  }
+  if (closeDensityQuizBtn && densityQuizBox) {
+    closeDensityQuizBtn.addEventListener('click', () => {
+      densityQuizBox.classList.add('hidden');
+    });
+  }
+
+  document.querySelectorAll('.density-q1-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.density-q1-btn').forEach(b => {
+        b.classList.remove('active', 'bg-stone-900', 'border-stone-900', 'text-white', 'font-bold', 'shadow-sm');
+        b.classList.add('bg-white', 'border-stone-200', 'text-stone-800', 'font-semibold');
+      });
+      btn.classList.add('active', 'bg-stone-900', 'border-stone-900', 'text-white', 'font-bold', 'shadow-sm');
+      btn.classList.remove('bg-white', 'border-stone-200', 'text-stone-800', 'font-semibold');
+      quizState.currentHair = btn.dataset.cur;
+      updateQuizRecommendation();
+      sound.playLuxuryClick();
+    });
+  });
+
+  document.querySelectorAll('.density-q2-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.density-q2-btn').forEach(b => {
+        b.classList.remove('active', 'bg-stone-900', 'border-stone-900', 'text-white', 'font-bold', 'shadow-sm');
+        b.classList.add('bg-white', 'border-stone-200', 'text-stone-800', 'font-semibold');
+      });
+      btn.classList.add('active', 'bg-stone-900', 'border-stone-900', 'text-white', 'font-bold', 'shadow-sm');
+      btn.classList.remove('bg-white', 'border-stone-200', 'text-stone-800', 'font-semibold');
+      quizState.goal = btn.dataset.goal;
+      updateQuizRecommendation();
+      sound.playLuxuryClick();
+    });
+  });
+
+  if (applyQuizGramsBtn) {
+    applyQuizGramsBtn.addEventListener('click', () => {
+      const g = applyQuizGramsBtn.dataset.grams || 150;
+      const targetPill = document.querySelector(`#weightPillGroup button[data-weight="${g}"]`);
+      if (targetPill) {
+        targetPill.click();
+      }
+      if (densityQuizBox) densityQuizBox.classList.add('hidden');
+      sound.playSparkle();
+    });
+  }
+
+  // Length Guide Box Handlers
+  const lengthGuideToggleBtn = document.getElementById('lengthGuideToggleBtn');
+  const lengthGuideBox = document.getElementById('lengthGuideBox');
+  const closeLengthGuideBtn = document.getElementById('closeLengthGuideBtn');
+
+  if (lengthGuideToggleBtn && lengthGuideBox) {
+    lengthGuideToggleBtn.addEventListener('click', () => {
+      lengthGuideBox.classList.toggle('hidden');
+      sound.playLuxuryClick();
+    });
+  }
+  if (closeLengthGuideBtn && lengthGuideBox) {
+    closeLengthGuideBtn.addEventListener('click', () => {
+      lengthGuideBox.classList.add('hidden');
+    });
+  }
+
+  document.querySelectorAll('.guide-len-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const len = card.dataset.len;
+      document.querySelectorAll('.guide-len-card').forEach(c => {
+        c.classList.remove('active', 'bg-amber-500/20', 'border-2', 'border-amber-400');
+        c.classList.add('bg-stone-800/90', 'border', 'border-stone-700');
+      });
+      card.classList.add('active', 'bg-amber-500/20', 'border-2', 'border-amber-400');
+      card.classList.remove('bg-stone-800/90', 'border-stone-700');
+
+      const targetLenPill = document.querySelector(`#lengthPillGroup button[data-len="${len}"]`);
+      if (targetLenPill) {
+        targetLenPill.click();
+      }
+      sound.playSparkle();
+    });
+  });
+
   updateMasterCustomizer();
 
   // ==========================================================================
