@@ -117,11 +117,47 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 1. MASTER SLAVIC HAIR CUSTOMIZER & PRODUCT SHOWCASE (DIVERSO-CRUSHING)
   // ==========================================================================
+  // 1. MASTER HAIR CUSTOMIZER & PRODUCT SHOWCASE (INDIAN, VIETNAMESE, SLAVIC)
+  // ==========================================================================
+  const hairOriginOptions = {
+    indian: {
+      label: 'Индийска Коса',
+      density: 'Двойна плътност (Double Drawn)',
+      badge: 'Индийска • Double Drawn',
+      lengths: [
+        { len: 55, eur: 190, bgn: 370, label: '55 см ★', default: true },
+        { len: 65, eur: 230, bgn: 450, label: '65-70 см ★' }
+      ]
+    },
+    vietnamese: {
+      label: 'Виетнамска Коса',
+      density: 'Супер двойна плътност (Super DD)',
+      badge: 'Виетнамска • Super DD',
+      lengths: [
+        { len: 60, eur: 290, bgn: 565, label: '60 см ★', default: true },
+        { len: 65, eur: 320, bgn: 625, label: '65 см ★' }
+      ]
+    },
+    slavic: {
+      label: 'Славянска Коса',
+      density: '100% Сурова Virgin (Double Drawn)',
+      badge: 'Славянска • 100% Raw Virgin',
+      lengths: [
+        { len: 45, eur: 160, bgn: 310, label: '45 см' },
+        { len: 55, eur: 190, bgn: 370, label: '55 см ★', default: true },
+        { len: 65, eur: 230, bgn: 450, label: '65-70 см ★' },
+        { len: 75, eur: 270, bgn: 530, label: '75-80 см' }
+      ]
+    }
+  };
+
   const hairConfigState = {
+    origin: 'indian',
+    originLabel: 'Индийска Коса',
+    densityLabel: 'Двойна плътност (Double Drawn)',
     length: 55,
-    lengthLabel: '55 см',
+    lengthLabel: '55 см ★',
     pricePer100gEur: 190,
     pricePer100gBgn: 370,
     weight: 100,
@@ -189,16 +225,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (bgnDisplay) bgnDisplay.textContent = `(${totalBgn},00 лв.)`;
 
     const activeLenBadge = document.getElementById('activeLenBadge');
-    if (activeLenBadge) activeLenBadge.textContent = `${hairConfigState.lengthLabel} (${totalEur} €)`;
+    if (activeLenBadge) activeLenBadge.textContent = `${hairConfigState.originLabel} • ${hairConfigState.lengthLabel} (${totalEur} €)`;
 
     // 3. Update Title & Specs
     const masterTitle = document.getElementById('masterProductTitle');
     if (masterTitle) {
-      masterTitle.textContent = `100% Сурова Славянска Коса на Треса – Дължина ${hairConfigState.lengthLabel}, цвят ${hairConfigState.colorName}`;
+      masterTitle.textContent = `${hairConfigState.originLabel} (${hairConfigState.densityLabel}) – Дължина ${hairConfigState.lengthLabel}, цвят ${hairConfigState.colorName}`;
     }
 
     const specLength = document.getElementById('specLength');
-    if (specLength) specLength.textContent = `${hairConfigState.lengthLabel} (Double Drawn)`;
+    if (specLength) specLength.textContent = `${hairConfigState.lengthLabel} (${hairConfigState.densityLabel})`;
 
     const specWeight = document.getElementById('specWeight');
     if (specWeight) specWeight.textContent = `${hairConfigState.weight} грама (${hairConfigState.weight >= 200 ? 'Mega Плътен Обем' : 'Стандартен Пълен Обем'})`;
@@ -207,6 +243,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (specColor) specColor.textContent = hairConfigState.colorName;
 
     // 4. Update Section Labels
+    const selectedOriginBadge = document.getElementById('selectedOriginBadge');
+    if (selectedOriginBadge) {
+      selectedOriginBadge.textContent = `${hairConfigState.originLabel} • ${hairConfigState.densityLabel}`;
+    }
+
     const selectedWeightLabel = document.getElementById('selectedWeightLabel');
     if (selectedWeightLabel) {
       selectedWeightLabel.textContent = `${hairConfigState.weight} грама (${hairConfigState.weight >= 200 ? 'Mega Плътен Обем' : 'Стандартен пълен обем'})`;
@@ -228,6 +269,80 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Bind Length Pill Click Listeners
+  function bindLengthPills() {
+    const lengthPills = document.querySelectorAll('#lengthPillGroup .opt-pill');
+    lengthPills.forEach(btn => {
+      btn.addEventListener('click', () => {
+        lengthPills.forEach(b => {
+          b.classList.remove('active', 'border-2', 'border-amber-400', 'bg-amber-50', 'font-bold', 'shadow-sm');
+          b.classList.add('border', 'border-stone-200', 'bg-white');
+        });
+        btn.classList.add('active', 'border-2', 'border-amber-400', 'bg-amber-50', 'font-bold', 'shadow-sm');
+        btn.classList.remove('border-stone-200', 'bg-white');
+
+        hairConfigState.length = parseInt(btn.dataset.len, 10);
+        hairConfigState.lengthLabel = btn.querySelector('.text-xs')?.textContent.trim() || `${btn.dataset.len} см`;
+        hairConfigState.pricePer100gEur = parseInt(btn.dataset.eur, 10);
+        hairConfigState.pricePer100gBgn = parseInt(btn.dataset.bgn, 10);
+
+        sound.playLuxuryClick();
+        updateMasterCustomizer();
+      });
+    });
+  }
+
+  // Re-render Length Pills based on Selected Origin
+  function renderLengthPills(originKey) {
+    const lengthPillGroup = document.getElementById('lengthPillGroup');
+    if (!lengthPillGroup) return;
+
+    const opt = hairOriginOptions[originKey];
+    if (!opt) return;
+
+    lengthPillGroup.innerHTML = opt.lengths.map(l => `
+      <button data-len="${l.len}" data-eur="${l.eur}" data-bgn="${l.bgn}" class="opt-pill ${l.default ? 'active border-2 border-amber-400 bg-amber-50 font-bold shadow-sm' : 'border border-stone-200 bg-white'} p-3 rounded-xl text-center hover:border-amber-400 transition-all">
+        <div class="text-xs font-bold text-stone-900">${l.label}</div>
+        <div class="text-[10px] ${l.default ? 'text-amber-800 font-bold' : 'text-stone-500'} font-mono">${l.eur} € (${l.bgn} лв.)</div>
+      </button>
+    `).join('');
+
+    const defaultOpt = opt.lengths.find(l => l.default) || opt.lengths[0];
+    hairConfigState.length = defaultOpt.len;
+    hairConfigState.lengthLabel = defaultOpt.label;
+    hairConfigState.pricePer100gEur = defaultOpt.eur;
+    hairConfigState.pricePer100gBgn = defaultOpt.bgn;
+
+    bindLengthPills();
+  }
+
+  // Origin Pill Listeners (Indian, Vietnamese, Slavic)
+  const originPills = document.querySelectorAll('#originPillGroup .origin-pill');
+  originPills.forEach(btn => {
+    btn.addEventListener('click', () => {
+      originPills.forEach(b => {
+        b.classList.remove('active', 'border-2', 'border-amber-400', 'bg-amber-50', 'shadow-sm');
+        b.classList.add('border', 'border-stone-200', 'bg-white');
+      });
+      btn.classList.add('active', 'border-2', 'border-amber-400', 'bg-amber-50', 'shadow-sm');
+      btn.classList.remove('border-stone-200', 'bg-white');
+
+      const originKey = btn.dataset.origin;
+      const opt = hairOriginOptions[originKey];
+      if (opt) {
+        hairConfigState.origin = originKey;
+        hairConfigState.originLabel = opt.label;
+        hairConfigState.densityLabel = opt.density;
+        renderLengthPills(originKey);
+        sound.playLuxuryClick();
+        updateMasterCustomizer();
+      }
+    });
+  });
+
+  // Initial Length Pills Binding
+  bindLengthPills();
+
   // Weight Pill Buttons
   const weightPills = document.querySelectorAll('#weightPillGroup .opt-pill');
   weightPills.forEach(btn => {
@@ -240,27 +355,6 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.remove('border-stone-200', 'bg-white');
 
       hairConfigState.weight = parseInt(btn.dataset.weight, 10);
-      sound.playLuxuryClick();
-      updateMasterCustomizer();
-    });
-  });
-
-  // Length Pill Buttons
-  const lengthPills = document.querySelectorAll('#lengthPillGroup .opt-pill');
-  lengthPills.forEach(btn => {
-    btn.addEventListener('click', () => {
-      lengthPills.forEach(b => {
-        b.classList.remove('active', 'border-2', 'border-amber-400', 'bg-amber-50', 'font-bold', 'shadow-sm');
-        b.classList.add('border', 'border-stone-200', 'bg-white');
-      });
-      btn.classList.add('active', 'border-2', 'border-amber-400', 'bg-amber-50', 'font-bold', 'shadow-sm');
-      btn.classList.remove('border-stone-200', 'bg-white');
-
-      hairConfigState.length = parseInt(btn.dataset.len, 10);
-      hairConfigState.lengthLabel = btn.querySelector('.text-xs')?.textContent.trim() || `${btn.dataset.len} см`;
-      hairConfigState.pricePer100gEur = parseInt(btn.dataset.eur, 10);
-      hairConfigState.pricePer100gBgn = parseInt(btn.dataset.bgn, 10);
-
       sound.playLuxuryClick();
       updateMasterCustomizer();
     });
@@ -391,17 +485,17 @@ document.addEventListener('DOMContentLoaded', () => {
       let baseBgn = Math.round(hairConfigState.pricePer100gBgn * weightRatio);
       let totalBgn = baseBgn + hairConfigState.methodFeeBgn;
 
-      const mainTitle = `Славянска Коса DS (${hairConfigState.lengthLabel}, ${hairConfigState.weight}g, ${hairConfigState.colorName}, ${hairConfigState.methodName})`;
+      const mainTitle = `${hairConfigState.originLabel} (${hairConfigState.densityLabel}, ${hairConfigState.lengthLabel}, ${hairConfigState.weight}g, ${hairConfigState.colorName}, ${hairConfigState.methodName})`;
       addToCart(mainTitle, totalBgn, `custom_hair_${Date.now()}`);
 
       if (hairConfigState.addBrush) {
-        addToCart('Специална Четка за Екстеншъни DS Loop Brush', 35, 'upsell_brush');
+        addToCart('Четка за Екстеншъни с Естествен Глигански Косъм + Гребен DS', 35, 'upsell_brush');
       }
       if (hairConfigState.addBook) {
-        addToCart('Официален Авторски Учебник (DS Manual)', 65, 'upsell_book');
+        addToCart('Официален Авторски Учебник (Деница Ставракиева)', 65, 'upsell_book');
       }
       if (hairConfigState.addBag) {
-        addToCart('Сатенен предпазен калъф и закачалка', 25, 'upsell_bag');
+        addToCart('Сатенен предпазен калъф и закачалка за съхранение', 25, 'upsell_bag');
       }
     });
   }
@@ -928,5 +1022,108 @@ document.addEventListener('DOMContentLoaded', () => {
       sound.playLuxuryClick();
     });
   });
+
+  // --- OFFICIAL TEXTBOOK SHOWCASE & LIGHTBOX PREVIEW (COVER & TOC ONLY) ---
+  const bookTabCover = document.getElementById('bookTabCover');
+  const bookTabContents = document.getElementById('bookTabContents');
+  const bookMainPreviewImg = document.getElementById('bookMainPreviewImg');
+  const bookPreviewBadge = document.getElementById('bookPreviewBadge');
+  const bookImageContainer = document.getElementById('bookImageContainer');
+
+  const bookLightboxModal = document.getElementById('bookLightboxModal');
+  const bookLightboxBackdrop = document.getElementById('bookLightboxBackdrop');
+  const closeBookLightboxBtn = document.getElementById('closeBookLightboxBtn');
+  const bookLightboxOpenBtn = document.getElementById('bookLightboxOpenBtn');
+  const modalBookImg = document.getElementById('modalBookImg');
+  const modalBookCoverTab = document.getElementById('modalBookCoverTab');
+  const modalBookTocTab = document.getElementById('modalBookTocTab');
+
+  function setBookPreview(type) {
+    if (type === 'contents') {
+      if (bookMainPreviewImg) bookMainPreviewImg.src = 'assets/book_contents_page.jpg';
+      if (modalBookImg) modalBookImg.src = 'assets/book_contents_page.jpg';
+      if (bookPreviewBadge) bookPreviewBadge.textContent = 'Официално Съдържание (Номерирано)';
+      
+      if (bookTabContents) {
+        bookTabContents.classList.add('active', 'bg-white', 'text-stone-900', 'shadow-sm', 'border', 'border-stone-200', 'font-bold');
+        bookTabContents.classList.remove('text-stone-600');
+      }
+      if (bookTabCover) {
+        bookTabCover.classList.remove('active', 'bg-white', 'text-stone-900', 'shadow-sm', 'border', 'border-stone-200', 'font-bold');
+        bookTabCover.classList.add('text-stone-600');
+      }
+      if (modalBookTocTab) {
+        modalBookTocTab.className = 'px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold bg-amber-100 text-amber-900 border border-amber-300';
+      }
+      if (modalBookCoverTab) {
+        modalBookCoverTab.className = 'px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold bg-stone-100 text-stone-700 hover:bg-amber-50';
+      }
+    } else {
+      if (bookMainPreviewImg) bookMainPreviewImg.src = 'assets/book_cover_front.jpg';
+      if (modalBookImg) modalBookImg.src = 'assets/book_cover_front.jpg';
+      if (bookPreviewBadge) bookPreviewBadge.textContent = 'Официална Корица';
+
+      if (bookTabCover) {
+        bookTabCover.classList.add('active', 'bg-white', 'text-stone-900', 'shadow-sm', 'border', 'border-stone-200', 'font-bold');
+        bookTabCover.classList.remove('text-stone-600');
+      }
+      if (bookTabContents) {
+        bookTabContents.classList.remove('active', 'bg-white', 'text-stone-900', 'shadow-sm', 'border', 'border-stone-200', 'font-bold');
+        bookTabContents.classList.add('text-stone-600');
+      }
+      if (modalBookCoverTab) {
+        modalBookCoverTab.className = 'px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold bg-amber-100 text-amber-900 border border-amber-300';
+      }
+      if (modalBookTocTab) {
+        modalBookTocTab.className = 'px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold bg-stone-100 text-stone-700 hover:bg-amber-50';
+      }
+    }
+  }
+
+  if (bookTabCover) {
+    bookTabCover.addEventListener('click', () => {
+      setBookPreview('cover');
+      sound.playLuxuryClick();
+    });
+  }
+  if (bookTabContents) {
+    bookTabContents.addEventListener('click', () => {
+      setBookPreview('contents');
+      sound.playLuxuryClick();
+    });
+  }
+
+  function openBookLightbox() {
+    if (bookLightboxModal) {
+      bookLightboxModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      sound.playSparkle();
+    }
+  }
+  function closeBookLightbox() {
+    if (bookLightboxModal) {
+      bookLightboxModal.classList.add('hidden');
+      document.body.style.overflow = '';
+      sound.playLuxuryClick();
+    }
+  }
+
+  if (bookImageContainer) bookImageContainer.addEventListener('click', openBookLightbox);
+  if (bookLightboxOpenBtn) bookLightboxOpenBtn.addEventListener('click', openBookLightbox);
+  if (closeBookLightboxBtn) closeBookLightboxBtn.addEventListener('click', closeBookLightbox);
+  if (bookLightboxBackdrop) bookLightboxBackdrop.addEventListener('click', closeBookLightbox);
+
+  if (modalBookCoverTab) {
+    modalBookCoverTab.addEventListener('click', () => {
+      setBookPreview('cover');
+      sound.playLuxuryClick();
+    });
+  }
+  if (modalBookTocTab) {
+    modalBookTocTab.addEventListener('click', () => {
+      setBookPreview('contents');
+      sound.playLuxuryClick();
+    });
+  }
 });
 

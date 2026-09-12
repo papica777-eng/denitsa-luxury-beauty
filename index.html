@@ -623,11 +623,46 @@
               </div>
             </div>
 
-            <!-- STEP 1: ДЪЛЖИНА НА КОСАТА * (Length First — Base Pricing Tier) -->
+            <!-- STEP 1: ПРОИЗХОД И ТИП НА КОСАТА * (Origin & Density Selection) -->
+            <div class="space-y-2.5 p-4 rounded-2xl bg-amber-50/60 border border-amber-300/80">
+              <div class="flex items-center justify-between text-xs font-mono">
+                <label class="font-bold text-stone-900 uppercase flex items-center gap-1.5">
+                  <span>👑 1. ПРОИЗХОД И ПЛЪТНОСТ НА КОСАТА</span> <span class="text-rose-600">*</span>:
+                </label>
+                <span id="selectedOriginBadge" class="text-amber-900 font-bold font-cinzel text-xs">Индийска • Double Drawn</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="originPillGroup">
+                <button type="button" data-origin="indian" class="origin-pill active p-3 rounded-xl border-2 border-amber-400 bg-amber-50 text-left font-bold shadow-sm transition-all">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-stone-900">Индийска Коса</span>
+                    <span class="text-[10px] font-mono text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded font-bold">190€ – 230€</span>
+                  </div>
+                  <div class="text-[11px] text-stone-600 mt-1">Двойна плътност (Double Drawn)</div>
+                </button>
+
+                <button type="button" data-origin="vietnamese" class="origin-pill p-3 rounded-xl border border-stone-200 bg-white text-left hover:border-amber-400 transition-all">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-stone-900">Виетнамска Коса</span>
+                    <span class="text-[10px] font-mono text-stone-700 bg-stone-100 px-1.5 py-0.5 rounded font-bold">290€ – 320€</span>
+                  </div>
+                  <div class="text-[11px] text-stone-600 mt-1">Супер двойна плътност (Super DD)</div>
+                </button>
+
+                <button type="button" data-origin="slavic" class="origin-pill p-3 rounded-xl border border-stone-200 bg-white text-left hover:border-amber-400 transition-all">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-stone-900">Славянска Коса</span>
+                    <span class="text-[10px] font-mono text-stone-700 bg-stone-100 px-1.5 py-0.5 rounded font-bold">160€ – 270€</span>
+                  </div>
+                  <div class="text-[11px] text-stone-600 mt-1">100% Сурова Virgin (Double Drawn)</div>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 2: ДЪЛЖИНА НА КОСАТА * (Length First — Base Pricing Tier) -->
             <div class="space-y-2 p-4 rounded-2xl bg-stone-50/70 border border-stone-200">
               <div class="flex items-center justify-between text-xs font-mono">
                 <label class="font-bold text-stone-900 uppercase">
-                  📏 1. ДЪЛЖИНА НА КОСАТА <span class="text-rose-600">*</span>:
+                  📏 2. ДЪЛЖИНА НА КОСАТА <span class="text-rose-600">*</span>:
                 </label>
                 <button type="button" id="lengthGuideToggleBtn" class="text-[11px] font-bold text-amber-800 hover:text-amber-900 flex items-center gap-1 underline underline-offset-2 decoration-amber-400">
                   <i data-lucide="eye" class="w-3.5 h-3.5 text-amber-600"></i>
@@ -667,18 +702,15 @@
                   <div class="guide-len-card p-3 rounded-xl bg-stone-800/90 border border-stone-700 hover:border-amber-400 cursor-pointer space-y-1 transition-all" data-len="75">
                     <div class="font-bold text-amber-300">75-80 см (30")</div>
                     <div class="text-[10px] text-stone-300 font-medium">Под ханша (Classic)</div>
-                    <div class="text-[10px] text-stone-400">Ултра-рядка сурова славянска коса</div>
+                    <div class="text-[10px] text-stone-400">Ултра-рядка дължина за максимален ефект</div>
                     <div class="text-[11px] font-mono text-amber-400 font-bold pt-1">270 € / 530 лв.</div>
                   </div>
                 </div>
               </div>
 
-              <!-- Pill Buttons Grid -->
+              <!-- Pill Buttons Grid Container (Dynamically updated via JS based on selected origin) -->
               <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="lengthPillGroup">
-                <button data-len="45" data-eur="160" data-bgn="310" class="opt-pill p-3 rounded-xl border border-stone-200 bg-white text-center hover:border-amber-400">
-                  <div class="text-xs font-bold text-stone-900">45 см</div>
-                  <div class="text-[10px] text-stone-500 font-mono">160 € (310 лв.)</div>
-                </button>
+                <!-- Default: Indian Hair Options (55cm & 65-70cm) -->
                 <button data-len="55" data-eur="190" data-bgn="370" class="opt-pill active p-3 rounded-xl border-2 border-amber-400 bg-amber-50 text-center font-bold shadow-sm">
                   <div class="text-xs font-bold text-stone-900">55 см ★</div>
                   <div class="text-[10px] text-amber-800 font-mono font-bold">190 € (370 лв.)</div>
@@ -686,10 +718,6 @@
                 <button data-len="65" data-eur="230" data-bgn="450" class="opt-pill p-3 rounded-xl border border-stone-200 bg-white text-center hover:border-amber-400">
                   <div class="text-xs font-bold text-stone-900">65-70 см ★</div>
                   <div class="text-[10px] text-stone-500 font-mono">230 € (450 лв.)</div>
-                </button>
-                <button data-len="75" data-eur="270" data-bgn="530" class="opt-pill p-3 rounded-xl border border-stone-200 bg-white text-center hover:border-amber-400">
-                  <div class="text-xs font-bold text-stone-900">75-80 см</div>
-                  <div class="text-[10px] text-stone-500 font-mono">270 € (530 лв.)</div>
                 </button>
               </div>
             </div>
@@ -855,7 +883,7 @@
                 <label class="flex items-center justify-between p-3 rounded-xl border border-stone-200 hover:border-amber-400 bg-white cursor-pointer transition-all">
                   <div class="flex items-center gap-2.5">
                     <input type="checkbox" id="addBrushCheckbox" data-price="35" class="w-4 h-4 text-amber-600 rounded">
-                    <span class="text-xs text-stone-900 font-semibold">Специална Четка за Екстеншъни DS Loop Brush (без скубане)</span>
+                    <span class="text-xs text-stone-900 font-semibold">Специална Златна Четка за Екстеншъни DS с Естествен Глигански Косъм + Гребен</span>
                   </div>
                   <span class="text-xs font-mono font-bold text-amber-800">+35 лв.</span>
                 </label>
@@ -863,7 +891,7 @@
                 <label class="flex items-center justify-between p-3 rounded-xl border border-stone-200 hover:border-amber-400 bg-white cursor-pointer transition-all">
                   <div class="flex items-center gap-2.5">
                     <input type="checkbox" id="addBookCheckbox" data-price="65" class="w-4 h-4 text-amber-600 rounded">
-                    <span class="text-xs text-stone-900 font-semibold">Официален Авторски Учебник по Удължаване на Коса (DS)</span>
+                    <span class="text-xs text-stone-900 font-semibold">Официален Авторски Учебник „Тайните на Удължаването на Косата“ (Деница Ставракиева)</span>
                   </div>
                   <span class="text-xs font-mono font-bold text-amber-800">+65 лв.</span>
                 </label>
@@ -1083,44 +1111,42 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
-          <!-- Product 1: Special Loop Brush -->
-          <div class="product-card bg-white rounded-3xl p-5 border-2 border-amber-400 flex flex-col justify-between shadow-md">
+          <!-- Product 1: Boar Bristle Cushion Brush with Rake Cleaner Tool -->
+          <div class="product-card bg-white rounded-3xl p-5 border-2 border-amber-400 flex flex-col justify-between shadow-md hover:shadow-xl transition-all">
             <div>
-              <div class="relative aspect-square rounded-2xl overflow-hidden bg-amber-50/60 mb-4 border border-stone-200 flex items-center justify-center p-4">
-                <div class="w-full h-full rounded-xl bg-gradient-to-tr from-amber-100 to-stone-50 flex items-center justify-center">
-                  <i data-lucide="sparkles" class="w-14 h-14 text-amber-600"></i>
-                </div>
+              <div class="relative aspect-square rounded-2xl overflow-hidden bg-stone-100 mb-4 border border-stone-200 flex items-center justify-center">
+                <img src="assets/boar_bristle_brush.jpg" alt="Златна Четка за Екстеншъни с Естествен Глигански Косъм" class="w-full h-full object-cover">
                 <span class="absolute top-3 left-3 bg-amber-400 text-black text-[10px] font-mono font-bold px-3 py-1 rounded-full shadow-sm">
-                  Специална за Екстеншъни
+                  Златен Комплект с Гребенче
                 </span>
               </div>
-              <div class="text-[10px] text-stone-500 font-mono uppercase">Аксесоари за екстеншъни</div>
-              <h4 class="font-cinzel text-sm font-bold text-stone-900 mt-1">Специална Четка за Екстеншъни DS Loop Brush</h4>
+              <div class="text-[10px] text-stone-500 font-mono uppercase">Грижа за екстеншъни</div>
+              <h4 class="font-cinzel text-sm font-bold text-stone-900 mt-1">Четка за Екстеншъни с Естествен Глигански Косъм DS</h4>
               <p class="text-stone-600 text-xs mt-1.5 leading-relaxed">
-                Специално проектирани меки влакна без пластмасови топчета. Плъзга се свободно през кератиновите капсули и стикерите без скубане и разкъсване.
+                Луксозна златна въздушна четка с естествен глигански косъм и предпазни щифтове + гребенче за почистване. Плъзга се свободно през капсулите без скубане.
               </p>
             </div>
             <div class="flex items-center justify-between mt-5 pt-3 border-t border-stone-100">
               <span class="font-cinzel text-lg font-bold text-stone-900">35 лв.</span>
-              <button class="add-to-cart-btn luxury-gold-btn px-4 py-2 rounded-full text-xs uppercase tracking-wider text-black" data-id="p_brush" data-title="Специална Четка за Екстеншъни DS" data-price="35">
+              <button class="add-to-cart-btn luxury-gold-btn px-4 py-2 rounded-full text-xs uppercase tracking-wider text-black" data-id="p_brush" data-title="Четка с Глигански Косъм + Гребен DS" data-price="35">
                 <i data-lucide="plus" class="w-3.5 h-3.5 mr-1"></i> Купи
               </button>
             </div>
           </div>
 
-          <!-- Product 2: Slavic Hair 55cm (190€) -->
-          <div class="product-card bg-white rounded-3xl p-5 border border-stone-200 flex flex-col justify-between shadow-sm">
+          <!-- Product 2: Indian Hair Double Drawn (190€ - 230€) -->
+          <div class="product-card bg-white rounded-3xl p-5 border border-stone-200 flex flex-col justify-between shadow-sm hover:border-amber-400 transition-all">
             <div>
               <div class="relative aspect-square rounded-2xl overflow-hidden bg-stone-100 mb-4 border border-stone-200">
-                <img src="assets/slavic_hair.jpg" alt="100% Slavic Hair 55cm" class="w-full h-full object-cover">
+                <img src="assets/slavic_hair.jpg" alt="Индийска Коса Двойна Плътност" class="w-full h-full object-cover">
                 <span class="absolute top-3 left-3 bg-white/95 text-stone-900 text-[10px] font-mono font-bold px-3 py-1 rounded-full border border-stone-200 shadow-sm">
-                  55 см • 190€
+                  55см: 190€ • 65-70см: 230€
                 </span>
               </div>
-              <div class="text-[10px] text-stone-500 font-mono uppercase">100% Сурова Славянска Коса</div>
-              <h4 class="font-cinzel text-sm font-bold text-stone-900 mt-1">Славянска Коса 55см #2 Dark Chocolate (100g)</h4>
+              <div class="text-[10px] text-amber-800 font-mono font-bold uppercase">Double Drawn • 100g</div>
+              <h4 class="font-cinzel text-sm font-bold text-stone-900 mt-1">Индийска Коса Двойна Плътност (100% Естествена)</h4>
               <p class="text-stone-600 text-xs mt-1.5 leading-relaxed">
-                100% девствена славянска коса от 1 донор, Double Drawn плътни краища, мекота без цъфтеж.
+                Плътни, изравнени краища без оредяване. 55 см: 190 € (370 лв.) | 65–70 см: 230 € (450 лв.). Налична на цяла треса, кератин или стикери.
               </p>
             </div>
             <div class="flex items-center justify-between mt-5 pt-3 border-t border-stone-100">
@@ -1128,58 +1154,56 @@
                 <span class="font-cinzel text-lg font-bold text-stone-900">190 €</span>
                 <span class="text-[11px] text-stone-500 font-mono">(370 лв.)</span>
               </div>
-              <button class="add-to-cart-btn luxury-outline-btn px-4 py-2 rounded-full text-xs uppercase tracking-wider" data-id="p_hair55" data-title="Славянска Коса 55см (100g)" data-price="370">
+              <button class="add-to-cart-btn luxury-outline-btn px-4 py-2 rounded-full text-xs uppercase tracking-wider" data-id="p_indian" data-title="Индийска Коса Двойна Плътност 55см (100g)" data-price="370">
                 <i data-lucide="plus" class="w-3.5 h-3.5 mr-1 text-amber-700"></i> Купи
               </button>
             </div>
           </div>
 
-          <!-- Product 3: Slavic Hair 65-70cm (230€) -->
-          <div class="product-card bg-white rounded-3xl p-5 border border-stone-200 flex flex-col justify-between shadow-sm">
+          <!-- Product 3: Vietnamese Hair Super Double Drawn (290€ - 320€) -->
+          <div class="product-card bg-white rounded-3xl p-5 border border-stone-200 flex flex-col justify-between shadow-sm hover:border-amber-400 transition-all">
             <div>
               <div class="relative aspect-square rounded-2xl overflow-hidden bg-stone-100 mb-4 border border-stone-200">
-                <img src="assets/hair_after.jpg" alt="100% Slavic Hair 65-70cm" class="w-full h-full object-cover">
+                <img src="assets/hair_after.jpg" alt="Виетнамска Коса Супер Двойна Плътност" class="w-full h-full object-cover">
                 <span class="absolute top-3 left-3 bg-white/95 text-stone-900 text-[10px] font-mono font-bold px-3 py-1 rounded-full border border-stone-200 shadow-sm">
-                  65-70 см • 230€
+                  60см: 290€ • 65см: 320€
                 </span>
               </div>
-              <div class="text-[10px] text-stone-500 font-mono uppercase">100% Сурова Славянска Коса</div>
-              <h4 class="font-cinzel text-sm font-bold text-stone-900 mt-1">Славянска Коса 65-70см #4/27 Balayage (100g)</h4>
+              <div class="text-[10px] text-amber-800 font-mono font-bold uppercase">Super Double Drawn • 100g</div>
+              <h4 class="font-cinzel text-sm font-bold text-stone-900 mt-1">Виетнамска Коса Супер Двойна Плътност</h4>
               <p class="text-stone-600 text-xs mt-1.5 leading-relaxed">
-                Ексклузивна луксозна дължина до ханша. Перфектно преливане, пълна симетрия и издръжливост до 3 години.
+                Максимална копринена плътност до последния милиметър. 60 см: 290 € (565 лв.) | 65 см: 320 € (625 лв.). Изключителна здравина и прав гладък косъм.
               </p>
             </div>
             <div class="flex items-center justify-between mt-5 pt-3 border-t border-stone-100">
               <div>
-                <span class="font-cinzel text-lg font-bold text-stone-900">230 €</span>
-                <span class="text-[11px] text-stone-500 font-mono">(450 лв.)</span>
+                <span class="font-cinzel text-lg font-bold text-stone-900">290 €</span>
+                <span class="text-[11px] text-stone-500 font-mono">(565 лв.)</span>
               </div>
-              <button class="add-to-cart-btn luxury-outline-btn px-4 py-2 rounded-full text-xs uppercase tracking-wider" data-id="p_hair65" data-title="Славянска Коса 65-70см (100g)" data-price="450">
+              <button class="add-to-cart-btn luxury-outline-btn px-4 py-2 rounded-full text-xs uppercase tracking-wider" data-id="p_viet" data-title="Виетнамска Коса Супер Двойна Плътност 60см (100g)" data-price="565">
                 <i data-lucide="plus" class="w-3.5 h-3.5 mr-1 text-amber-700"></i> Купи
               </button>
             </div>
           </div>
 
           <!-- Product 4: Author Manual Book -->
-          <div class="product-card bg-white rounded-3xl p-5 border border-stone-200 flex flex-col justify-between shadow-sm">
+          <div class="product-card bg-white rounded-3xl p-5 border border-stone-200 flex flex-col justify-between shadow-sm hover:border-amber-400 transition-all">
             <div>
-              <div class="relative aspect-square rounded-2xl overflow-hidden bg-amber-50/60 mb-4 border border-stone-200 flex items-center justify-center p-4">
-                <div class="w-full h-full rounded-xl bg-gradient-to-br from-amber-100 to-stone-50 flex items-center justify-center">
-                  <i data-lucide="book-open" class="w-14 h-14 text-amber-700"></i>
-                </div>
+              <div class="relative aspect-square rounded-2xl overflow-hidden bg-amber-50/40 mb-4 border border-stone-200 flex items-center justify-center">
+                <img src="assets/book_cover_front.jpg" alt="Официален Учебник от Деница Ставракиева" class="w-full h-full object-contain p-1">
                 <span class="absolute top-3 left-3 bg-white/95 text-stone-900 text-[10px] font-mono font-bold px-3 py-1 rounded-full border border-stone-200 shadow-sm">
-                  Авторски Учебник
+                  Официално Издание • 65 лв.
                 </span>
               </div>
               <div class="text-[10px] text-stone-500 font-mono uppercase">Обучение & Наръчници</div>
-              <h4 class="font-cinzel text-sm font-bold text-stone-900 mt-1">Учебник по Удължаване на Коса (DS Manual)</h4>
+              <h4 class="font-cinzel text-sm font-bold text-stone-900 mt-1">Официален Авторски Учебник (Деница Ставракиева)</h4>
               <p class="text-stone-600 text-xs mt-1.5 leading-relaxed">
-                Пълно печатно ръководство от Деница със схеми за зониране, прецизно капсулиране, безопасен монтаж и поддръжка.
+                „Тайните на Удължаването на Косата“ — пълно печатно ръководство (62 стр.) с реални схеми, зониране, капсулиране и бизнес стратегия.
               </p>
             </div>
             <div class="flex items-center justify-between mt-5 pt-3 border-t border-stone-100">
               <span class="font-cinzel text-lg font-bold text-stone-900">65 лв.</span>
-              <button class="add-to-cart-btn luxury-outline-btn px-4 py-2 rounded-full text-xs uppercase tracking-wider" data-id="p_book" data-title="Учебник по Удължаване на Коса (DS)" data-price="65">
+              <button class="add-to-cart-btn luxury-outline-btn px-4 py-2 rounded-full text-xs uppercase tracking-wider" data-id="p_book" data-title="Официален Авторски Учебник (Деница Ставракиева)" data-price="65">
                 <i data-lucide="plus" class="w-3.5 h-3.5 mr-1 text-amber-700"></i> Купи
               </button>
             </div>
@@ -1245,21 +1269,56 @@
             </div>
           </div>
 
-          <!-- Right: Visual Course Frame -->
+          <!-- Right: Official Textbook Showcase & Preview (Cover + Corrected Contents Only) -->
           <div class="lg:col-span-5 relative">
-            <div class="relative rounded-3xl overflow-hidden border border-stone-200 p-2.5 bg-white shadow-2xl">
-              <div class="relative rounded-2xl overflow-hidden aspect-[4/5] bg-stone-100">
-                <img src="assets/hero_model.jpg" alt="Masterclass Hair Extensions DS" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
+            <div class="relative rounded-3xl overflow-hidden border-2 border-amber-300/80 p-4 bg-white shadow-2xl space-y-4">
+              
+              <!-- Tab Switcher: Cover vs Contents -->
+              <div class="flex items-center justify-between pb-2 border-b border-stone-100">
+                <div class="flex items-center gap-1.5 p-1 bg-stone-100 rounded-xl text-xs font-mono">
+                  <button type="button" id="bookTabCover" class="book-tab active px-3 py-1.5 rounded-lg font-bold bg-white text-stone-900 shadow-sm border border-stone-200 transition-all flex items-center gap-1.5">
+                    <i data-lucide="book" class="w-3.5 h-3.5 text-amber-700"></i>
+                    <span>Корица</span>
+                  </button>
+                  <button type="button" id="bookTabContents" class="book-tab px-3 py-1.5 rounded-lg font-medium text-stone-600 hover:text-stone-900 transition-all flex items-center gap-1.5">
+                    <i data-lucide="list" class="w-3.5 h-3.5 text-amber-700"></i>
+                    <span>Съдържание</span>
+                  </button>
+                </div>
+
+                <button type="button" id="bookLightboxOpenBtn" class="text-[11px] font-bold text-amber-800 hover:text-amber-900 flex items-center gap-1 bg-amber-50 hover:bg-amber-100 px-2.5 py-1.5 rounded-lg transition-colors border border-amber-200">
+                  <i data-lucide="maximize-2" class="w-3.5 h-3.5 text-amber-700"></i>
+                  <span>Увеличи</span>
+                </button>
+              </div>
+
+              <!-- Interactive Book Display -->
+              <div class="relative rounded-2xl overflow-hidden aspect-[3/4] bg-stone-50 border border-stone-200 flex items-center justify-center p-2 group cursor-pointer" id="bookImageContainer">
+                <img id="bookMainPreviewImg" src="assets/book_cover_front.jpg" alt="Учебник Тайните на Удължаването на Косата" class="w-full h-full object-contain rounded-xl shadow-md group-hover:scale-[1.02] transition-transform duration-300">
                 
-                <div class="absolute bottom-5 left-5 right-5 text-white">
-                  <span class="bg-amber-400 text-black font-bold text-[10px] px-3 py-1 rounded-full font-mono uppercase">
-                    Master Class Certification
+                <div class="absolute inset-0 bg-stone-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                  <span class="px-4 py-2 rounded-full bg-white/95 text-stone-900 font-mono text-xs font-bold shadow-lg flex items-center gap-2">
+                    <i data-lucide="zoom-in" class="w-4 h-4 text-amber-700"></i>
+                    Кликнете за преглед в цял екран
                   </span>
-                  <div class="text-lg font-cinzel font-bold mt-2 text-white">Станете Сертифициран Stylist</div>
-                  <div class="text-xs text-stone-200 mt-1">Обучения с Деница в София и Варна или самостоятелна подготовка с учебника.</div>
+                </div>
+
+                <span id="bookPreviewBadge" class="absolute top-4 left-4 bg-amber-400 text-black font-bold text-[10px] px-3 py-1 rounded-full font-mono uppercase shadow-md">
+                  Официална Корица
+                </span>
+              </div>
+
+              <!-- Book Meta & Ordering -->
+              <div class="p-3 bg-amber-50/60 rounded-2xl border border-amber-200/80 space-y-2 text-xs">
+                <div class="flex items-center justify-between font-mono">
+                  <span class="font-bold text-stone-900">Деница Ставракиева • 2026 г.</span>
+                  <span class="text-amber-900 font-bold">62 страници • 65 лв.</span>
+                </div>
+                <div class="text-[11px] text-stone-600 leading-relaxed">
+                  Официален наръчник на салон Beauty Room DS. Включва пълна теория, схеми на капсулиране, разделяне на зони и салонни правила.
                 </div>
               </div>
+
             </div>
           </div>
 
@@ -2128,6 +2187,40 @@
       <span class="text-xs font-bold font-sans text-stone-900">Здравей! 👋</span>
       <img src="assets/logo.jpg" alt="Деница Аватар" class="w-8 h-8 rounded-full object-cover border border-amber-400 shadow-sm">
     </button>
+  </div>
+
+  <!-- LUXURY BOOK PREVIEW LIGHTBOX MODAL (COVER & TOC ONLY) -->
+  <div id="bookLightboxModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-6">
+    <div class="absolute inset-0 bg-black/85 backdrop-blur-md" id="bookLightboxBackdrop"></div>
+    <div class="relative bg-white rounded-3xl p-4 sm:p-6 max-w-3xl w-full max-h-[92vh] flex flex-col border-2 border-amber-400 shadow-2xl z-10 overflow-hidden">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between pb-3 border-b border-stone-200">
+        <div class="flex items-center gap-2">
+          <button type="button" id="modalBookCoverTab" class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold bg-amber-100 text-amber-900 border border-amber-300">
+            Официална Корица
+          </button>
+          <button type="button" id="modalBookTocTab" class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold bg-stone-100 text-stone-700 hover:bg-amber-50">
+            Оригинално Съдържание
+          </button>
+        </div>
+        <button id="closeBookLightboxBtn" class="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700 flex items-center justify-center transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Modal Image Container with Scroll/Zoom -->
+      <div class="flex-1 overflow-auto py-3 flex items-center justify-center bg-stone-50 rounded-2xl my-2">
+        <img id="modalBookImg" src="assets/book_cover_front.jpg" alt="Учебник Тайните на Удължаването" class="max-h-[70vh] w-auto object-contain rounded-xl shadow-lg">
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="pt-2 flex items-center justify-between text-xs flex-wrap gap-2">
+        <span class="text-stone-500 font-mono">Деница Ставракиева • Beauty Room DS</span>
+        <button class="add-to-cart-btn luxury-gold-btn px-6 py-2.5 rounded-full uppercase tracking-wider text-black font-bold" data-id="p_book_modal" data-title="Официален Авторски Учебник (Деница Ставракиева)" data-price="65">
+          <i data-lucide="shopping-bag" class="w-4 h-4 mr-1"></i> Купи Учебника (65 лв.)
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- Main JavaScript Engine -->
